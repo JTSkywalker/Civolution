@@ -4,15 +4,12 @@
  */
 package handle;
 
-import handle.awesome.AIthought;
-import content.Situation;
-
 /**
  *
  * @author VAIO
  */
-public interface AI extends Runnable {
-    
-    AIthought think(Situation situation);
+public interface CommandOperator {
+
+    public void operate(CommandCluster commands);
     
 }

@@ -5,6 +5,7 @@
 package content;
 
 import handle.AI;
+import handle.CommandCluster;
 
 /**
  *
@@ -19,6 +20,10 @@ public class Civolution {
     }
     
     public Situation getSituation(AI ai) {
+        throw new UnsupportedOperationException();
+    }
+    
+    public void operate(CommandCluster commands) {
         throw new UnsupportedOperationException();
     }
 }

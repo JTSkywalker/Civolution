@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package handle;
+package handle.awesome;
 
 /**
  *
  * @author VAIO
  */
-class AIthought implements Runnable {
+public class AIthought implements Runnable {
 
     @Override
     public void run() {
