@@ -14,23 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package lang;
 
-import handle.CommCluster;
-import handle.Stopped;
+package handle;
+
+import content.Civolution;
+import content.Situation;
+import lang.Interpreter;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Interpreter {
+public interface HandleFactory {
 
-    public boolean interpret() throws Stopped;
+    public Thinker createThinker(Civolution civolution);
 
-    public void interpretSim() throws Stopped;
+    public Interpreter createInterpreter(Situation mySituation);
 
-    public void reset();
-
-    public CommCluster getCommands();
+    public CommOperator createCommandOperator(Civolution civolution);
     
 }

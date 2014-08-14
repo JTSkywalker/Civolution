@@ -14,23 +14,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package lang;
 
-import handle.CommCluster;
-import handle.Stopped;
+package handle.naive;
+
+import content.Civolution;
+import content.Situation;
+import lang.Interpreter;
+import lang.imp.ImpInterpreter;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Interpreter {
+public class HandleFactory implements handle.HandleFactory {
 
-    public boolean interpret() throws Stopped;
+    @Override
+    public Thinker createThinker(Civolution civolution) {
+        return new Thinker(civolution);
+    }
 
-    public void interpretSim() throws Stopped;
+    @Override
+    public Interpreter createInterpreter(Situation mySituation) {
+        return new ImpInterpreter(mySituation);
+    }
 
-    public void reset();
-
-    public CommCluster getCommands();
+    @Override
+    public CommandOperator createCommandOperator(Civolution civolution) {
+        return new CommandOperator(civolution);
+    }
     
 }

@@ -3,8 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/handle/Starter.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/handle/Util.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/lang/ast/comm/Comm.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/content/Skill.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/content/primitive/Coordinates.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/lang/Interpreter.java</file>
             <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/handle/Handler.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/content/Civolution.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/handle/naive/Handle.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/content/primitive/Actor.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/handle/CommCluster.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/handle/CommOperator.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/handle/Agent.java</file>
+            <file>file:/C:/Users/VAIO/Documents/GitHub/Civolution/src/content/Actor.java</file>
         </group>
     </open-files>
 </project-private>

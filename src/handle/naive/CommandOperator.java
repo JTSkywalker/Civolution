@@ -14,23 +14,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package lang;
 
+package handle.naive;
+
+import content.Civolution;
 import handle.CommCluster;
-import handle.Stopped;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Interpreter {
+public class CommandOperator implements handle.CommOperator {
 
-    public boolean interpret() throws Stopped;
+    private final Civolution civolution;
+    
+    CommandOperator(Civolution civolution) {
+        this.civolution = civolution;
+    }
 
-    public void interpretSim() throws Stopped;
-
-    public void reset();
-
-    public CommCluster getCommands();
+    @Override
+    public void operate(CommCluster commands) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

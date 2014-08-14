@@ -14,23 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package lang;
 
+package handle.naive;
+
+import content.Civolution;
 import handle.CommCluster;
-import handle.Stopped;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Interpreter {
+public class Thinker implements handle.Thinker {
 
-    public boolean interpret() throws Stopped;
+    Thinker(Civolution civolution) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-    public void interpretSim() throws Stopped;
+    @Override
+    public void startThinking(CommCluster commands) {
+        //do absolutely nothing
+    }
 
-    public void reset();
+    @Override
+    public void stopThinking() {
+        //do absolutely nothing
+    }
 
-    public CommCluster getCommands();
+    @Override
+    public void waitForTermination() {
+        //terminate immediately
+    }
     
 }

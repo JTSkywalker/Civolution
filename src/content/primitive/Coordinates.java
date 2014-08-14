@@ -14,23 +14,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package lang;
 
-import handle.CommCluster;
-import handle.Stopped;
+package content.primitive;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Interpreter {
-
-    public boolean interpret() throws Stopped;
-
-    public void interpretSim() throws Stopped;
-
-    public void reset();
-
-    public CommCluster getCommands();
+public class Coordinates {
+    private final int x, y, rangeX, rangeY;
+    
+    Coordinates(int x, int y, int rangeX, int rangeY) {
+        this.x = x;
+        this.y = y;
+        this.rangeX = rangeX;
+        this.rangeY = rangeY;
+    }
+    
+    Coordinates add(int rx, int ry) {
+        return new Coordinates((rx + x)%rangeX,
+                               (ry + y)%rangeY,
+                                rangeX, rangeY);
+    }
+    
     
 }

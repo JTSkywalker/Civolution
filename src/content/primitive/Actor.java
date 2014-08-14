@@ -14,23 +14,39 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package lang;
 
-import handle.CommCluster;
-import handle.Stopped;
+package content.primitive;
+
+import lang.ast.comm.Comm;
+
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Interpreter {
+public abstract class Actor implements content.Actor {
 
-    public boolean interpret() throws Stopped;
+    protected Coordinates pos;
+    protected boolean moveable;
+    
+    @Override
+    public void go(int rx, int ry) {
+        pos = pos.add(rx, ry);
+    }
 
-    public void interpretSim() throws Stopped;
+    @Override
+    public void fortify() {
+        throw new UnsupportedOperationException("Not supported.");
+    }
 
-    public void reset();
+    @Override
+    public void attack(content.Actor enemy) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
 
-    public CommCluster getCommands();
+    @Override
+    public Comm comm(Comm comm, content.Actor commander) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

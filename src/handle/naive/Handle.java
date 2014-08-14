@@ -14,23 +14,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package lang;
 
-import handle.CommCluster;
-import handle.Stopped;
+package handle.naive;
+
+import content.Civolution;
+import handle.GameOver;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Interpreter {
-
-    public boolean interpret() throws Stopped;
-
-    public void interpretSim() throws Stopped;
-
-    public void reset();
-
-    public CommCluster getCommands();
+public abstract class Handle {
     
+    private final Civolution civ;
+    private final Iterable<Agent> agents;
+    
+    public void play() {
+        try {
+            for(Agent agent : agents)
+                agents.start();
+        } catch (GameOver go) {
+            saveOrDiscard();
+        }
+    }
+    
+    private void saveOrDiscard() {
+        throw new UnsupportedOperationException();
+    }
 }

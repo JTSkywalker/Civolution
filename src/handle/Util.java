@@ -14,23 +14,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package lang;
 
-import handle.CommCluster;
-import handle.Stopped;
+package handle;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Interpreter {
+public class Util {
 
-    public boolean interpret() throws Stopped;
-
-    public void interpretSim() throws Stopped;
-
-    public void reset();
-
-    public CommCluster getCommands();
+    public static void print(Object out) {
+        System.out.print(out);
+    }
+    public static void println(Object out) {
+        System.out.println(out);
+    }
+    public static void println() {
+        System.out.println();
+    }
     
+    public static void waitForCondition(AtomicBoolean condition) {
+        synchronized(condition) {
+            while (!condition.get())
+                try {
+                    condition.wait();
+                } catch (InterruptedException ex) { }
+        }
+    }
+    
+    public static void signalAll(AtomicBoolean condition) {
+        synchronized(condition) {
+            condition.set(true);
+            condition.notifyAll();
+        }
+    }
 }

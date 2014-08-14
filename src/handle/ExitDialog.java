@@ -14,23 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package lang;
 
-import handle.CommCluster;
-import handle.Stopped;
+package handle;
+
+import content.Civolution;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Interpreter {
-
-    public boolean interpret() throws Stopped;
-
-    public void interpretSim() throws Stopped;
-
-    public void reset();
-
-    public CommCluster getCommands();
+public interface ExitDialog {
+    
+    public void run(Civolution civolution, CommCluster commands);
     
 }
