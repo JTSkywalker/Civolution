@@ -15,26 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package handle.naive;
-
-import content.Civolution;
-import handle.CommCluster;
+package handle;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public class CommandOperator implements handle.CommOperator {
-
-    private final Civolution civolution;
-    
-    CommandOperator(Civolution civolution) {
-        this.civolution = civolution;
-    }
-
-    @Override
-    public void operate(CommCluster commands) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+public interface Player {
     
 }

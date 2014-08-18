@@ -14,14 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package handle;
+
+package content;
+
+import handle.Conditions;
+import handle.Reaction;
+import java.util.Collection;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface CommCluster {
+public interface Game {
     
-    void addCC(CommCluster cc);
+    public Collection<Actor> getActors();
+    
+    public Reaction nextReaction(handle.Actions actions, Conditions conditions);
     
 }

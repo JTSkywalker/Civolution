@@ -17,14 +17,12 @@
 
 package handle;
 
-import content.Civolution;
+import util.Dialog;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface ExitDialog {
-    
-    public void run(Civolution civolution, CommCluster commands);
+interface ExitDialog extends Dialog {
     
 }

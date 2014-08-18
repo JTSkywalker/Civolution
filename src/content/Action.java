@@ -21,8 +21,6 @@ package content;
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Skill {
+public interface Action {
     
-    public void use();
-        
 }

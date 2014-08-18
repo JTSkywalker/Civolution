@@ -15,12 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package handle;
+package content;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public class GameOver extends Exception {
+public interface AI extends handle.Player {
     
 }

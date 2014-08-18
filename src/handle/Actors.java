@@ -14,23 +14,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package lang;
 
-import handle.CommCluster;
-import handle.Stopped;
+package handle;
+
+import content.Actor;
+import java.util.Collection;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface Interpreter {
+interface Actors extends Collection<Actor> {
+    
+    void think(Actions actions, Conditions conditions);
 
-    public boolean interpret() throws Stopped;
+    void terminate();
 
-    public void interpretSim() throws Stopped;
-
-    public void reset();
-
-    public CommCluster getCommands();
+    void waitForTermination();
     
 }

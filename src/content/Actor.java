@@ -17,20 +17,10 @@
 
 package content;
 
-import lang.ast.comm.Comm;
-
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
 public interface Actor {
-    
-    public void go(int rx, int ry);
-    
-    public void fortify();
-    
-    public void attack(Actor enemy);
-    
-    public Comm comm(Comm comm, Actor commander);
     
 }

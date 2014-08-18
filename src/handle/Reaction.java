@@ -15,32 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package handle.naive;
-
-import content.Civolution;
-import content.Situation;
-import lang.Interpreter;
-import lang.imp.ImpInterpreter;
+package handle;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public class HandleFactory implements handle.HandleFactory {
+public class Reaction {
 
-    @Override
-    public Thinker createThinker(Civolution civolution) {
-        return new Thinker(civolution);
+    void start() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    public Interpreter createInterpreter(Situation mySituation) {
-        return new ImpInterpreter(mySituation);
+    boolean isHuman() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    public CommandOperator createCommandOperator(Civolution civolution) {
-        return new CommandOperator(civolution);
+    Actors others() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    void operate(Actions actions, Conditions conditions) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

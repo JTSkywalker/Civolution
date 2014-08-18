@@ -17,20 +17,10 @@
 
 package handle;
 
-import content.Civolution;
-import content.Situation;
-import lang.Interpreter;
-
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface HandleFactory {
-
-    public Thinker createThinker(Civolution civolution);
-
-    public Interpreter createInterpreter(Situation mySituation);
-
-    public CommOperator createCommandOperator(Civolution civolution);
+public class Conditions {
     
 }

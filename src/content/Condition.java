@@ -15,17 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package handle.naive;
+package content;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public class CommandCluster implements handle.CommCluster {
-
-    @Override
-    public void addCC(handle.CommCluster cc) {
-        //do absolutely nothing
-    }
+class Condition {
     
 }

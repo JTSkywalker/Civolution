@@ -14,24 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package content;
 
-import handle.AI;
-import handle.CommCluster;
+package util;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
+ * @param <t1>
+ * @param <t2>
  */
-public interface Civolution {
+public class P <t1, t2> {
     
-    //Writing methods should NOT be declared public
+    private final t1 first;
+    private final t2 second;
     
-    public Iterable<AI> getAIs();
+    public P(t1 first, t2 second) {
+        this.first  = first;
+        this.second = second;
+    }
     
-    public Situation getSituation(AI ai);
-
-    public Situation getMySituation();
+    public t1 first() {
+        return first;
+    }
     
-    public void operate(CommCluster commands);
+    public t2 second() {
+        return second;
+    }
 }

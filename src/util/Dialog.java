@@ -14,17 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package handle;
 
-import handle.awesome.AIthought;
-import content.Situation;
+package util;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public interface AI extends Runnable {
-    
-    AIthought think(Situation situation);
+public interface Dialog {
     
 }

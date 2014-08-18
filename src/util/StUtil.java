@@ -15,27 +15,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package content.primitive;
+package util;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  *
  * @author JTSkywalker <jtskywalker@t-online.de>
  */
-public class Coordinates {
-    private final int x, y, rangeX, rangeY;
-    
-    Coordinates(int x, int y, int rangeX, int rangeY) {
-        this.x = x;
-        this.y = y;
-        this.rangeX = rangeX;
-        this.rangeY = rangeY;
+public class StUtil {
+
+    public static void print(Object out) {
+        System.out.print(out);
+    }
+    public static void println(Object out) {
+        System.out.println(out);
+    }
+    public static void println() {
+        System.out.println();
     }
     
-    Coordinates add(int rx, int ry) {
-        return new Coordinates((rx + x)%rangeX,
-                               (ry + y)%rangeY,
-                                rangeX, rangeY);
+    public static void waitForCondition(AtomicBoolean condition) {
+        synchronized(condition) {
+            while (!condition.get())
+                try {
+                    condition.wait();
+                } catch (InterruptedException ex) { }
+        }
     }
     
-    
+    public static void signalAll(AtomicBoolean condition) {
+        synchronized(condition) {
+            condition.set(true);
+            condition.notifyAll();
+        }
+    }
 }
