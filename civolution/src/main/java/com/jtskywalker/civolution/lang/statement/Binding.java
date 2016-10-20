@@ -9,7 +9,6 @@ import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.Expression;
 import com.jtskywalker.civolution.lang.Scope;
 import com.jtskywalker.civolution.lang.Statement;
-import com.jtskywalker.civolution.server.util.Pair;
 import java.util.Objects;
 
 /**
@@ -18,32 +17,31 @@ import java.util.Objects;
  */
 public class Binding<T> implements Statement<T> {
     
-    final String name;
-    final Expression exp;
-    final int pp;
+    private final String name;
+    private final Expression exp;
+    private final Statement next;
 
-    public Binding(String name, Expression exp, int programpoint) {
+    public Binding(String name, Expression exp, Statement next) {
         this.name = name;
         this.exp = exp;
-        this.pp = programpoint;
+        this.next = next;
     }
 
     @Override
-    public Pair<Integer, T> nextExternal(Evaluator<T> externalEvaluator,
-            Scope<String, Integer> scope, int startPP) {
-        if (startPP > pp) {
-            return new Pair(pp,null);
-        }
+    public ExternalStmt<T> nextExternal(Evaluator<T> externalEvaluator,
+            Scope<String, Integer> scope) {
         scope.put(name, exp.evaluate(externalEvaluator, scope));
-        return new Pair(pp,null);
+        if (next == null) {
+            return null;
+        }
+        return next.nextExternal(externalEvaluator, scope);
     }
-
+    
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Objects.hashCode(this.exp);
-        hash = 29 * hash + this.pp;
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.exp);
         return hash;
     }
 
@@ -59,9 +57,6 @@ public class Binding<T> implements Statement<T> {
             return false;
         }
         final Binding<?> other = (Binding<?>) obj;
-        if (this.pp != other.pp) {
-            return false;
-        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -73,8 +68,8 @@ public class Binding<T> implements Statement<T> {
 
     @Override
     public String toString() {
-        return "Binding{" + "name=" + name + ", exp=" + exp + ", pp=" + pp + '}';
+        return "Binding{" + "name=" + name + ", exp=" + exp + '}';
     }
-    
+
     
 }

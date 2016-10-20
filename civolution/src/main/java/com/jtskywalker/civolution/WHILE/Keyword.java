@@ -19,5 +19,5 @@ public enum Keyword implements Token {
     DEF,
     NEQ, GT, LT, GEQ, LEQ, EQ, 
     QM, EM, 
-    SEMICOLON;
+    SEMICOLON, RBRACKET, LBRACKET;
 }

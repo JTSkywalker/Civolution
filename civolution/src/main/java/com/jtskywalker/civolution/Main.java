@@ -24,18 +24,20 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Game game = new Game(80,40);
+        int width = 20;
+        int height = 10;
+        Game game = new Game(width,height);
         
         Actor human = new HumanActor();
         Counter queen = CounterFactory.createQueen(0, human);
-        game.putCounter(queen, new Coordinates(10,10,80,40));
+        game.putCounter(queen, new Coordinates(1,1,width,height));
         
         Actor sub1 = new Subordinate(0);
         Actor sub2 = new Subordinate(0);
         game.putCounter(CounterFactory.createWarrior(0,sub1),
-                new Coordinates(10, 12, 80, 40));
+                new Coordinates(3, 3, width, height));
         game.putCounter(CounterFactory.createScout(0, sub2),
-                new Coordinates(12, 10, 80, 40));
+                new Coordinates(0, 5, width, height));
         
         Server server = new Server(game);
         

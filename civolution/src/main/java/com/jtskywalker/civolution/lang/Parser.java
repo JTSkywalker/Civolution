@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface Parser<T> {
 
-    public Statement<T> parse(List<Token> tokenlist, int programpoint) 
+    public Statement<T> parse(List<Token> tokenlist) 
             throws ParserErrorException;
     
     

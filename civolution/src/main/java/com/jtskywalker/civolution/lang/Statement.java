@@ -5,7 +5,8 @@
  */
 package com.jtskywalker.civolution.lang;
 
-import com.jtskywalker.civolution.server.util.Pair;
+import com.jtskywalker.civolution.lang.statement.ExternalStmt;
+
 
 
 /**
@@ -15,7 +16,7 @@ import com.jtskywalker.civolution.server.util.Pair;
  */
 public interface Statement<T> {
     
-    public Pair<Integer, T> nextExternal(Evaluator<T> externalEvaluator,
-            Scope<String,Integer> scope, int startPP);
+    public ExternalStmt<T> nextExternal(Evaluator<T> externalEvaluator,
+            Scope<String,Integer> scope);
     
 }

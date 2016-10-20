@@ -35,7 +35,24 @@ public class Scope<K,V> {
     }
     
     public void put(K key, V value) {
-        table.put(key, value);
+        if (table.containsKey(key)
+                || parent == null
+                || !parent.contains(key)) {
+            table.put(key, value);
+            
+        } else {
+            parent.put(key, value);
+        }
+    }
+    
+    public boolean contains(K key) {
+        if (table.containsKey(key)) {
+            return true;
+        }
+        if (parent == null) {
+            return false;
+        }
+        return parent.contains(key);
     }
     
 }

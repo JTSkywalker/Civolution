@@ -18,28 +18,31 @@ import java.util.Objects;
 public class ExternalStmt<T> implements Statement<T> {
     
     final T external;
-    final int pp;
+    final Statement<T> next;
 
-    public ExternalStmt(T external, int pp) {
+    public ExternalStmt(T external, Statement<T> next) {
         this.external = external;
-        this.pp = pp;
+        this.next = next;
     }
 
     @Override
-    public Pair<Integer, T> nextExternal(Evaluator<T> externalEvaluator, 
-            Scope<String, Integer> scope, int startPP) {
-        if (startPP > pp) {
-            return new Pair(pp, null);
-        } else {
-            return new Pair(pp, external);
-        }
+    public ExternalStmt<T> nextExternal(Evaluator<T> externalEvaluator,
+            Scope<String, Integer> scope) {
+        return this;
+    }
+
+    public T getExternal() {
+        return external;
+    }
+
+    public Statement<T> getNext() {
+        return next;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.external);
-        hash = 59 * hash + this.pp;
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.external);
         return hash;
     }
 
@@ -55,9 +58,6 @@ public class ExternalStmt<T> implements Statement<T> {
             return false;
         }
         final ExternalStmt<?> other = (ExternalStmt<?>) obj;
-        if (this.pp != other.pp) {
-            return false;
-        }
         if (!Objects.equals(this.external, other.external)) {
             return false;
         }
@@ -66,7 +66,7 @@ public class ExternalStmt<T> implements Statement<T> {
 
     @Override
     public String toString() {
-        return "ExternalStmt{" + "external=" + external + ", pp=" + pp + '}';
+        return "ExternalStmt{" + "external=" + external + '}';
     }
         
 }

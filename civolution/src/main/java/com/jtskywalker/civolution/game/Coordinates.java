@@ -43,28 +43,28 @@ public class Coordinates {
     public Coordinates add(Direction direction) {
         switch (direction) {
             case N:
-                return new Coordinates( x, (y + 1) % height,
+                return new Coordinates( x, mod(y + 1, height),
                                         width, height);
             case NE:
-                return new Coordinates((x + 1) % width, (y + 1) % height,
+                return new Coordinates(mod(x + 1, width), mod(y + 1, height),
                                         width, height);
             case E:
-                return new Coordinates((x + 1) % width, y,
+                return new Coordinates(mod(x + 1, width), y,
                                         width, height);
             case SE:
-                return new Coordinates((x + 1) % width, (y - 1) % height,
+                return new Coordinates(mod(x + 1, width), mod(y - 1, height),
                                         width, height);
             case S:
-                return new Coordinates( x, (y - 1) % height,
+                return new Coordinates( x, mod(y - 1, height),
                                         width, height);
             case SW:
-                return new Coordinates((x - 1) % width, (y - 1) % height,
+                return new Coordinates(mod(x - 1, width), mod(y - 1, height),
                                         width, height);
             case W:
-                return new Coordinates((x - 1) % width, y,
+                return new Coordinates(mod(x - 1, width), y,
                                         width, height);
             case NW:
-                return new Coordinates((x - 1) % width, (y + 1) % height,
+                return new Coordinates(mod(x - 1, width), mod(y + 1, height),
                                         width, height);
             default:
                 throw new AssertionError(direction.name());
@@ -115,5 +115,8 @@ public class Coordinates {
                 ", width=" + width + ", height=" + height + '}';
     }
     
+    private int mod(int a, int b) {
+        return (a % b + b) % b;
+    }
     
 }

@@ -39,6 +39,12 @@ public class WHILELexer {
                 
             case "}":
                 return Keyword.RBRACE;
+                
+            case "[":
+                return Keyword.LBRACKET;
+                
+            case "]":
+                return Keyword.RBRACKET;
             
             case "+":
                 return Keyword.PLUS;

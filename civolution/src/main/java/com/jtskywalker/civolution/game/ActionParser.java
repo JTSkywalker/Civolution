@@ -35,7 +35,7 @@ public class ActionParser implements ExtParser<Action> {
                 return new Move(parseDirection(block.get(1)));
             case "command":
                 return new Command(internalParser
-                        .parse(block.subList(1, block.size() - 1), 0));
+                        .parse(block.subList(1, block.size() - 1)));
             default:
                 throw new ParserErrorException();
         }

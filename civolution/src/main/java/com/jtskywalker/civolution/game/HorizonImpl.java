@@ -35,10 +35,14 @@ public class HorizonImpl implements Horizon {
                     if (c == null) {
                         printstream.print(' ');
                     } else {
-                       printstream.print(c.getNation());
+                        if (c.getBaseStrength() == 20 && c.getBaseMobility() == 20) {
+                            printstream.print("*");
+                        } else {
+                            printstream.print(c.getNation());
+                        }
                     }
                 } else {
-                    printstream.print('#');
+                    printstream.print('.');
                 }
             }
             printstream.print('\n');

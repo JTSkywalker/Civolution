@@ -6,15 +6,17 @@
 package com.jtskywalker.civolution.server;
 
 import com.jtskywalker.civolution.WHILE.WHILELexer;
-import com.jtskywalker.civolution.WHILE.WHILEParser;
 import com.jtskywalker.civolution.game.ActionParser;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.CivoLangException;
 import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.Parser;
+import com.jtskywalker.civolution.lang.ParserImpl;
 import com.jtskywalker.civolution.lang.Scope;
 import com.jtskywalker.civolution.lang.Statement;
 import com.jtskywalker.civolution.lang.Token;
+import com.jtskywalker.civolution.lang.statement.ExternalStmt;
+import com.jtskywalker.civolution.server.util.Pair;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
@@ -31,23 +33,34 @@ public class HumanActor extends Actor {
     
     final WHILELexer lexer = new WHILELexer();
     final Parser<Action> parser
-            = new WHILEParser(new ActionParser());
+            = new ParserImpl(new ActionParser());
+    
+    Statement<Action> program = null;
+    final Scope<String,Integer> scope = new Scope(null);
 
     @Override
     public Action nextAction(Horizon horizon) {
-        horizon.printOn(OUTPUT);
         Evaluator<Action> eval = new ActionEvaluator(horizon);
-        Scanner sc = new Scanner(INPUT);
-        String input = sc.nextLine();
-        try {
-            List<Token> tokenlist = lexer.lex(input);
-            Statement<Action> program = parser.parse(tokenlist, 0);
-            program.nextExternal(eval, new Scope(null), 0);
-        } catch (CivoLangException ex) {
-            ex.printStackTrace();
+        if (program == null) {
+            horizon.printOn(OUTPUT);
+            Scanner sc = new Scanner(INPUT);
+            String input = sc.nextLine();
+            try {
+                List<Token> tokenlist = lexer.lex(input);
+                program = parser.parse(tokenlist);
+            } catch (CivoLangException ex) {
+                ex.printStackTrace();
+                return nextAction(horizon);
+            }
+        }
+        ExternalStmt<Action> result 
+                = program.nextExternal(eval, scope);
+        if (result == null) {
+            program = null;
             return nextAction(horizon);
         }
-        return null;
+        program = result.getNext();
+        return result.getExternal();
     }
     
 }

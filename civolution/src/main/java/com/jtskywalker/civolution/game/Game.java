@@ -38,7 +38,7 @@ public class Game {
     public Horizon computeHorizon(Counter counter) {
         Horizon horizon = new HorizonImpl(width, height);
         for (Counter c : getFriends(counter)) {
-            horizon.putCounter(counter, getCoordinates(counter));
+            horizon.putCounter(c, getCoordinates(c));
         }
         return horizon;
     }
