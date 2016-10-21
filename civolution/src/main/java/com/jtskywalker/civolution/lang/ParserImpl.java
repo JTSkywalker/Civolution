@@ -27,6 +27,7 @@ public class ParserImpl<T> implements Parser<T> {
 
     public ParserImpl(ExtParser<T> externalParser) {
         this.externalParser = externalParser;
+        externalParser.setIntParser(this);
     }    
     
     @Override

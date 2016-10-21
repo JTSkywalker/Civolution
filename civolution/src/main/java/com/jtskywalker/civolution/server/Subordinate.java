@@ -6,7 +6,11 @@
 package com.jtskywalker.civolution.server;
 
 import com.jtskywalker.civolution.game.action.Pause;
+import com.jtskywalker.civolution.lang.ActionEvaluator;
+import com.jtskywalker.civolution.lang.Evaluator;
+import com.jtskywalker.civolution.lang.Scope;
 import com.jtskywalker.civolution.lang.Statement;
+import com.jtskywalker.civolution.lang.statement.ExternalStmt;
 
 /**
  *
@@ -16,6 +20,7 @@ public class Subordinate extends Actor {
     
     final int nation;
     Statement orders;
+    final Scope<String,Integer> scope = new Scope(null);
 
     public Subordinate(int nation) {
         this.nation = nation;
@@ -23,7 +28,18 @@ public class Subordinate extends Actor {
     
     @Override
     public Action nextAction(Horizon horizon) {
-        return new Pause();
+        Evaluator<Action> eval = new ActionEvaluator(horizon);
+        if (orders == null) {
+            return new Pause();
+        }
+        ExternalStmt<Action> result 
+                = orders.nextExternal(eval, scope);
+        if (result == null) {
+            orders = null;
+            return new Pause();
+        }
+        orders = result.getNext();
+        return result.getExternal();
     }
     
     @Override
