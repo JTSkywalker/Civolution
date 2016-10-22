@@ -5,7 +5,6 @@
  */
 package com.jtskywalker.civolution.server;
 
-import com.jtskywalker.civolution.game.Coordinates;
 import com.jtskywalker.civolution.game.Counter;
 import java.io.PrintStream;
 

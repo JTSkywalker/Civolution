@@ -5,6 +5,7 @@
  */
 package com.jtskywalker.civolution.game;
 
+import com.jtskywalker.civolution.server.Coordinates;
 import com.jtskywalker.civolution.server.Actor;
 import com.jtskywalker.civolution.server.Horizon;
 import java.util.HashMap;

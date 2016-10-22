@@ -5,7 +5,7 @@
  */
 package com.jtskywalker.civolution;
 
-import com.jtskywalker.civolution.game.Coordinates;
+import com.jtskywalker.civolution.server.Coordinates;
 import com.jtskywalker.civolution.game.Counter;
 import com.jtskywalker.civolution.game.CounterFactory;
 import com.jtskywalker.civolution.game.Game;

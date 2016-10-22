@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.game;
+package com.jtskywalker.civolution.server;
 
 import com.jtskywalker.civolution.game.action.Direction;
 

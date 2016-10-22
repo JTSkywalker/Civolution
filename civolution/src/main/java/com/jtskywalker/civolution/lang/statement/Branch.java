@@ -32,8 +32,14 @@ public class Branch<T> implements Statement<T>{
     public ExternalStmt<T> nextExternal(Evaluator<T> externalEvaluator,
                                         Scope<String, Integer> scope) {
         if (condition.evaluate(externalEvaluator, scope) != 0) {
+            if (consequence == null) {
+                return null;
+            }
             return consequence.nextExternal(externalEvaluator, scope);
         } else {
+            if (alternative == null) {
+                return null;
+            }
             return alternative.nextExternal(externalEvaluator, scope);
         }
     }
