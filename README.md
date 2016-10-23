@@ -14,14 +14,21 @@ Now you can try out what happens when you enter commands using the following abs
 Num describes any natural Number give in decimal representation.)
 
   Stmt       ::= ( BlockStmt | SingleStmt ) Stmt
+  
   SingleStmt ::= ``!'' Act ``;'' | Id ``='' Exp
+  
   BlockStmt  ::= ( ``if'' | ``while'' ) Exp ``{'' Stmt ``}''
 
+
   Exp       ::= ( SingleExp | BinaryExp )
+  
   SingleExp ::= ( Id | Num ) 
+  
   BinaryExp ::= SingleExp Operator SingleExp
+  
 
   Act       ::= move Direction | command { Stmt }
+  
   Direction ::= ``N'' | ``NE'' | ``E'' | ``SE''
               | ``S'' | ``SW'' | ``W'' | ``NW''
    
