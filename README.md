@@ -15,9 +15,9 @@ Num describes any natural Number give in decimal representation.)
 
   Stmt       ::= ( BlockStmt | SingleStmt ) Stmt
   
-  SingleStmt ::= ``!'' Act ``;'' | Id ``='' Exp
+  SingleStmt ::= "!" Act ";" | Id "=" Exp
   
-  BlockStmt  ::= ( ``if'' | ``while'' ) Exp ``{'' Stmt ``}''
+  BlockStmt  ::= ( "if" | "while" ) Exp "{" Stmt "}"
 
 
   Exp       ::= ( SingleExp | BinaryExp )
@@ -29,6 +29,6 @@ Num describes any natural Number give in decimal representation.)
 
   Act       ::= move Direction | command { Stmt }
   
-  Direction ::= ``N'' | ``NE'' | ``E'' | ``SE''
-              | ``S'' | ``SW'' | ``W'' | ``NW''
+  Direction ::= "N" | "NE" | "E" | "SE"
+              | "S" | "SW" | "W" | "NW"
    
