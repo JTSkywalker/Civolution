@@ -27,7 +27,7 @@ Num describes any natural Number give in decimal representation.)
   BinaryExp ::= SingleExp Operator SingleExp
   
 
-  Act       ::= move Direction | command { Stmt }
+  Act       ::= move Direction | command "{" Stmt "}"
   
   Direction ::= "N" | "NE" | "E" | "SE"
               | "S" | "SW" | "W" | "NW"
