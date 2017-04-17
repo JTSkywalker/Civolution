@@ -29,7 +29,7 @@ public class Move implements Action {
             throws ActionNotAllowedException {
         Coordinates oldC = game.getCoordinates(counter);
         Coordinates newC = oldC.add(direction);
-        if (game.hasEnemy(newC,counter.getNation())) {
+        if (game.hasEnemy(newC,counter.getEmblem())) {
             if (counter.canAttack()) {
                 return (new Attack(direction)).execute(game, counter);
             } else {

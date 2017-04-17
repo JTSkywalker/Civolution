@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- *
+ * This class contains all information on the game 
  * @author rincewind
  */
 public class Game {
@@ -31,7 +31,7 @@ public class Game {
     public List<Counter> getFriends(Counter counter) {
         return counters.keySet()
                 .stream()
-                .filter((c) -> c.getNation() == counter.getNation())
+                .filter((c) -> c.getEmblem() == counter.getEmblem())
                 .collect(Collectors.toList());
     }
     
@@ -51,7 +51,7 @@ public class Game {
     public boolean hasEnemy(Coordinates coord, int nation) {
         return getCounters(coord)
                 .stream()
-                .anyMatch((c) -> c.getNation() != nation);
+                .anyMatch((c) -> c.getEmblem() != nation);
     }
 
     public List<Counter> getCounters(Coordinates coord) {

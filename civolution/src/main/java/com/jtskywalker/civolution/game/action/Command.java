@@ -33,7 +33,7 @@ public class Command implements Action {
             return 0;
         }
         Actor subordinate = sub.getActor();
-        subordinate.receiveOrders(order, counter.getNation());
+        subordinate.receiveOrders(order, counter.getEmblem());
         return 0;
     }
 

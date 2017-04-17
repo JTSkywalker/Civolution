@@ -23,9 +23,7 @@ public class Server {
 
     public Server(Game game) {
         this.game = game;
-        for (Actor a : game.getActors()) {
-            actors.put(a, 0);
-        }
+  
     }
     
     public void run() {

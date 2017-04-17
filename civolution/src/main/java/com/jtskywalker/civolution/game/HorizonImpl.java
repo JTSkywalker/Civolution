@@ -91,7 +91,7 @@ public class HorizonImpl implements Horizon {
                     .stream()
                     .findAny()
                     .orElseThrow(() -> new IllegalArgumentException())
-                    .getNation();
+                    .getEmblem();
             
             printstream.print(nation);
             printstream.print(queens == 0 ? " " : 

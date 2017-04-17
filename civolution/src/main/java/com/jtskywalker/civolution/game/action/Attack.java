@@ -33,7 +33,7 @@ public class Attack implements Action {
         
         Coordinates oldC = game.getCoordinates(counter);
         Coordinates newC = oldC.add(direction);
-        if (!game.hasEnemy(newC, counter.getNation())) {
+        if (!game.hasEnemy(newC, counter.getEmblem())) {
             throw new ActionNotAllowedException();
         }
         Counter enemy = game.getDefender(newC);

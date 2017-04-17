@@ -14,13 +14,13 @@ import java.util.Objects;
  */
 public class Counter {
     
-    final int nation, baseStrength, baseMobility, population;
+    final int emblem, baseStrength, baseMobility, population;
     double fitness;
     final boolean canAttack;
     final Actor actor;
 
     public Counter(int nation, int baseStrength, int baseMobility, int population, boolean canAttack, Actor actor) {
-        this.nation = nation;
+        this.emblem = nation;
         this.baseStrength = baseStrength;
         this.baseMobility = baseMobility;
         this.population = population;
@@ -29,8 +29,8 @@ public class Counter {
         this.fitness = 1;
     }
 
-    public int getNation() {
-        return nation;
+    public int getEmblem() {
+        return emblem;
     }
 
     public int getBaseStrength() {
@@ -81,7 +81,7 @@ public class Counter {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + this.nation;
+        hash = 53 * hash + this.emblem;
         hash = 53 * hash + this.baseStrength;
         hash = 53 * hash + this.baseMobility;
         hash = 53 * hash + this.population;
@@ -103,7 +103,7 @@ public class Counter {
             return false;
         }
         final Counter other = (Counter) obj;
-        if (this.nation != other.nation) {
+        if (this.emblem != other.emblem) {
             return false;
         }
         if (this.baseStrength != other.baseStrength) {
@@ -129,7 +129,7 @@ public class Counter {
 
     @Override
     public String toString() {
-        return "Counter{" + "nation=" + nation + ", baseStrength=" + baseStrength + ", baseMobility=" + baseMobility + ", population=" + population + ", fitness=" + fitness + ", canAttack=" + canAttack + ", actor=" + actor + '}';
+        return "Counter{" + "nation=" + emblem + ", baseStrength=" + baseStrength + ", baseMobility=" + baseMobility + ", population=" + population + ", fitness=" + fitness + ", canAttack=" + canAttack + ", actor=" + actor + '}';
     }
     
     

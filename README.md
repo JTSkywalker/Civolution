@@ -15,7 +15,7 @@ Num describes any natural Number give in decimal representation.)
 
   Stmt       ::= ( BlockStmt | SingleStmt ) Stmt
   
-  SingleStmt ::= "!" Act ";" | Id "=" Exp
+  SingleStmt ::= "!" Act ";" | Id "=" Exp ";"
   
   BlockStmt  ::= ( "if" | "while" ) Exp "{" Stmt "}"
 
