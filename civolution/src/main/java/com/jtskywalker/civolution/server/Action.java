@@ -5,7 +5,7 @@
  */
 package com.jtskywalker.civolution.server;
 
-import com.jtskywalker.civolution.game.Counter;
+import com.jtskywalker.civolution.game.Pawn;
 import com.jtskywalker.civolution.game.Game;
 
 /**
@@ -14,6 +14,6 @@ import com.jtskywalker.civolution.game.Game;
  */
 public interface Action {
     
-    public int execute(Game game, Counter counter) throws ActionNotAllowedException;
+    public int execute(Game game, Pawn counter) throws ActionNotAllowedException;
     
 }

@@ -21,14 +21,14 @@ import java.util.stream.Collectors;
 public class Game {
     
     final int width, height;
-    final Map<Counter,Coordinates> counters = new HashMap<>();
+    final Map<Pawn,Coordinates> counters = new HashMap<>();
 
     public Game(int width, int height) {
         this.width = width;
         this.height= height;
     }
         
-    public List<Counter> getFriends(Counter counter) {
+    public List<Pawn> getFriends(Pawn counter) {
         return counters.keySet()
                 .stream()
                 .filter((c) -> c.getEmblem() == counter.getEmblem())
@@ -36,15 +36,15 @@ public class Game {
     }
     
     
-    public Horizon computeHorizon(Counter counter) {
+    public Horizon computeHorizon(Pawn counter) {
         Horizon horizon = new HorizonImpl(width, height);
-        for (Counter c : getFriends(counter)) {
+        for (Pawn c : getFriends(counter)) {
             horizon.putCounter(c, getCoordinates(c));
         }
         return horizon;
     }
 
-    public Coordinates getCoordinates(Counter counter) {
+    public Coordinates getCoordinates(Pawn counter) {
         return counters.get(counter);
     }
 
@@ -54,14 +54,14 @@ public class Game {
                 .anyMatch((c) -> c.getEmblem() != nation);
     }
 
-    public List<Counter> getCounters(Coordinates coord) {
+    public List<Pawn> getCounters(Coordinates coord) {
         return counters.keySet()
                 .stream()
                 .filter((c) -> (counters.get(c).equals(coord)))
                 .collect(Collectors.toList());
     }
     
-    public void putCounter(Counter counter, Coordinates newC) {
+    public void putCounter(Pawn counter, Coordinates newC) {
         counters.put(counter, newC);
     }
 
@@ -69,22 +69,22 @@ public class Game {
         return 1;
     }
 
-    public Counter getDefender(Coordinates coord) {
+    public Pawn getDefender(Coordinates coord) {
         return getCounters(coord)
                 .stream()
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException());
     }
 
-    public void setFitness(Counter counter, double d) {
+    public void setFitness(Pawn counter, double d) {
         counter.setFitness(d);
     }
 
-    public void kill(Counter counter) {
+    public void kill(Pawn counter) {
         counters.remove(counter);
     }
 
-    public Counter getSubordinate(Counter counter) {
+    public Pawn getSubordinate(Pawn counter) {
         Coordinates coord = getCoordinates(counter);
         return getCounters(coord)
                 .stream()

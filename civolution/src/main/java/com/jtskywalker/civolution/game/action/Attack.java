@@ -6,7 +6,7 @@
 package com.jtskywalker.civolution.game.action;
 
 import com.jtskywalker.civolution.server.Coordinates;
-import com.jtskywalker.civolution.game.Counter;
+import com.jtskywalker.civolution.game.Pawn;
 import com.jtskywalker.civolution.game.Game;
 import com.jtskywalker.civolution.server.Action;
 import com.jtskywalker.civolution.server.ActionNotAllowedException;
@@ -25,7 +25,7 @@ public class Attack implements Action {
     }
 
     @Override
-    public int execute(Game game, Counter counter)
+    public int execute(Game game, Pawn counter)
             throws ActionNotAllowedException {
         if (!counter.canAttack()) {
             throw new ActionNotAllowedException();
@@ -36,7 +36,7 @@ public class Attack implements Action {
         if (!game.hasEnemy(newC, counter.getEmblem())) {
             throw new ActionNotAllowedException();
         }
-        Counter enemy = game.getDefender(newC);
+        Pawn enemy = game.getDefender(newC);
         int bES = enemy.getBaseStrength();
         int bMS = counter.getBaseStrength();
         int oldES = enemy.getEffectiveStrength();

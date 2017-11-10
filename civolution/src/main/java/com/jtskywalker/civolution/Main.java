@@ -6,7 +6,7 @@
 package com.jtskywalker.civolution;
 
 import com.jtskywalker.civolution.server.Coordinates;
-import com.jtskywalker.civolution.game.Counter;
+import com.jtskywalker.civolution.game.Pawn;
 import com.jtskywalker.civolution.game.CounterFactory;
 import com.jtskywalker.civolution.game.Game;
 import com.jtskywalker.civolution.server.Actor;
@@ -29,7 +29,7 @@ public class Main {
         Game game = new Game(width,height);
         
         Actor human = new HumanActor();
-        Counter queen = CounterFactory.createQueen(0, human);
+        Pawn queen = CounterFactory.createQueen(0, human);
         game.putCounter(queen, new Coordinates(1,1,width,height));
         
         Actor sub1 = new Subordinate(0);

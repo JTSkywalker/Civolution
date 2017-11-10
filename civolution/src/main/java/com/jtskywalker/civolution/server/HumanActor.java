@@ -16,7 +16,6 @@ import com.jtskywalker.civolution.lang.Scope;
 import com.jtskywalker.civolution.lang.Statement;
 import com.jtskywalker.civolution.lang.Token;
 import com.jtskywalker.civolution.lang.statement.ExternalStmt;
-import com.jtskywalker.civolution.server.util.Pair;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;

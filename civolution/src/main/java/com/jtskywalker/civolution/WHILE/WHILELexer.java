@@ -17,13 +17,48 @@ import java.util.Scanner;
  */
 public class WHILELexer {
     
+    
     public List<Token> lex(String input) {
-        Scanner sc = new Scanner(new StringReader(input));
+        String prelexed = prelex(input);
+        Scanner sc = new Scanner(new StringReader(prelexed));
         List<Token> tokenlist = new ArrayList<>();
         while (sc.hasNext()) {
             tokenlist.add(lexToken(sc.next()));
         }
         return tokenlist;
+    }
+    
+    // support omitting whitespace
+    String prelex(String input) {
+        String res = "";
+        for (int i=0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            String spaced = " " + c + " ";
+            switch (c) {
+                case '{':
+                case '}':
+                case '[':
+                case ']':
+                case '+':
+                case '-':
+                case '?':
+                case ';':
+                    res += spaced;
+                    break;
+                case '!':
+                case '<':
+                case '>':
+                case '=':
+                    if (i + 1 < input.length() && input.charAt(i+1) == '=')
+                        res += " " + c;
+                    else
+                        res += spaced;
+                    break;
+                default:
+                    res += c;
+            }
+        }
+        return res;
     }
     
     Token lexToken(String s) {

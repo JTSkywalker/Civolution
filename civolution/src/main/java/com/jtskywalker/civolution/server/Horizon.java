@@ -5,7 +5,7 @@
  */
 package com.jtskywalker.civolution.server;
 
-import com.jtskywalker.civolution.game.Counter;
+import com.jtskywalker.civolution.game.Pawn;
 import java.io.PrintStream;
 
 /**
@@ -16,6 +16,6 @@ public interface Horizon {
     
     public void printOn(PrintStream OUTPUT);
     
-    public void putCounter(Counter counter, Coordinates coord);
+    public void putCounter(Pawn counter, Coordinates coord);
     
 }

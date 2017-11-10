@@ -15,7 +15,7 @@ import java.util.Set;
 public class HorizonImpl implements Horizon {
     
     final int width, height;
-    final HashMapSet<Coordinates, Counter> visible = new HashMapSet<>();
+    final HashMapSet<Coordinates, Pawn> visible = new HashMapSet<>();
 
     public HorizonImpl(int width, int height) {
         this.width = width;
@@ -54,13 +54,13 @@ public class HorizonImpl implements Horizon {
     }
 
     @Override
-    public void putCounter(Counter counter, Coordinates coord) {
+    public void putCounter(Pawn counter, Coordinates coord) {
         visible.put(coord, counter);
     }
 
     private void printFigures(PrintStream printstream, Coordinates coord) {
         if (visible.containsKey(coord)) {
-            Set<Counter> counters = visible.get(coord);
+            Set<Pawn> counters = visible.get(coord);
             if (counters.isEmpty()) {
                 printstream.print("     ");
                 return;
@@ -107,22 +107,22 @@ public class HorizonImpl implements Horizon {
         }
     }
 
-    private boolean isQueen(Counter c) {
+    private boolean isQueen(Pawn c) {
         return c.getBaseStrength() == 20
                 && c.getBaseMobility() == 20;
     }
     
-    private boolean isWarrior(Counter c) {
+    private boolean isWarrior(Pawn c) {
         return c.getBaseStrength() == 20
                 && c.getBaseMobility() == 10;
     }
     
-    private boolean isScout(Counter c) {
+    private boolean isScout(Pawn c) {
         return c.getBaseStrength() == 10
                 && c.getBaseMobility() == 20;
     }
     
-    private boolean isSettler(Counter c) {
+    private boolean isSettler(Pawn c) {
         return c.getBaseStrength() == 5
                 && c.getBaseMobility() == 5;
     }

@@ -5,7 +5,7 @@
  */
 package com.jtskywalker.civolution.server;
 
-import com.jtskywalker.civolution.game.Counter;
+import com.jtskywalker.civolution.game.Pawn;
 import com.jtskywalker.civolution.lang.Statement;
 
 /**
@@ -14,14 +14,14 @@ import com.jtskywalker.civolution.lang.Statement;
  */
 public abstract class Actor {
     
-    Counter counter;
+    Pawn pawn;
 
-    public Counter getCounter() {
-        return counter;
+    public Pawn getPawn() {
+        return pawn;
     }
     
-    public void setCounter(Counter counter) {
-        this.counter = counter;
+    public void setPawn(Pawn pawn) {
+        this.pawn = pawn;
     }
     
     public abstract Action nextAction(Horizon horizon);

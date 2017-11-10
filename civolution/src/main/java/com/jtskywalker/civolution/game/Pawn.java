@@ -12,14 +12,14 @@ import java.util.Objects;
  *
  * @author rincewind
  */
-public class Counter {
+public class Pawn {
     
     final int emblem, baseStrength, baseMobility, population;
     double fitness;
     final boolean canAttack;
     final Actor actor;
 
-    public Counter(int nation, int baseStrength, int baseMobility, int population, boolean canAttack, Actor actor) {
+    public Pawn(int nation, int baseStrength, int baseMobility, int population, boolean canAttack, Actor actor) {
         this.emblem = nation;
         this.baseStrength = baseStrength;
         this.baseMobility = baseMobility;
@@ -102,7 +102,7 @@ public class Counter {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Counter other = (Counter) obj;
+        final Pawn other = (Pawn) obj;
         if (this.emblem != other.emblem) {
             return false;
         }

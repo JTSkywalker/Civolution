@@ -13,27 +13,27 @@ import com.jtskywalker.civolution.server.Actor;
  */
 public class CounterFactory {
     
-    public static Counter createWarrior(int nation, Actor actor) {
-        Counter c = new Counter(nation, 20, 10, 3, true, actor);
-        c.getActor().setCounter(c);
+    public static Pawn createWarrior(int nation, Actor actor) {
+        Pawn c = new Pawn(nation, 20, 10, 3, true, actor);
+        c.getActor().setPawn(c);
         return c;
     }
     
-    public static Counter createScout(int nation, Actor actor) {
-        Counter c = new Counter(nation, 10, 20, 2, true, actor);
-        c.getActor().setCounter(c);
+    public static Pawn createScout(int nation, Actor actor) {
+        Pawn c = new Pawn(nation, 10, 20, 2, true, actor);
+        c.getActor().setPawn(c);
         return c;
     }
     
-    public static Counter createQueen(int nation, Actor actor) {
-        Counter c = new Counter(nation, 20, 20, 1, true, actor);
-        c.getActor().setCounter(c);
+    public static Pawn createQueen(int nation, Actor actor) {
+        Pawn c = new Pawn(nation, 20, 20, 1, true, actor);
+        c.getActor().setPawn(c);
         return c;
     }
     
-    public static Counter createSettler(int nation, Actor actor) {
-        Counter c = new Counter(nation, 5, 5, 10, false, actor);
-        c.getActor().setCounter(c);
+    public static Pawn createSettler(int nation, Actor actor) {
+        Pawn c = new Pawn(nation, 5, 5, 10, false, actor);
+        c.getActor().setPawn(c);
         return c;
     }
      

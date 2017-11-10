@@ -6,7 +6,7 @@
 package com.jtskywalker.civolution.game.action;
 
 import com.jtskywalker.civolution.server.Coordinates;
-import com.jtskywalker.civolution.game.Counter;
+import com.jtskywalker.civolution.game.Pawn;
 import com.jtskywalker.civolution.game.Game;
 import com.jtskywalker.civolution.server.Action;
 import com.jtskywalker.civolution.server.ActionNotAllowedException;
@@ -25,7 +25,7 @@ public class Move implements Action {
     }
 
     @Override
-    public int execute(Game game, Counter counter) 
+    public int execute(Game game, Pawn counter) 
             throws ActionNotAllowedException {
         Coordinates oldC = game.getCoordinates(counter);
         Coordinates newC = oldC.add(direction);

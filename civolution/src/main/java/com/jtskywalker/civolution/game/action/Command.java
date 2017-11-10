@@ -5,7 +5,7 @@
  */
 package com.jtskywalker.civolution.game.action;
 
-import com.jtskywalker.civolution.game.Counter;
+import com.jtskywalker.civolution.game.Pawn;
 import com.jtskywalker.civolution.game.Game;
 import com.jtskywalker.civolution.lang.Statement;
 import com.jtskywalker.civolution.server.Action;
@@ -27,8 +27,8 @@ public class Command implements Action {
 
 
     @Override
-    public int execute(Game game, Counter counter) throws ActionNotAllowedException {
-        Counter sub = game.getSubordinate(counter);
+    public int execute(Game game, Pawn counter) throws ActionNotAllowedException {
+        Pawn sub = game.getSubordinate(counter);
         if (sub == null) {
             return 0;
         }
