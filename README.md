@@ -32,6 +32,3 @@ Num describes any natural Number give in decimal representation.)
   Direction ::= "N" | "NE" | "E" | "SE"
               | "S" | "SW" | "W" | "NW"
 
-Note: For now it is neccessary to include a space character between every two token,
-for example "x = 2 ; while x { ! move N ; }" will work out fine,
-while "x=2;while x {!move N;}" won't (although it should be OK in a future version).

@@ -50,7 +50,25 @@ public class DelayedQueue<T> {
         steps(1);
     }
     
-    public List<T> pop() {
+    /**
+     * find an element of the collection with the lowest delay
+     * and step to this point
+     * @return next element or null if empty
+     */
+    public T stepToNext() {
+        int min = Integer.MAX_VALUE;
+        T next = null;
+        for (T t : map.keySet()) {
+            if (map.get(t) < min) {
+                min = map.get(t);
+                next = t;
+            }
+        }
+        steps(min);
+        return next;
+    }
+    
+    public List<T> popAll() {
         List<T> ret = new ArrayList<>();
         map.forEach((a,b) -> {
             if (b <= 0) {

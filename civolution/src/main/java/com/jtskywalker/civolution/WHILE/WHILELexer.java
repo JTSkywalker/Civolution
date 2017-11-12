@@ -29,6 +29,7 @@ public class WHILELexer {
     }
     
     // support omitting whitespace
+    // it's a pretty ugly solution though 
     String prelex(String input) {
         String res = "";
         for (int i=0; i < input.length(); i++) {
@@ -49,9 +50,10 @@ public class WHILELexer {
                 case '<':
                 case '>':
                 case '=':
-                    if (i + 1 < input.length() && input.charAt(i+1) == '=')
-                        res += " " + c;
-                    else
+                    if (i + 1 < input.length() && input.charAt(i+1) == '=') {
+                        res += " " + c + "=";
+                        i++;//don't visit this symbol again
+                    } else
                         res += spaced;
                     break;
                 default:

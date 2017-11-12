@@ -5,6 +5,7 @@
  */
 package com.jtskywalker.civolution.server;
 
+import com.jtskywalker.civolution.game.Pawn;
 import com.jtskywalker.civolution.game.action.Pause;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;
@@ -16,18 +17,20 @@ import com.jtskywalker.civolution.lang.statement.ExternalStmt;
  *
  * @author rincewind
  */
-public class Subordinate extends Actor {
+public class Subordinate implements Actor {
     
     final int nation;
     Statement orders;
+    Pawn pawn;
     final Scope<String,Integer> scope = new Scope(null);
+    final Controller controller;
 
-    public Subordinate(int nation) {
+    public Subordinate(int nation, Controller controller) {
         this.nation = nation;
+        this.controller = controller;
     }
     
-    @Override
-    public Action nextAction(Horizon horizon) {
+    Action nextAction(Horizon horizon) {
         Evaluator<Action> eval = new ActionEvaluator(horizon);
         if (orders == null) {
             return new Pause();
@@ -43,6 +46,12 @@ public class Subordinate extends Actor {
     }
     
     @Override
+    public void findNextAction(Horizon horizon) {
+        Action next = nextAction(horizon);
+        controller.executeAction(this, next);
+    }
+    
+    @Override
     public boolean receiveOrders(Statement<Action> orders, int nation) {
         if (this.nation == nation) {
             this.orders = orders;
@@ -50,6 +59,16 @@ public class Subordinate extends Actor {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Pawn getPawn() {
+        return pawn;
+    }
+
+    @Override
+    public void setPawn(Pawn pawn) {
+        this.pawn = pawn;
     }
     
 }

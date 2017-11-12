@@ -126,4 +126,36 @@ public class HorizonImpl implements Horizon {
         return c.getBaseStrength() == 5
                 && c.getBaseMobility() == 5;
     }
+
+    @Override
+    public int getSettlersAt(int i, int j) {
+        Coordinates coord = new Coordinates(i,j,width,height);
+        Set<Pawn> counters = visible.get(coord);
+        return counters.stream().filter((c) -> isSettler(c))
+                .map((c) -> 1).reduce(0, Integer::sum);
+    }
+
+    @Override
+    public int getWarriorsAt(int i, int j) {
+        Coordinates coord = new Coordinates(i,j,width,height);
+        Set<Pawn> counters = visible.get(coord);
+        return counters.stream().filter((c) -> isWarrior(c))
+                .map((c) -> 1).reduce(0, Integer::sum);
+    }
+
+    @Override
+    public int getScoutsAt(int i, int j) {
+        Coordinates coord = new Coordinates(i,j,width,height);
+        Set<Pawn> counters = visible.get(coord);
+        return counters.stream().filter((c) -> isScout(c))
+                .map((c) -> 1).reduce(0, Integer::sum);
+    }
+
+    @Override
+    public int getQueensAt(int i, int j) {
+        Coordinates coord = new Coordinates(i,j,width,height);
+        Set<Pawn> counters = visible.get(coord);
+        return counters.stream().filter((c) -> isQueen(c))
+                .map((c) -> 1).reduce(0, Integer::sum);
+    }
 }

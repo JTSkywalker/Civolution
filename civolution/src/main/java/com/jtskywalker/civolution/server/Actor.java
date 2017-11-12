@@ -12,22 +12,14 @@ import com.jtskywalker.civolution.lang.Statement;
  *
  * @author rincewind
  */
-public abstract class Actor {
+public interface Actor {
     
-    Pawn pawn;
-
-    public Pawn getPawn() {
-        return pawn;
-    }
+    public Pawn getPawn();
     
-    public void setPawn(Pawn pawn) {
-        this.pawn = pawn;
-    }
+    public void setPawn(Pawn pawn);
     
-    public abstract Action nextAction(Horizon horizon);
+    public abstract void findNextAction(Horizon horizon);
     
-    public boolean receiveOrders(Statement<Action> orders, int nation) {
-        return false;
-    }
+    public boolean receiveOrders(Statement<Action> orders, int nation);
     
 }

@@ -17,5 +17,13 @@ public interface Horizon {
     public void printOn(PrintStream OUTPUT);
     
     public void putCounter(Pawn counter, Coordinates coord);
+
+    public int getSettlersAt(int i, int j);
+
+    public int getWarriorsAt(int i, int j);
+
+    public int getScoutsAt(int i, int j);
+
+    public int getQueensAt(int i, int j);
     
 }

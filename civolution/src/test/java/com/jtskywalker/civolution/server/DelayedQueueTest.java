@@ -73,7 +73,7 @@ public class DelayedQueueTest {
         expRes.add("seven");
         expRes.add("fourteen");
         expRes.add("twenty-four");
-        assertEquals(expRes,ins.pop());
+        assertEquals(expRes,ins.popAll());
     }
     /**
      * Test of pop method, of class DelayedQueue.
@@ -93,7 +93,7 @@ public class DelayedQueueTest {
         expRes.add("seven");
         expRes.add("fourteen");
         expRes.add("twenty-four");
-        assertEquals(expRes,ins.pop());
+        assertEquals(expRes,ins.popAll());
     }
     
     @Test

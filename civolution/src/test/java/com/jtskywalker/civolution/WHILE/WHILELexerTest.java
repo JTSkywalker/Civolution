@@ -36,7 +36,7 @@ public class WHILELexerTest {
     @org.junit.Test
     public void testLex() {
         System.out.println("lex");
-        String input = "while a == 49 { xxaa3 = 42 ; y = 33 ; }";
+        String input = "while a == 49 { xxaa3 = 42\n; y = 33 ; }";
         WHILELexer instance = new WHILELexer();
         List<Token> expResult = new ArrayList<>();
         expResult.add(Keyword.WHILE);
