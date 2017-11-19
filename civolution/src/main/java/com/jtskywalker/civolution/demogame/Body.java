@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.game;
-
-import java.util.Objects;
+package com.jtskywalker.civolution.demogame;
 
 /**
  *

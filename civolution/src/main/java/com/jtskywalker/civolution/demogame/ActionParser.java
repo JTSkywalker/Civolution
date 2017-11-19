@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.game;
+package com.jtskywalker.civolution.demogame;
 
+import com.jtskywalker.civolution.demogame.action.Move;
+import com.jtskywalker.civolution.demogame.action.Attack;
+import com.jtskywalker.civolution.demogame.action.Command;
+import com.jtskywalker.civolution.demogame.action.Direction;
 import com.jtskywalker.civolution.WHILE.Identifier;
-import com.jtskywalker.civolution.game.action.*;
 import com.jtskywalker.civolution.lang.ExtParser;
 import com.jtskywalker.civolution.lang.Parser;
 import com.jtskywalker.civolution.lang.ParserErrorException;

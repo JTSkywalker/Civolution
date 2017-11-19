@@ -5,8 +5,8 @@
  */
 package com.jtskywalker.civolution.controller;
 
-import com.jtskywalker.civolution.game.Body;
-import com.jtskywalker.civolution.game.action.Pause;
+import com.jtskywalker.civolution.demogame.Body;
+import com.jtskywalker.civolution.demogame.action.Pause;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.Scope;

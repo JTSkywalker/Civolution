@@ -5,9 +5,9 @@
  */
 package com.jtskywalker.civolution.view;
 
-import com.jtskywalker.civolution.game.BodyFactory;
-import com.jtskywalker.civolution.game.DemoGame;
-import com.jtskywalker.civolution.game.Body;
+import com.jtskywalker.civolution.demogame.BodyFactory;
+import com.jtskywalker.civolution.demogame.DemoGame;
+import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.controller.Coordinates;
 import com.jtskywalker.civolution.controller.Controller;

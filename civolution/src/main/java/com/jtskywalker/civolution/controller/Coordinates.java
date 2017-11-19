@@ -5,7 +5,7 @@
  */
 package com.jtskywalker.civolution.controller;
 
-import com.jtskywalker.civolution.game.action.Direction;
+import com.jtskywalker.civolution.demogame.action.Direction;
 
 /**
  *

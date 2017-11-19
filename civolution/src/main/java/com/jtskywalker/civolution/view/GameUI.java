@@ -11,8 +11,8 @@ import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.controller.Controller;
 import com.jtskywalker.civolution.controller.Horizon;
 import com.jtskywalker.civolution.controller.Mind;
-import com.jtskywalker.civolution.game.ActionParser;
-import com.jtskywalker.civolution.game.Body;
+import com.jtskywalker.civolution.demogame.ActionParser;
+import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.Parser;
@@ -24,13 +24,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  *
