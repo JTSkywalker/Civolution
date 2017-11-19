@@ -11,7 +11,7 @@ import com.jtskywalker.civolution.lang.ExtParser;
 import com.jtskywalker.civolution.lang.Parser;
 import com.jtskywalker.civolution.lang.ParserErrorException;
 import com.jtskywalker.civolution.lang.Token;
-import com.jtskywalker.civolution.server.Action;
+import com.jtskywalker.civolution.controller.Action;
 import java.util.List;
 
 /**

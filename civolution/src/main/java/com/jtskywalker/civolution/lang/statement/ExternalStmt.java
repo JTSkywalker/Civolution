@@ -8,7 +8,7 @@ package com.jtskywalker.civolution.lang.statement;
 import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.Scope;
 import com.jtskywalker.civolution.lang.Statement;
-import com.jtskywalker.civolution.server.util.Pair;
+import com.jtskywalker.civolution.util.Pair;
 import java.util.Objects;
 
 /**

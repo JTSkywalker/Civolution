@@ -5,8 +5,8 @@
  */
 package com.jtskywalker.civolution.lang;
 
-import com.jtskywalker.civolution.server.Action;
-import com.jtskywalker.civolution.server.Horizon;
+import com.jtskywalker.civolution.controller.Action;
+import com.jtskywalker.civolution.controller.Horizon;
 
 
 public class ActionEvaluator implements Evaluator<Action> {

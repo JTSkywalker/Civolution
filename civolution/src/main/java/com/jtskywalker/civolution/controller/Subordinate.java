@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.server;
+package com.jtskywalker.civolution.controller;
 
-import com.jtskywalker.civolution.game.Pawn;
+import com.jtskywalker.civolution.game.Body;
 import com.jtskywalker.civolution.game.action.Pause;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;
@@ -17,20 +17,18 @@ import com.jtskywalker.civolution.lang.statement.ExternalStmt;
  *
  * @author rincewind
  */
-public class Subordinate implements Actor {
+public class Subordinate implements Mind {
     
     final int nation;
     Statement orders;
-    Pawn pawn;
     final Scope<String,Integer> scope = new Scope(null);
-    final Controller controller;
 
-    public Subordinate(int nation, Controller controller) {
+    public Subordinate(int nation) {
         this.nation = nation;
-        this.controller = controller;
     }
     
-    Action nextAction(Horizon horizon) {
+    @Override
+    public Action nextAction(Horizon horizon) {
         Evaluator<Action> eval = new ActionEvaluator(horizon);
         if (orders == null) {
             return new Pause();
@@ -46,12 +44,6 @@ public class Subordinate implements Actor {
     }
     
     @Override
-    public void findNextAction(Horizon horizon) {
-        Action next = nextAction(horizon);
-        controller.executeAction(this, next);
-    }
-    
-    @Override
     public boolean receiveOrders(Statement<Action> orders, int nation) {
         if (this.nation == nation) {
             this.orders = orders;
@@ -62,13 +54,8 @@ public class Subordinate implements Actor {
     }
 
     @Override
-    public Pawn getPawn() {
-        return pawn;
-    }
-
-    @Override
-    public void setPawn(Pawn pawn) {
-        this.pawn = pawn;
+    public void setOrders(Statement<Action> orders) {
+        this.orders = orders;
     }
     
 }

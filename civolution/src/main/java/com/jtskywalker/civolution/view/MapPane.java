@@ -5,7 +5,7 @@
  */
 package com.jtskywalker.civolution.view;
 
-import com.jtskywalker.civolution.server.Horizon;
+import com.jtskywalker.civolution.controller.Horizon;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;

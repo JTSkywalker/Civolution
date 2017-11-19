@@ -5,27 +5,25 @@
  */
 package com.jtskywalker.civolution.game;
 
-import com.jtskywalker.civolution.server.Actor;
 import java.util.Objects;
 
 /**
  *
  * @author rincewind
  */
-public class Pawn {
+public class Body {
     
     final int emblem, baseStrength, baseMobility, population;
     double fitness;
     final boolean canAttack;
-    final Actor actor;
 
-    public Pawn(int nation, int baseStrength, int baseMobility, int population, boolean canAttack, Actor actor) {
+    public Body(int nation, int baseStrength, int baseMobility, int population,
+            boolean canAttack) {
         this.emblem = nation;
         this.baseStrength = baseStrength;
         this.baseMobility = baseMobility;
         this.population = population;
         this.canAttack = canAttack;
-        this.actor = actor;
         this.fitness = 1;
     }
 
@@ -51,12 +49,7 @@ public class Pawn {
 
     public boolean isCanAttack() {
         return canAttack;
-    }
-
-    public Actor getActor() {
-        return actor;
-    }  
-    
+    }    
     
     public boolean canAttack() {
         return canAttack;
@@ -87,7 +80,6 @@ public class Pawn {
         hash = 53 * hash + this.population;
         hash = 53 * hash + (int) (Double.doubleToLongBits(this.fitness) ^ (Double.doubleToLongBits(this.fitness) >>> 32));
         hash = 53 * hash + (this.canAttack ? 1 : 0);
-        hash = 53 * hash + Objects.hashCode(this.actor);
         return hash;
     }
 
@@ -102,7 +94,7 @@ public class Pawn {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Pawn other = (Pawn) obj;
+        final Body other = (Body) obj;
         if (this.emblem != other.emblem) {
             return false;
         }
@@ -121,18 +113,17 @@ public class Pawn {
         if (this.canAttack != other.canAttack) {
             return false;
         }
-        if (!Objects.equals(this.actor, other.actor)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Counter{" + "nation=" + emblem + ", baseStrength=" + baseStrength + ", baseMobility=" + baseMobility + ", population=" + population + ", fitness=" + fitness + ", canAttack=" + canAttack + ", actor=" + actor + '}';
+        return "Counter{" + "nation=" + emblem 
+                + ", baseStrength=" + baseStrength 
+                + ", baseMobility=" + baseMobility 
+                + ", population=" + population 
+                + ", fitness=" + fitness 
+                + ", canAttack=" + canAttack + '}';
     }
-    
-    
-    
   
 }

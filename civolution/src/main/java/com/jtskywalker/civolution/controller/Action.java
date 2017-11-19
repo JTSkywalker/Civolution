@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.server;
+package com.jtskywalker.civolution.controller;
 
-import com.jtskywalker.civolution.game.Pawn;
-import com.jtskywalker.civolution.game.Game;
+import com.jtskywalker.civolution.game.Body;
+import com.jtskywalker.civolution.game.DemoGame;
 
 /**
  *
@@ -14,6 +14,6 @@ import com.jtskywalker.civolution.game.Game;
  */
 public interface Action {
     
-    public int execute(Game game, Pawn counter) throws ActionNotAllowedException;
+    public int execute(DemoGame game, Actor actor) throws ActionNotAllowedException;
     
 }

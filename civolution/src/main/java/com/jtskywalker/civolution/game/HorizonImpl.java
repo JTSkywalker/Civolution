@@ -5,26 +5,24 @@
  */
 package com.jtskywalker.civolution.game;
 
-import com.jtskywalker.civolution.server.Coordinates;
-import com.jtskywalker.civolution.server.Horizon;
-import com.jtskywalker.civolution.server.util.HashMapSet;
-import java.io.PrintStream;
+import com.jtskywalker.civolution.controller.Actor;
+import com.jtskywalker.civolution.controller.Coordinates;
+import com.jtskywalker.civolution.controller.Horizon;
+import com.jtskywalker.civolution.util.HashMapSet;
 import java.util.Set;
 
 
 public class HorizonImpl implements Horizon {
     
     final int width, height;
-    final HashMapSet<Coordinates, Pawn> visible = new HashMapSet<>();
+    final HashMapSet<Coordinates, Actor> visible = new HashMapSet<>();
 
     public HorizonImpl(int width, int height) {
         this.width = width;
         this.height = height;
     }
     
-    
-
-    @Override
+    /*@Override
     public void printOn(PrintStream printstream) {
         printstream.print("\n\n");
         for (int y=height-1; y >= 0; y--) {
@@ -51,16 +49,17 @@ public class HorizonImpl implements Horizon {
             printstream.print("+-----");
         }
         printstream.print("+\n\n");
-    }
+    }*/
 
     @Override
-    public void putCounter(Pawn counter, Coordinates coord) {
-        visible.put(coord, counter);
+    public void putActor(Actor actor, Coordinates coord) {
+        visible.put(coord, actor);
     }
 
+    /*
     private void printFigures(PrintStream printstream, Coordinates coord) {
         if (visible.containsKey(coord)) {
-            Set<Pawn> counters = visible.get(coord);
+            Set<Body> counters = visible.get(coord);
             if (counters.isEmpty()) {
                 printstream.print("     ");
                 return;
@@ -106,23 +105,24 @@ public class HorizonImpl implements Horizon {
             printstream.print("     ");
         }
     }
+    */
 
-    private boolean isQueen(Pawn c) {
+    private boolean isQueen(Body c) {
         return c.getBaseStrength() == 20
                 && c.getBaseMobility() == 20;
     }
     
-    private boolean isWarrior(Pawn c) {
+    private boolean isWarrior(Body c) {
         return c.getBaseStrength() == 20
                 && c.getBaseMobility() == 10;
     }
     
-    private boolean isScout(Pawn c) {
+    private boolean isScout(Body c) {
         return c.getBaseStrength() == 10
                 && c.getBaseMobility() == 20;
     }
     
-    private boolean isSettler(Pawn c) {
+    private boolean isSettler(Body c) {
         return c.getBaseStrength() == 5
                 && c.getBaseMobility() == 5;
     }
@@ -130,32 +130,32 @@ public class HorizonImpl implements Horizon {
     @Override
     public int getSettlersAt(int i, int j) {
         Coordinates coord = new Coordinates(i,j,width,height);
-        Set<Pawn> counters = visible.get(coord);
-        return counters.stream().filter((c) -> isSettler(c))
+        Set<Actor> counters = visible.get(coord);
+        return counters.stream().filter((c) -> isSettler(c.getBody()))
                 .map((c) -> 1).reduce(0, Integer::sum);
     }
 
     @Override
     public int getWarriorsAt(int i, int j) {
         Coordinates coord = new Coordinates(i,j,width,height);
-        Set<Pawn> counters = visible.get(coord);
-        return counters.stream().filter((c) -> isWarrior(c))
+        Set<Actor> counters = visible.get(coord);
+        return counters.stream().filter((c) -> isWarrior(c.getBody()))
                 .map((c) -> 1).reduce(0, Integer::sum);
     }
 
     @Override
     public int getScoutsAt(int i, int j) {
         Coordinates coord = new Coordinates(i,j,width,height);
-        Set<Pawn> counters = visible.get(coord);
-        return counters.stream().filter((c) -> isScout(c))
+        Set<Actor> counters = visible.get(coord);
+        return counters.stream().filter((c) -> isScout(c.getBody()))
                 .map((c) -> 1).reduce(0, Integer::sum);
     }
 
     @Override
     public int getQueensAt(int i, int j) {
         Coordinates coord = new Coordinates(i,j,width,height);
-        Set<Pawn> counters = visible.get(coord);
-        return counters.stream().filter((c) -> isQueen(c))
+        Set<Actor> counters = visible.get(coord);
+        return counters.stream().filter((c) -> isQueen(c.getBody()))
                 .map((c) -> 1).reduce(0, Integer::sum);
     }
 }

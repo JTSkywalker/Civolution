@@ -3,10 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.server;
-
-import com.jtskywalker.civolution.game.Pawn;
-import java.io.PrintStream;
+package com.jtskywalker.civolution.controller;
 
 /**
  *
@@ -14,9 +11,9 @@ import java.io.PrintStream;
  */
 public interface Horizon {
     
-    public void printOn(PrintStream OUTPUT);
+    //public void printOn(PrintStream OUTPUT);
     
-    public void putCounter(Pawn counter, Coordinates coord);
+    public void putActor(Actor actor, Coordinates coord);
 
     public int getSettlersAt(int i, int j);
 

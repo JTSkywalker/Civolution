@@ -5,10 +5,11 @@
  */
 package com.jtskywalker.civolution.game.action;
 
-import com.jtskywalker.civolution.game.Pawn;
-import com.jtskywalker.civolution.game.Game;
-import com.jtskywalker.civolution.server.Action;
-import com.jtskywalker.civolution.server.ActionNotAllowedException;
+import com.jtskywalker.civolution.game.Body;
+import com.jtskywalker.civolution.game.DemoGame;
+import com.jtskywalker.civolution.controller.Action;
+import com.jtskywalker.civolution.controller.ActionNotAllowedException;
+import com.jtskywalker.civolution.controller.Actor;
 
 /**
  *
@@ -17,7 +18,7 @@ import com.jtskywalker.civolution.server.ActionNotAllowedException;
 public class Pause implements Action {
 
     @Override
-    public int execute(Game game, Pawn counter) throws ActionNotAllowedException {
+    public int execute(DemoGame game, Actor actor) throws ActionNotAllowedException {
         return 1;
     }
     

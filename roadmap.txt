@@ -1,0 +1,6 @@
+game inteface 
+horizon interface 
+separate game code from general code:
+- better pawn interface 
+- read units as json files
+- read tile a json file

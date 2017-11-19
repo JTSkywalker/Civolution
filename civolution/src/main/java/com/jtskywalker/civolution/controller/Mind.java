@@ -3,23 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.server;
+package com.jtskywalker.civolution.controller;
 
-import com.jtskywalker.civolution.game.Pawn;
 import com.jtskywalker.civolution.lang.Statement;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
-public interface Actor {
+public interface Mind {
     
-    public Pawn getPawn();
-    
-    public void setPawn(Pawn pawn);
-    
-    public abstract void findNextAction(Horizon horizon);
+    public Action nextAction(Horizon horizon);
     
     public boolean receiveOrders(Statement<Action> orders, int nation);
+
+    public void setOrders(Statement<Action> orders);
     
 }

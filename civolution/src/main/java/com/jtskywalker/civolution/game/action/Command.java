@@ -5,12 +5,12 @@
  */
 package com.jtskywalker.civolution.game.action;
 
-import com.jtskywalker.civolution.game.Pawn;
-import com.jtskywalker.civolution.game.Game;
+import com.jtskywalker.civolution.game.Body;
+import com.jtskywalker.civolution.game.DemoGame;
 import com.jtskywalker.civolution.lang.Statement;
-import com.jtskywalker.civolution.server.Action;
-import com.jtskywalker.civolution.server.ActionNotAllowedException;
-import com.jtskywalker.civolution.server.Actor;
+import com.jtskywalker.civolution.controller.Action;
+import com.jtskywalker.civolution.controller.ActionNotAllowedException;
+import com.jtskywalker.civolution.controller.Actor;
 import java.util.Objects;
 
 /**
@@ -27,13 +27,10 @@ public class Command implements Action {
 
 
     @Override
-    public int execute(Game game, Pawn counter) throws ActionNotAllowedException {
-        Pawn sub = game.getSubordinate(counter);
-        if (sub == null) {
-            return 0;
-        }
-        Actor subordinate = sub.getActor();
-        subordinate.receiveOrders(order, counter.getEmblem());
+    public int execute(DemoGame game, Actor actor) 
+            throws ActionNotAllowedException {
+        Actor sub = game.getSubordinate(actor);
+        sub.receiveOrders(order, actor.getEmblem());
         return 0;
     }
 

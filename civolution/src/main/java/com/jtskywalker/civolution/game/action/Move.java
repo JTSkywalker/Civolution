@@ -5,11 +5,12 @@
  */
 package com.jtskywalker.civolution.game.action;
 
-import com.jtskywalker.civolution.server.Coordinates;
-import com.jtskywalker.civolution.game.Pawn;
-import com.jtskywalker.civolution.game.Game;
-import com.jtskywalker.civolution.server.Action;
-import com.jtskywalker.civolution.server.ActionNotAllowedException;
+import com.jtskywalker.civolution.controller.Coordinates;
+import com.jtskywalker.civolution.game.Body;
+import com.jtskywalker.civolution.game.DemoGame;
+import com.jtskywalker.civolution.controller.Action;
+import com.jtskywalker.civolution.controller.ActionNotAllowedException;
+import com.jtskywalker.civolution.controller.Actor;
 import java.util.Objects;
 
 /**
@@ -25,18 +26,18 @@ public class Move implements Action {
     }
 
     @Override
-    public int execute(Game game, Pawn counter) 
+    public int execute(DemoGame game, Actor actor) 
             throws ActionNotAllowedException {
-        Coordinates oldC = game.getCoordinates(counter);
+        Coordinates oldC = game.getCoordinates(actor);
         Coordinates newC = oldC.add(direction);
-        if (game.hasEnemy(newC,counter.getEmblem())) {
-            if (counter.canAttack()) {
-                return (new Attack(direction)).execute(game, counter);
+        if (game.hasEnemy(newC,actor.getEmblem())) {
+            if (actor.getBody().canAttack()) {
+                return (new Attack(direction)).execute(game, actor);
             } else {
                 throw new ActionNotAllowedException();
             }
         }
-        game.putCounter(counter,newC);
+        game.putActor(actor,newC);
         return game.getTileMobilityCost(newC);
     }
 

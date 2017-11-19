@@ -5,11 +5,12 @@
  */
 package com.jtskywalker.civolution.game.action;
 
-import com.jtskywalker.civolution.server.Coordinates;
-import com.jtskywalker.civolution.game.Pawn;
-import com.jtskywalker.civolution.game.Game;
-import com.jtskywalker.civolution.server.Action;
-import com.jtskywalker.civolution.server.ActionNotAllowedException;
+import com.jtskywalker.civolution.controller.Coordinates;
+import com.jtskywalker.civolution.game.Body;
+import com.jtskywalker.civolution.game.DemoGame;
+import com.jtskywalker.civolution.controller.Action;
+import com.jtskywalker.civolution.controller.ActionNotAllowedException;
+import com.jtskywalker.civolution.controller.Actor;
 import java.util.Objects;
 
 /**
@@ -25,37 +26,40 @@ public class Attack implements Action {
     }
 
     @Override
-    public int execute(Game game, Pawn counter)
+    public int execute(DemoGame game, Actor actor)
             throws ActionNotAllowedException {
-        if (!counter.canAttack()) {
+        
+        Body body = actor.getBody();
+        if (!body.canAttack()) {
             throw new ActionNotAllowedException();
         }
         
-        Coordinates oldC = game.getCoordinates(counter);
+        Coordinates oldC = game.getCoordinates(actor);
         Coordinates newC = oldC.add(direction);
-        if (!game.hasEnemy(newC, counter.getEmblem())) {
+        if (!game.hasEnemy(newC, actor.getEmblem())) {
             throw new ActionNotAllowedException();
         }
-        Pawn enemy = game.getDefender(newC);
-        int bES = enemy.getBaseStrength();
-        int bMS = counter.getBaseStrength();
-        int oldES = enemy.getEffectiveStrength();
-        int oldMS = counter.getEffectiveStrength();
+        Actor enemyActor = game.getDefender(newC);
+        Body enemyBody = enemyActor.getBody();
+        int bES = enemyBody.getBaseStrength();
+        int bMS = body.getBaseStrength();
+        int oldES = enemyBody.getEffectiveStrength();
+        int oldMS = body.getEffectiveStrength();
         double newES = oldES - 0.5 * oldMS - (Math.random() - 0.5) * bMS;
         double newMS = oldMS - 0.5 * oldES - (Math.random() - 0.5) * bES;
         if (newES > 0) {
-            game.setFitness(enemy, newES / bES);
+            game.setFitness(enemyBody, newES / bES);
         } else {
-            game.kill(enemy);
+            game.kill(enemyActor);
         }
         if (newMS > 0) {
-            game.setFitness(counter, newMS / bMS);
+            game.setFitness(body, newMS / bMS);
         } else {
-            game.kill(counter);
+            game.kill(actor);
             return -1;
         }
         if (newES <= 0 && newMS > 0) {
-            return (new Move(direction).execute(game, counter));
+            return (new Move(direction).execute(game, actor));
         }
         return 1;
     }
