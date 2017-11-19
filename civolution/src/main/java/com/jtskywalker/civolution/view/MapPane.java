@@ -24,29 +24,29 @@ public class MapPane extends GridPane {
     public MapPane(int width, int height) {
         this.height = height;
         this.width = width;
-        tile = new Tile[height][width];
-        for (int i=0; i < height; i++) {
-            for (int j=0; j < width; j++) {
-                tile[i][j] = new Tile(0,0,0,0);
-                this.add(tile[i][j], i, width - j - 1);
+        tile = new Tile[width][height];
+        for (int x=0; x < width; x++) {
+            for (int y=0; y < height; y++) {
+                tile[x][y] = new Tile(0,0,0,0);
+                this.add(tile[x][y], x, height - y - 1);
             }
         }
         this.setGridLinesVisible(true);
-        for (int i=0; i < height; i++) {
+        for (int x=0; x < width; x++) {
             this.getColumnConstraints().add(new ColumnConstraints(CELLSIZE));
         }
-        for (int j=0; j < width; j++) {
+        for (int y=0; y < height; y++) {
             this.getRowConstraints().add(new RowConstraints(CELLSIZE));
         }
     }
     
     public void updateView(Horizon horizon) {
-        for (int i=0; i < height; i++) {
-            for (int j=0; j < width; j++) {
-                tile[i][j].setSettlers(horizon.getSettlersAt(i,j));
-                tile[i][j].setWarriors(horizon.getWarriorsAt(i,j));
-                tile[i][j].setScouts(horizon.getScoutsAt(i,j));
-                tile[i][j].setQueens(horizon.getQueensAt(i,j));
+        for (int x=0; x < width; x++) {
+            for (int y=0; y < height; y++) {
+                tile[x][y].setSettlers(horizon.getSettlersAt(x,y));
+                tile[x][y].setWarriors(horizon.getWarriorsAt(x,y));
+                tile[x][y].setScouts(horizon.getScoutsAt(x,y));
+                tile[x][y].setQueens(horizon.getQueensAt(x,y));
             }
         }
     }
