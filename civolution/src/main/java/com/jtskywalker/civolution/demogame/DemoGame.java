@@ -5,8 +5,9 @@
  */
 package com.jtskywalker.civolution.demogame;
 
-import com.jtskywalker.civolution.controller.Coordinates;
+import com.jtskywalker.civolution.game.Coordinates;
 import com.jtskywalker.civolution.controller.Actor;
+import com.jtskywalker.civolution.game.Game;
 import com.jtskywalker.civolution.game.Horizon;
 import java.util.HashMap;
 import java.util.List;
@@ -18,19 +19,19 @@ import java.util.stream.Collectors;
  * This class contains all information on the game 
  * @author rincewind
  */
-public class DemoGame {
+public class DemoGame implements Game<BodyImpl> {
     
     public static final String BASEPATH = "src/main/resources/demogame/";
     
     final int width, height;
-    final Map<Actor,Coordinates> actors = new HashMap<>();
+    final Map<Actor<BodyImpl>,Coordinates> actors = new HashMap<>();
 
     public DemoGame(int width, int height) {
         this.width = width;
         this.height= height;
     }
         
-    public List<Actor> getFriends(Actor actor) {
+    public List<Actor<BodyImpl>> getFriends(Actor<BodyImpl> actor) {
         return actors.keySet()
                 .stream()
                 .filter((c) -> c.getEmblem() == actor.getEmblem())
@@ -38,15 +39,16 @@ public class DemoGame {
     }
     
     
-    public Horizon computeHorizon(Actor actor) {
+    @Override
+    public Horizon computeHorizon(Actor<BodyImpl> actor) {
         HorizonImpl horizon = new HorizonImpl(width, height);
-        for (Actor c : getFriends(actor)) {
+        getFriends(actor).forEach((c) -> {
             horizon.putActor(c, getCoordinates(c));
-        }
+        });
         return horizon;
     }
 
-    public Coordinates getCoordinates(Actor actor) {
+    public Coordinates getCoordinates(Actor<BodyImpl> actor) {
         return actors.get(actor);
     }
 
@@ -56,14 +58,14 @@ public class DemoGame {
                 .anyMatch((c) -> c.getEmblem() != nation);
     }
 
-    public List<Actor> getActors(Coordinates coord) {
+    public List<Actor<BodyImpl>> getActors(Coordinates coord) {
         return actors.keySet()
                 .stream()
                 .filter((c) -> (actors.get(c).equals(coord)))
                 .collect(Collectors.toList());
     }
     
-    public void putActor(Actor actor, Coordinates newC) {
+    public void putActor(Actor<BodyImpl> actor, Coordinates newC) {
         actors.put(actor, newC);
     }
 
@@ -71,22 +73,22 @@ public class DemoGame {
         return 1;
     }
 
-    public Actor getDefender(Coordinates coord) {
+    public Actor<BodyImpl> getDefender(Coordinates coord) {
         return getActors(coord)
                 .stream()
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException());
     }
 
-    public void setFitness(Body body, double d) {
+    public void setFitness(BodyImpl body, double d) {
         body.setFitness(d);
     }
 
-    public void kill(Actor actor) {
+    public void kill(Actor<BodyImpl> actor) {
         actors.remove(actor);
     }
 
-    public Actor getSubordinate(Actor actor) {
+    public Actor<BodyImpl> getSubordinate(Actor actor) {
         Coordinates coord = getCoordinates(actor);
         return getActors(coord)
                 .stream()
@@ -95,16 +97,19 @@ public class DemoGame {
                 .orElseThrow(() -> new IllegalArgumentException()); 
     }
 
-    public Set<Actor> getActors() {
+    @Override
+    public Set<Actor<BodyImpl>> getActors() {
         return actors.keySet()
                 .stream()
                 .collect(Collectors.toSet());
     }
 
+    @Override
     public int getHeight() {
         return height;
     }
 
+    @Override
     public int getWidth() {
         return width;
     }

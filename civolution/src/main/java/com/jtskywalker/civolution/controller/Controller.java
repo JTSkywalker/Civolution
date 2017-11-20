@@ -6,8 +6,7 @@
 package com.jtskywalker.civolution.controller;
 
 import com.jtskywalker.civolution.util.DelayedQueue;
-import com.jtskywalker.civolution.demogame.Body;
-import com.jtskywalker.civolution.demogame.DemoGame;
+import com.jtskywalker.civolution.game.Game;
 
 /**
  *
@@ -15,12 +14,12 @@ import com.jtskywalker.civolution.demogame.DemoGame;
  */
 public class Controller {
     
-    final DemoGame game;
+    final Game game;
     
     //Integer denotes turns the actor has to pause
     final DelayedQueue<Actor> actors;
 
-    public Controller(DemoGame game) {
+    public Controller(Game game) {
         this.game = game;
         actors = new DelayedQueue(game.getActors());
     }

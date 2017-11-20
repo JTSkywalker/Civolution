@@ -7,12 +7,13 @@ package com.jtskywalker.civolution.view;
 
 import com.jtskywalker.civolution.demogame.BodyFactory;
 import com.jtskywalker.civolution.demogame.DemoGame;
-import com.jtskywalker.civolution.demogame.Body;
+import com.jtskywalker.civolution.demogame.BodyImpl;
 import com.jtskywalker.civolution.controller.Actor;
-import com.jtskywalker.civolution.controller.Coordinates;
+import com.jtskywalker.civolution.game.Coordinates;
 import com.jtskywalker.civolution.controller.Controller;
 import com.jtskywalker.civolution.controller.Mind;
 import com.jtskywalker.civolution.controller.Subordinate;
+import com.jtskywalker.civolution.demogame.ActionParser;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -26,8 +27,6 @@ import javafx.stage.Stage;
  */
 public class StartUI extends Application {
     
-    Body pawn;
-    StackPane pane;    
     
     @Override
     public void start(Stage primaryStage) {
@@ -63,16 +62,17 @@ public class StartUI extends Application {
         
         Controller controller = new Controller(game);
         Mind humanMind = new ExternalMind(0);
-        Body queen = bf.create("queen", 0);
-        GameUI human = new GameUI(queen, humanMind, controller);
+        BodyImpl queen = bf.create("queen", 0);
+        GameUI human 
+                = new GameUI(queen, humanMind, controller, new ActionParser());
         game.putActor(human, new Coordinates(1,1,width,height));
         
-        Body warrior = bf.create("warrior", 0);
+        BodyImpl warrior = bf.create("warrior", 0);
         Mind subM1 = new Subordinate(0);
         Actor sub1 = new Actor(warrior ,subM1, controller);
         game.putActor(sub1, new Coordinates(3, 3, width, height));
         
-        Body scout = bf.create("scout", 0);
+        BodyImpl scout = bf.create("scout", 0);
         Mind subM2 = new Subordinate(0);
         Actor sub2 = new Actor(scout, subM2, controller);
         game.putActor(sub2, new Coordinates(0, 5, width, height));

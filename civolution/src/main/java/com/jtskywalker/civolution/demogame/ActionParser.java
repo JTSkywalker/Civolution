@@ -8,7 +8,7 @@ package com.jtskywalker.civolution.demogame;
 import com.jtskywalker.civolution.demogame.action.Move;
 import com.jtskywalker.civolution.demogame.action.Attack;
 import com.jtskywalker.civolution.demogame.action.Command;
-import com.jtskywalker.civolution.demogame.action.Direction;
+import com.jtskywalker.civolution.game.Direction;
 import com.jtskywalker.civolution.WHILE.Identifier;
 import com.jtskywalker.civolution.lang.ExtParser;
 import com.jtskywalker.civolution.lang.Parser;

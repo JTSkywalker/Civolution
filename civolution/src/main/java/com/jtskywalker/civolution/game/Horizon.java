@@ -5,8 +5,6 @@
  */
 package com.jtskywalker.civolution.game;
 
-import com.jtskywalker.civolution.controller.Coordinates;
-
 /**
  *
  * @author rincewind

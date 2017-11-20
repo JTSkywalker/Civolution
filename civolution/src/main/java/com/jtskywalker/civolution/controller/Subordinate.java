@@ -6,7 +6,6 @@
 package com.jtskywalker.civolution.controller;
 
 import com.jtskywalker.civolution.game.Horizon;
-import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.game.Skip;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;

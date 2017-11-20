@@ -5,6 +5,7 @@
  */
 package com.jtskywalker.civolution.demogame;
 
+import com.jtskywalker.civolution.game.Body;
 import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 
@@ -12,14 +13,14 @@ import org.json.simple.JSONObject;
  *
  * @author rincewind
  */
-public class Body implements com.jtskywalker.civolution.game.Body {
+public class BodyImpl implements Body {
     
     final int emblem, baseStrength, baseMobility, population;
     double fitness;
     final boolean canAttack;
     final Image image;
 
-    public Body(int nation, int baseStrength, int baseMobility, int population,
+    public BodyImpl(int nation, int baseStrength, int baseMobility, int population,
             boolean canAttack, Image image) {
         this.emblem = nation;
         this.baseStrength = baseStrength;
@@ -30,6 +31,7 @@ public class Body implements com.jtskywalker.civolution.game.Body {
         this.image = image;
     }
 
+    @Override
     public int getEmblem() {
         return emblem;
     }
@@ -97,7 +99,7 @@ public class Body implements com.jtskywalker.civolution.game.Body {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Body other = (Body) obj;
+        final BodyImpl other = (BodyImpl) obj;
         if (this.emblem != other.emblem) {
             return false;
         }

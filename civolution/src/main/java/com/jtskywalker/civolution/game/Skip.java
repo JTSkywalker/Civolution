@@ -5,7 +5,6 @@
  */
 package com.jtskywalker.civolution.game;
 
-import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.ActionNotAllowedException;
 import com.jtskywalker.civolution.controller.Actor;
@@ -13,11 +12,13 @@ import com.jtskywalker.civolution.controller.Actor;
 /**
  *
  * @author rincewind
+ * @param <T>
+ * @param <S>
  */
-public class Skip implements Action {
+public class Skip<T extends Game, S extends Body> implements Action<T,S> {
 
     @Override
-    public int execute(DemoGame game, Actor actor) throws ActionNotAllowedException {
+    public int execute(T game, Actor<S> actor) throws ActionNotAllowedException {
         return 1;
     }
     

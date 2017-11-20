@@ -11,10 +11,10 @@ import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.controller.Controller;
 import com.jtskywalker.civolution.game.Horizon;
 import com.jtskywalker.civolution.controller.Mind;
-import com.jtskywalker.civolution.demogame.ActionParser;
-import com.jtskywalker.civolution.demogame.Body;
+import com.jtskywalker.civolution.game.Body;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;
+import com.jtskywalker.civolution.lang.ExtParser;
 import com.jtskywalker.civolution.lang.Parser;
 import com.jtskywalker.civolution.lang.ParserErrorException;
 import com.jtskywalker.civolution.lang.ParserImpl;
@@ -46,14 +46,16 @@ public class GameUI extends Actor {
 
     private final WHILELexer lexer
             = new WHILELexer();
-    private final Parser<Action> parser
-            = new ParserImpl(new ActionParser());
+    private final Parser<Action> parser;
     
     private Horizon horizon;
    
     
-    public GameUI(Body body, Mind mind, Controller controller) {
+    public GameUI(Body body, Mind mind, Controller controller, 
+            ExtParser<Action> extParser) {
         super(body, mind, controller);
+        this.parser = new ParserImpl(extParser);
+        
         int width = controller.getWidth();
         int height= controller.getHeight();
         

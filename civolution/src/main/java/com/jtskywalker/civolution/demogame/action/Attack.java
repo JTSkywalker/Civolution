@@ -5,8 +5,9 @@
  */
 package com.jtskywalker.civolution.demogame.action;
 
-import com.jtskywalker.civolution.controller.Coordinates;
-import com.jtskywalker.civolution.demogame.Body;
+import com.jtskywalker.civolution.game.Direction;
+import com.jtskywalker.civolution.game.Coordinates;
+import com.jtskywalker.civolution.demogame.BodyImpl;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.ActionNotAllowedException;
@@ -17,7 +18,7 @@ import java.util.Objects;
  *
  * @author rincewind
  */
-public class Attack implements Action {
+public class Attack implements Action<DemoGame, BodyImpl> {
     
     final Direction direction;
 
@@ -26,10 +27,10 @@ public class Attack implements Action {
     }
 
     @Override
-    public int execute(DemoGame game, Actor actor)
+    public int execute(DemoGame game, Actor<BodyImpl> actor)
             throws ActionNotAllowedException {
         
-        Body body = actor.getBody();
+        BodyImpl body = actor.getBody();
         if (!body.canAttack()) {
             throw new ActionNotAllowedException();
         }
@@ -39,8 +40,8 @@ public class Attack implements Action {
         if (!game.hasEnemy(newC, actor.getEmblem())) {
             throw new ActionNotAllowedException();
         }
-        Actor enemyActor = game.getDefender(newC);
-        Body enemyBody = enemyActor.getBody();
+        Actor<BodyImpl> enemyActor = game.getDefender(newC);
+        BodyImpl enemyBody = enemyActor.getBody();
         int bES = enemyBody.getBaseStrength();
         int bMS = body.getBaseStrength();
         int oldES = enemyBody.getEffectiveStrength();

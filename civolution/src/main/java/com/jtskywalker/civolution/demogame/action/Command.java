@@ -5,7 +5,7 @@
  */
 package com.jtskywalker.civolution.demogame.action;
 
-import com.jtskywalker.civolution.demogame.Body;
+import com.jtskywalker.civolution.demogame.BodyImpl;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.lang.Statement;
 import com.jtskywalker.civolution.controller.Action;
@@ -17,7 +17,7 @@ import java.util.Objects;
  *
  * @author rincewind
  */
-public class Command implements Action {
+public class Command implements Action<DemoGame,BodyImpl> {
     
     final Statement<Action> order;
 

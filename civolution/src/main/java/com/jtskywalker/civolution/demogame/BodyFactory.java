@@ -38,14 +38,14 @@ public class BodyFactory {
         }
     }
     
-    public Body create(String type, int nation) {
+    public BodyImpl create(String type, int nation) {
         JSONObject jsonObj = (JSONObject) bodies.get(type);
         if (jsonObj == null) {
             throw new IllegalArgumentException(
                     "The body was not found in the Body file!");
         }
         Image image = new Image("file:" + DemoGame.BASEPATH + type + ".png");
-        return new Body(nation,
+        return new BodyImpl(nation,
                         Math.toIntExact((Long) jsonObj.get("strength")),
                         Math.toIntExact((Long) jsonObj.get("mobility")),
                         Math.toIntExact((Long) jsonObj.get("population")),

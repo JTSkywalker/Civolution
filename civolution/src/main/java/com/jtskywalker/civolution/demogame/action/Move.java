@@ -5,18 +5,20 @@
  */
 package com.jtskywalker.civolution.demogame.action;
 
-import com.jtskywalker.civolution.controller.Coordinates;
+import com.jtskywalker.civolution.game.Direction;
+import com.jtskywalker.civolution.game.Coordinates;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.ActionNotAllowedException;
 import com.jtskywalker.civolution.controller.Actor;
+import com.jtskywalker.civolution.demogame.BodyImpl;
 import java.util.Objects;
 
 /**
  *
  * @author rincewind
  */
-public class Move implements Action {
+public class Move implements Action<DemoGame,BodyImpl> {
     
     final Direction direction;
 
@@ -25,7 +27,7 @@ public class Move implements Action {
     }
 
     @Override
-    public int execute(DemoGame game, Actor actor) 
+    public int execute(DemoGame game, Actor<BodyImpl> actor) 
             throws ActionNotAllowedException {
         Coordinates oldC = game.getCoordinates(actor);
         Coordinates newC = oldC.add(direction);

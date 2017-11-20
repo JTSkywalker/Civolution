@@ -15,5 +15,7 @@ import javafx.scene.image.Image;
 public interface Body extends JSONable {
     
     public Image getImage();
+
+    public int getEmblem();
     
 }

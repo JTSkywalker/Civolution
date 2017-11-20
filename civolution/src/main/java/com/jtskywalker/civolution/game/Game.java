@@ -5,10 +5,22 @@
  */
 package com.jtskywalker.civolution.game;
 
+import com.jtskywalker.civolution.controller.Actor;
+import java.util.Collection;
+
 /**
  *
  * @author jt
+ * @param <T>
  */
-public class Game {
+public interface Game<T extends Body> {
+    
+    public Horizon computeHorizon(Actor<T> actor);
+    
+    public Collection<Actor<T>> getActors();
+    
+    public int getWidth();
+    
+    public int getHeight();
     
 }
