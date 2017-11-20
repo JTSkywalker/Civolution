@@ -9,7 +9,7 @@ import com.jtskywalker.civolution.WHILE.WHILELexer;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.controller.Controller;
-import com.jtskywalker.civolution.controller.Horizon;
+import com.jtskywalker.civolution.game.Horizon;
 import com.jtskywalker.civolution.controller.Mind;
 import com.jtskywalker.civolution.demogame.ActionParser;
 import com.jtskywalker.civolution.demogame.Body;

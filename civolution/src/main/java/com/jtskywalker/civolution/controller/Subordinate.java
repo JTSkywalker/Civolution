@@ -5,8 +5,9 @@
  */
 package com.jtskywalker.civolution.controller;
 
+import com.jtskywalker.civolution.game.Horizon;
 import com.jtskywalker.civolution.demogame.Body;
-import com.jtskywalker.civolution.demogame.action.Pause;
+import com.jtskywalker.civolution.game.Skip;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.Scope;
@@ -31,13 +32,13 @@ public class Subordinate implements Mind {
     public Action nextAction(Horizon horizon) {
         Evaluator<Action> eval = new ActionEvaluator(horizon);
         if (orders == null) {
-            return new Pause();
+            return new Skip();
         }
         ExternalStmt<Action> result 
                 = orders.nextExternal(eval, scope);
         if (result == null) {
             orders = null;
-            return new Pause();
+            return new Skip();
         }
         orders = result.getNext();
         return result.getExternal();

@@ -7,9 +7,11 @@ package com.jtskywalker.civolution.demogame;
 
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.controller.Coordinates;
-import com.jtskywalker.civolution.controller.Horizon;
+import com.jtskywalker.civolution.game.Horizon;
+import com.jtskywalker.civolution.game.Tile;
 import com.jtskywalker.civolution.util.HashMapSet;
 import java.util.Set;
+import javafx.scene.image.Image;
 
 
 public class HorizonImpl implements Horizon {
@@ -51,7 +53,6 @@ public class HorizonImpl implements Horizon {
         printstream.print("+\n\n");
     }*/
 
-    @Override
     public void putActor(Actor actor, Coordinates coord) {
         visible.put(coord, actor);
     }
@@ -127,7 +128,6 @@ public class HorizonImpl implements Horizon {
                 && c.getBaseMobility() == 5;
     }
 
-    @Override
     public int getSettlersAt(int i, int j) {
         Coordinates coord = new Coordinates(i,j,width,height);
         Set<Actor> counters = visible.get(coord);
@@ -135,7 +135,6 @@ public class HorizonImpl implements Horizon {
                 .map((c) -> 1).reduce(0, Integer::sum);
     }
 
-    @Override
     public int getWarriorsAt(int i, int j) {
         Coordinates coord = new Coordinates(i,j,width,height);
         Set<Actor> counters = visible.get(coord);
@@ -143,7 +142,6 @@ public class HorizonImpl implements Horizon {
                 .map((c) -> 1).reduce(0, Integer::sum);
     }
 
-    @Override
     public int getScoutsAt(int i, int j) {
         Coordinates coord = new Coordinates(i,j,width,height);
         Set<Actor> counters = visible.get(coord);
@@ -151,11 +149,33 @@ public class HorizonImpl implements Horizon {
                 .map((c) -> 1).reduce(0, Integer::sum);
     }
 
-    @Override
     public int getQueensAt(int i, int j) {
         Coordinates coord = new Coordinates(i,j,width,height);
         Set<Actor> counters = visible.get(coord);
         return counters.stream().filter((c) -> isQueen(c.getBody()))
                 .map((c) -> 1).reduce(0, Integer::sum);
+    }
+
+    @Override
+    public Tile getTile(Coordinates coord) {
+        Set<Actor> localActors = visible.get(coord);
+        int queens = (int) localActors.stream().filter((a) -> isQueen(a.getBody())).count();
+        int warriors = (int) localActors.stream().filter((a) -> isWarrior(a.getBody())).count();
+        int scouts = (int) localActors.stream().filter((a) -> isScout(a.getBody())).count();
+        int settlers = (int) localActors.stream().filter((a) -> isSettler(a.getBody())).count();
+        String base = "file:" + DemoGame.BASEPATH;
+        if (queens == 1 && warriors == 0 && scouts == 0 && settlers == 0) 
+            return new TileImpl(new Image(base + "queen.png"));
+        if (queens == 0 && warriors == 1 && scouts == 0 && settlers == 0) 
+            return new TileImpl(new Image(base + "warrior.png"));
+        if (queens == 0 && warriors == 0 && scouts == 1 && settlers == 0) 
+            return new TileImpl(new Image(base + "scout.png"));
+        if (queens == 1 && warriors == 0 && scouts == 0 && settlers == 1) 
+            return new TileImpl(new Image(base + "settler.png"));
+        
+        if (queens == 0 && warriors == 0 && scouts == 0 && settlers == 0) 
+            return new TileImpl(new Image(base + "empty.png"));
+        
+        return new TileImpl(new Image(base + "more.png"));
     }
 }

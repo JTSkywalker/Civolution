@@ -1,0 +1,9 @@
+iconset: http://www.iconarchive.com/show/windows-8-icons-by-icons8.html
+
+warrior:
+http://www.iconarchive.com/show/windows-8-icons-by-icons8/Military-Sword-icon.html
+http://icons8.com
+http://icons8.com/license/
+
+other:
+http://www.iconarchive.com/show/windows-8-icons-by-icons8/Cultures-Sagrada-Familia-icon.html

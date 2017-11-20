@@ -6,7 +6,7 @@
 package com.jtskywalker.civolution.view;
 
 import com.jtskywalker.civolution.controller.Action;
-import com.jtskywalker.civolution.controller.Horizon;
+import com.jtskywalker.civolution.game.Horizon;
 import com.jtskywalker.civolution.controller.Mind;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;

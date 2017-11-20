@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -20,13 +21,13 @@ import org.json.simple.parser.ParseException;
  */
 public class BodyFactory {
     
-    private final static String PATH ="src/main/resources/demogame/Bodies.json";
     private JSONObject bodies;
     
     public BodyFactory() {
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader(PATH));
+            Object obj = parser.parse(
+                    new FileReader(DemoGame.BASEPATH + "bodies.json"));
             bodies = (JSONObject) obj;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(BodyFactory.class.getName())
@@ -43,11 +44,13 @@ public class BodyFactory {
             throw new IllegalArgumentException(
                     "The body was not found in the Body file!");
         }
+        Image image = new Image("file:" + DemoGame.BASEPATH + type + ".png");
         return new Body(nation,
                         Math.toIntExact((Long) jsonObj.get("strength")),
                         Math.toIntExact((Long) jsonObj.get("mobility")),
                         Math.toIntExact((Long) jsonObj.get("population")),
-                        (boolean) jsonObj.get("canAttack"));
+                        (boolean) jsonObj.get("canAttack"),
+                        image);
     }
      
 }

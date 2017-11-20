@@ -7,7 +7,7 @@ package com.jtskywalker.civolution.demogame;
 
 import com.jtskywalker.civolution.controller.Coordinates;
 import com.jtskywalker.civolution.controller.Actor;
-import com.jtskywalker.civolution.controller.Horizon;
+import com.jtskywalker.civolution.game.Horizon;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
  * @author rincewind
  */
 public class DemoGame {
+    
+    public static final String BASEPATH = "src/main/resources/demogame/";
     
     final int width, height;
     final Map<Actor,Coordinates> actors = new HashMap<>();
@@ -37,7 +39,7 @@ public class DemoGame {
     
     
     public Horizon computeHorizon(Actor actor) {
-        Horizon horizon = new HorizonImpl(width, height);
+        HorizonImpl horizon = new HorizonImpl(width, height);
         for (Actor c : getFriends(actor)) {
             horizon.putActor(c, getCoordinates(c));
         }

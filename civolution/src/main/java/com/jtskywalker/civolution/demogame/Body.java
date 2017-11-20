@@ -5,27 +5,29 @@
  */
 package com.jtskywalker.civolution.demogame;
 
-import com.jtskywalker.civolution.util.JSONable;
+import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 
 /**
  *
  * @author rincewind
  */
-public class Body implements JSONable {
+public class Body implements com.jtskywalker.civolution.game.Body {
     
     final int emblem, baseStrength, baseMobility, population;
     double fitness;
     final boolean canAttack;
+    final Image image;
 
     public Body(int nation, int baseStrength, int baseMobility, int population,
-            boolean canAttack) {
+            boolean canAttack, Image image) {
         this.emblem = nation;
         this.baseStrength = baseStrength;
         this.baseMobility = baseMobility;
         this.population = population;
         this.canAttack = canAttack;
         this.fitness = 1;
+        this.image = image;
     }
 
     public int getEmblem() {
@@ -136,6 +138,11 @@ public class Body implements JSONable {
         json.put("fitness", fitness);
         json.put("canAttack", canAttack);
         return json;
+    }
+
+    @Override
+    public Image getImage() {
+        return image;
     }
   
 }

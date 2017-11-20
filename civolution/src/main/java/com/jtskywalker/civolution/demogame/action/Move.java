@@ -6,7 +6,6 @@
 package com.jtskywalker.civolution.demogame.action;
 
 import com.jtskywalker.civolution.controller.Coordinates;
-import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.ActionNotAllowedException;
