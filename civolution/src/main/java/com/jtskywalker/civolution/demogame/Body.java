@@ -5,11 +5,14 @@
  */
 package com.jtskywalker.civolution.demogame;
 
+import com.jtskywalker.civolution.util.JSONable;
+import org.json.simple.JSONObject;
+
 /**
  *
  * @author rincewind
  */
-public class Body {
+public class Body implements JSONable {
     
     final int emblem, baseStrength, baseMobility, population;
     double fitness;
@@ -122,6 +125,17 @@ public class Body {
                 + ", population=" + population 
                 + ", fitness=" + fitness 
                 + ", canAttack=" + canAttack + '}';
+    }
+
+    @Override
+    public JSONObject getJSON() {
+        JSONObject json = new JSONObject();
+        json.put("strength", baseStrength);
+        json.put("mobility", baseMobility);
+        json.put("population", population);
+        json.put("fitness", fitness);
+        json.put("canAttack", canAttack);
+        return json;
     }
   
 }

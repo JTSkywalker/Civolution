@@ -5,7 +5,6 @@
  */
 package com.jtskywalker.civolution.controller;
 
-import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.demogame.DemoGame;
 
 /**

@@ -59,19 +59,20 @@ public class StartUI extends Application {
         int width = 10;
         int height = 15;
         DemoGame game = new DemoGame(width,height);
+        BodyFactory bf = new BodyFactory();
         
         Controller controller = new Controller(game);
         Mind humanMind = new ExternalMind(0);
-        Body queen = BodyFactory.createQueen(0);
+        Body queen = bf.create("queen", 0);
         GameUI human = new GameUI(queen, humanMind, controller);
         game.putActor(human, new Coordinates(1,1,width,height));
         
-        Body warrior = BodyFactory.createWarrior(0);
+        Body warrior = bf.create("warrior", 0);
         Mind subM1 = new Subordinate(0);
         Actor sub1 = new Actor(warrior ,subM1, controller);
         game.putActor(sub1, new Coordinates(3, 3, width, height));
         
-        Body scout = BodyFactory.createScout(0);
+        Body scout = bf.create("scout", 0);
         Mind subM2 = new Subordinate(0);
         Actor sub2 = new Actor(scout, subM2, controller);
         game.putActor(sub2, new Coordinates(0, 5, width, height));

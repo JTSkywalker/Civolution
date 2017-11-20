@@ -1,0 +1,27 @@
+{
+    "warrior" : {
+        "strength" : 20,
+        "mobility" : 10,
+        "population" : 3,
+        "canAttack" : true
+    },
+    
+    "scout" : {
+        "strength" : 10,
+        "mobility" : 20,
+        "population" : 2,
+        "canAttack" : true
+    },
+    "queen" : {
+        "strength" : 20,
+        "mobility" : 20,
+        "population" : 1,
+        "canAttack" : true
+    },
+    "settler" : {
+        "strength" : 5,
+        "mobility" : 5,
+        "population" : 10,
+        "canAttack" : true
+    }
+}

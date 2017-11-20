@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -67,6 +68,11 @@ public class GameUI extends Actor {
         
         //setup map
         map = new MapPane(width, height);
+        
+        //setup infoPane
+        Label infoText = new Label();
+        infoPane.getChildren().add(infoText);
+        infoText.setText(body.getJSON().toJSONString() + "\n" + "test");
         
         //setup root
         root.setCenter(map);
