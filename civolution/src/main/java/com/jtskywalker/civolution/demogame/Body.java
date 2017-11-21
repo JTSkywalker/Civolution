@@ -7,12 +7,13 @@ package com.jtskywalker.civolution.demogame;
 
 import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
+import com.jtskywalker.civolution.game.Visitable;
 
 /**
  *
  * @author rincewind
  */
-public class Body {
+public class Body implements Visitable<DemogameVisitor> {
     
     final int emblem, baseStrength, baseMobility, population;
     double fitness;
@@ -141,6 +142,11 @@ public class Body {
 
     public Image getImage() {
         return image;
+    }
+
+    @Override
+    public void accept(DemogameVisitor visitor) {
+        visitor.visit(this);
     }
   
 }

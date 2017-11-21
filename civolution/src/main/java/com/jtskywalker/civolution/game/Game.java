@@ -11,8 +11,9 @@ import java.util.Collection;
 /**
  *
  * @author jt
+ * @param <T>
  */
-public interface Game /*extends Visitor<Game<T>>*/ {
+public interface Game<T> extends Visitable<T> {
     
     public Horizon computeHorizon(Actor actor);
     

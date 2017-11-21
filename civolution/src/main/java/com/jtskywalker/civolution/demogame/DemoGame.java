@@ -19,7 +19,7 @@ import javafx.util.Pair;
  * This class contains all information on the game 
  * @author rincewind
  */
-public class DemoGame implements Game {
+public class DemoGame implements Game<DemogameVisitor> {
     
     public static final String BASEPATH = "src/main/resources/demogame/";
     
@@ -119,6 +119,14 @@ public class DemoGame implements Game {
 
     public Body getBody(Actor actor) {
         return actors.get(actor).getKey();
+    }
+
+    @Override
+    public void accept(DemogameVisitor visitor) {
+        for (Pair<Body,Coordinates> pair : actors.values()) {
+            pair.getKey().accept(visitor);
+        }
+        visitor.visit(this);
     }
     
     
