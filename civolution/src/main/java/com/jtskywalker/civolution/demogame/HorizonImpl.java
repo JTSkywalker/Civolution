@@ -9,23 +9,26 @@ import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.game.Coordinates;
 import com.jtskywalker.civolution.game.Horizon;
 import com.jtskywalker.civolution.game.Tile;
-import com.jtskywalker.civolution.util.HashMapSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javafx.scene.image.Image;
+import javafx.util.Pair;
 
 
 public class HorizonImpl implements Horizon {
     
     final int width, height;
-    final HashMapSet<Coordinates, Actor<BodyImpl>> visible = new HashMapSet<>();
+    final Map<Actor, Pair<BodyImpl,Coordinates>> visible = new HashMap<>();
 
     public HorizonImpl(int width, int height) {
         this.width = width;
         this.height = height;
     }
 
-    public void putActor(Actor actor, Coordinates coord) {
-        visible.put(coord, actor);
+    public void putActor(Actor actor, BodyImpl body, Coordinates coord) {
+        visible.put(actor, new Pair(body, coord));
     }
 
     private boolean isQueen(BodyImpl c) {
@@ -50,11 +53,18 @@ public class HorizonImpl implements Horizon {
 
     @Override
     public Tile getTile(Coordinates coord) {
-        Set<Actor<BodyImpl>> localActors = visible.get(coord);
-        int queens = (int) localActors.stream().filter((a) -> isQueen(a.getBody())).count();
-        int warriors = (int) localActors.stream().filter((a) -> isWarrior(a.getBody())).count();
-        int scouts = (int) localActors.stream().filter((a) -> isScout(a.getBody())).count();
-        int settlers = (int) localActors.stream().filter((a) -> isSettler(a.getBody())).count();
+        Set<BodyImpl> localBodies = visible.values().stream()
+                .filter((b) -> b.getValue().equals(coord))
+                .map((b) -> b.getKey())
+                .collect(Collectors.toSet());
+        int queens = (int) localBodies.stream().filter((a) 
+                -> isQueen(a)).count();
+        int warriors = (int) localBodies.stream().filter((a) 
+                -> isWarrior(a)).count();
+        int scouts = (int) localBodies.stream().filter((a) 
+                -> isScout(a)).count();
+        int settlers = (int) localBodies.stream().filter((a) 
+                -> isSettler(a)).count();
         String base = "file:" + DemoGame.BASEPATH;
         if (queens == 1 && warriors == 0 && scouts == 0 && settlers == 0) 
             return new TileImpl(new Image(base + "queen.png"));

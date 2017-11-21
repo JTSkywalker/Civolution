@@ -11,13 +11,12 @@ import java.util.Collection;
 /**
  *
  * @author jt
- * @param <T>
  */
-public interface Game<T extends Body> /*extends Visitor<Game<T>>*/ {
+public interface Game /*extends Visitor<Game<T>>*/ {
     
-    public Horizon computeHorizon(Actor<T> actor);
+    public Horizon computeHorizon(Actor actor);
     
-    public Collection<Actor<T>> getActors();
+    public Collection<Actor> getActors();
     
     public int getWidth();
     

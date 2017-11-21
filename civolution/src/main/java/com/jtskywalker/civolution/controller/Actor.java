@@ -6,22 +6,18 @@
 package com.jtskywalker.civolution.controller;
 
 import com.jtskywalker.civolution.game.Horizon;
-import com.jtskywalker.civolution.game.Body;
 import com.jtskywalker.civolution.lang.Statement;
 
 /**
  *
  * @author rincewind
- * @param <T>
  */
-public class Actor<T extends Body> {
+public class Actor {
     
-    private T body;
     private Mind mind;
     final Controller controller;
     
-    public Actor(T body, Mind mind, Controller controller) {
-        this.body = body;
+    public Actor(Mind mind, Controller controller) {
         this.mind = mind;
         this.controller = controller;
     }
@@ -42,24 +38,12 @@ public class Actor<T extends Body> {
         mind.setOrders(orders);
     }
 
-    public T getBody() {
-        return body;
-    }
-
-    public void setBody(T body) {
-        this.body = body;
-    }
-
     public Mind getMind() {
         return mind;
     }
 
     public void setMind(Mind mind) {
         this.mind = mind;
-    }
-
-    public int getEmblem() {
-        return body.getEmblem();
     }
     
     public Controller getController() {

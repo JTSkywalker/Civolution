@@ -5,17 +5,15 @@
  */
 package com.jtskywalker.civolution.controller;
 
-import com.jtskywalker.civolution.game.Body;
 import com.jtskywalker.civolution.game.Game;
 
 /**
  *
  * @author rincewind
  * @param <T>
- * @param <S>
  */
-public interface Action<T extends Game, S extends Body> {
+public interface Action<T extends Game> {
     
-    public int execute(T game, Actor<S> actor) throws ActionNotAllowedException;
+    public int execute(T game, Actor actor) throws ActionNotAllowedException;
     
 }

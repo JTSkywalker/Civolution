@@ -15,12 +15,14 @@ import com.jtskywalker.civolution.controller.Controller;
 import com.jtskywalker.civolution.controller.Mind;
 import com.jtskywalker.civolution.controller.Subordinate;
 import com.jtskywalker.civolution.demogame.ActionParser;
+import java.util.HashMap;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 /**
  *
@@ -58,30 +60,31 @@ public class StartUI extends Application {
         
         int width = 10;
         int height = 15;
-        DemoGame game = new DemoGame(width,height);
+        HashMap<Actor,Pair<BodyImpl,Coordinates>> actors = new HashMap();
         BodyFactory bf = new BodyFactory();
+        Controller controller = new Controller();
         
-        Controller controller = new Controller(game);
-        Mind humanMind = new ExternalMind(0);
         BodyImpl queen = bf.create("queen", 0);
-        GameUI human 
-                = new GameUI(queen, humanMind, controller, new ActionParser());
-        game.putActor(human, new Coordinates(1,1,width,height));
-        
         BodyImpl warrior = bf.create("warrior", 0);
-        Mind subM1 = new Subordinate(0);
-        Actor sub1 = new Actor(warrior ,subM1, controller);
-        game.putActor(sub1, new Coordinates(3, 3, width, height));
-        
         BodyImpl scout = bf.create("scout", 0);
-        Mind subM2 = new Subordinate(0);
-        Actor sub2 = new Actor(scout, subM2, controller);
-        game.putActor(sub2, new Coordinates(0, 5, width, height));
         
-        // this shouldn't be that ugly...
-        controller.addActor(human);
-        controller.addActor(sub1);
-        controller.addActor(sub2);
+        Mind humanMind = new ExternalMind(0);
+        GameUI human 
+                = new GameUI(humanMind, controller, new ActionParser());
+        Mind subM1 = new Subordinate(0);
+        Actor sub1 = new Actor(subM1, controller);
+        Mind subM2 = new Subordinate(0);
+        Actor sub2 = new Actor(subM2, controller);
+        
+        actors.put(human, new Pair(queen, new Coordinates(1,1,width,height)));
+        actors.put(sub1,  new Pair(warrior, new Coordinates(3, 3, width, height)));
+        actors.put(sub2,  new Pair(scout, new Coordinates(0, 5, width, height)));
+        
+        DemoGame game = new DemoGame(width, height, actors);
+        
+        //FIXME: this is kind of ugly
+        controller.init(game);
+        human.init();
         
         stage.setScene(new Scene(human.getRoot(), 960, 1000));
         stage.show();

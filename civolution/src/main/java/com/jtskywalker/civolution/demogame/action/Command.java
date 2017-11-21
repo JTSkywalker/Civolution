@@ -5,7 +5,6 @@
  */
 package com.jtskywalker.civolution.demogame.action;
 
-import com.jtskywalker.civolution.demogame.BodyImpl;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.lang.Statement;
 import com.jtskywalker.civolution.controller.Action;
@@ -17,7 +16,7 @@ import java.util.Objects;
  *
  * @author rincewind
  */
-public class Command implements Action<DemoGame,BodyImpl> {
+public class Command implements Action<DemoGame> {
     
     final Statement<Action> order;
 
@@ -30,7 +29,7 @@ public class Command implements Action<DemoGame,BodyImpl> {
     public int execute(DemoGame game, Actor actor) 
             throws ActionNotAllowedException {
         Actor sub = game.getSubordinate(actor);
-        sub.receiveOrders(order, actor.getEmblem());
+        sub.receiveOrders(order, game.getBody(actor).getEmblem());
         return 0;
     }
 

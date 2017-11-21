@@ -78,5 +78,9 @@ public class DelayedQueue<T> {
         ret.sort((T a, T b) -> Integer.compare(map.get(a),map.get(b))); 
         return ret;
     }
+
+    public void addAll(Collection<T> actors) {
+        actors.forEach((a) -> map.put(a, 0));
+    }
     
 }

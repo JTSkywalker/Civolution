@@ -11,7 +11,6 @@ import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.controller.Controller;
 import com.jtskywalker.civolution.game.Horizon;
 import com.jtskywalker.civolution.controller.Mind;
-import com.jtskywalker.civolution.game.Body;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.ExtParser;
@@ -25,7 +24,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -40,7 +38,7 @@ public class GameUI extends Actor {
     private final BorderPane root = new BorderPane();
     
     private final VBox infoPane = new VBox();
-    private final MapPane map;
+    private MapPane map;
     private final Button btn = new Button();
     private final TextField txt = new TextField();
 
@@ -51,13 +49,15 @@ public class GameUI extends Actor {
     private Horizon horizon;
    
     
-    public GameUI(Body body, Mind mind, Controller controller, 
-            ExtParser<Action> extParser) {
-        super(body, mind, controller);
-        this.parser = new ParserImpl(extParser);
-        
-        int width = controller.getWidth();
-        int height= controller.getHeight();
+    public GameUI(Mind mind, Controller controller, ExtParser<Action> extParser) {
+        super(mind, controller);
+        //TODO: This is suspicious!!! I am handing around an uninitialised controller
+        this.parser = new ParserImpl(extParser);   
+    }
+    
+    public void init() {
+        int width = super.getController().getWidth();
+        int height= super.getController().getHeight();
         
         //setup cmpPane
         BorderPane cmdPane = new BorderPane();
@@ -71,10 +71,10 @@ public class GameUI extends Actor {
         //setup map
         map = new MapPane(width, height);
         
-        //setup infoPane
-        Label infoText = new Label();
-        infoPane.getChildren().add(infoText);
-        infoText.setText(body.getJSON().toJSONString() + "\n" + "test");
+        //setup infoPane: this should be solved with a visitor
+        //Label infoText = new Label();
+        //infoPane.getChildren().add(infoText);
+        //infoText.setText(body.getJSON().toJSONString() + "\n" + "test");
         
         //setup root
         root.setCenter(map);

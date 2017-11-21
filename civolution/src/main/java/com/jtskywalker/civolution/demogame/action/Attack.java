@@ -18,7 +18,7 @@ import java.util.Objects;
  *
  * @author rincewind
  */
-public class Attack implements Action<DemoGame, BodyImpl> {
+public class Attack implements Action<DemoGame> {
     
     final Direction direction;
 
@@ -27,21 +27,21 @@ public class Attack implements Action<DemoGame, BodyImpl> {
     }
 
     @Override
-    public int execute(DemoGame game, Actor<BodyImpl> actor)
+    public int execute(DemoGame game, Actor actor)
             throws ActionNotAllowedException {
         
-        BodyImpl body = actor.getBody();
+        BodyImpl body = game.getBody(actor);
         if (!body.canAttack()) {
             throw new ActionNotAllowedException();
         }
         
         Coordinates oldC = game.getCoordinates(actor);
         Coordinates newC = oldC.add(direction);
-        if (!game.hasEnemy(newC, actor.getEmblem())) {
+        if (!game.hasEnemy(newC, body.getEmblem())) {
             throw new ActionNotAllowedException();
         }
-        Actor<BodyImpl> enemyActor = game.getDefender(newC);
-        BodyImpl enemyBody = enemyActor.getBody();
+        Actor enemyActor = game.getDefender(newC);
+        BodyImpl enemyBody = game.getBody(enemyActor);
         int bES = enemyBody.getBaseStrength();
         int bMS = body.getBaseStrength();
         int oldES = enemyBody.getEffectiveStrength();

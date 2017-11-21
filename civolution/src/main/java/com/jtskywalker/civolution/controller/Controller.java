@@ -14,22 +14,28 @@ import com.jtskywalker.civolution.game.Game;
  */
 public class Controller {
     
-    final Game game;
+    private Game game;
     
     //Integer denotes turns the actor has to pause
-    final DelayedQueue<Actor> actors;
+    final DelayedQueue<Actor> actors = new DelayedQueue();
+    
+    public Controller() {
+        
+    }
 
-    public Controller(Game game) {
+    public void init(Game game) {
         this.game = game;
-        actors = new DelayedQueue(game.getActors());
+        this.actors.addAll(game.getActors());
     }
     
     public void notifyNextActor() {
+        checkInitialised();
         Actor next = actors.stepToNext();
         next.findNextAction(game.computeHorizon(next));
     }
     
     public void executeAction(Actor actor, Action action) {
+        checkInitialised();
         if (actors.getDelay(actor) == 0) {
             try { 
                 int pause = action.execute(game, actor);
@@ -42,14 +48,23 @@ public class Controller {
     }
     
     public void addActor(Actor human) {
+        checkInitialised();
         actors.put(human, 0);
+    }
+
+    private void checkInitialised() throws IllegalStateException {
+        if (game == null || actors == null) {
+            throw new IllegalStateException("Controller not initialised.");
+        }
     }
     
     public int getWidth() {
+        checkInitialised();
         return game.getWidth();
     }
     
     public int getHeight() {
+        checkInitialised();
         return game.getHeight();
     }
     

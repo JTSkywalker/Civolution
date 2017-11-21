@@ -9,71 +9,74 @@ import com.jtskywalker.civolution.game.Coordinates;
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.game.Game;
 import com.jtskywalker.civolution.game.Horizon;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javafx.util.Pair;
 
 /**
  * This class contains all information on the game 
  * @author rincewind
  */
-public class DemoGame implements Game<BodyImpl> {
+public class DemoGame implements Game {
     
     public static final String BASEPATH = "src/main/resources/demogame/";
     
     final int width, height;
-    final Map<Actor<BodyImpl>,Coordinates> actors = new HashMap<>();
+    final Map<Actor,Pair<BodyImpl,Coordinates>> actors;
 
-    public DemoGame(int width, int height) {
+    public DemoGame(int width, int height,
+            Map<Actor,Pair<BodyImpl,Coordinates>> actors) {
         this.width = width;
         this.height= height;
+        this.actors= actors;
     }
         
-    public List<Actor<BodyImpl>> getFriends(Actor<BodyImpl> actor) {
+    public List<Actor> getFriends(Actor actor) {
         return actors.keySet()
                 .stream()
-                .filter((c) -> c.getEmblem() == actor.getEmblem())
+                .filter((c) 
+                         -> getBody(c).getEmblem() == getBody(actor).getEmblem())
                 .collect(Collectors.toList());
     }
     
     
     @Override
-    public Horizon computeHorizon(Actor<BodyImpl> actor) {
+    public Horizon computeHorizon(Actor actor) {
         HorizonImpl horizon = new HorizonImpl(width, height);
         getFriends(actor).forEach((c) -> {
-            horizon.putActor(c, getCoordinates(c));
+            horizon.putActor(c, getBody(c), getCoordinates(c));
         });
         return horizon;
     }
 
-    public Coordinates getCoordinates(Actor<BodyImpl> actor) {
-        return actors.get(actor);
+    public Coordinates getCoordinates(Actor actor) {
+        return actors.get(actor).getValue();
     }
 
     public boolean hasEnemy(Coordinates coord, int nation) {
         return getActors(coord)
                 .stream()
-                .anyMatch((c) -> c.getEmblem() != nation);
+                .anyMatch((c) -> actors.get(c).getKey().getEmblem() != nation);
     }
 
-    public List<Actor<BodyImpl>> getActors(Coordinates coord) {
+    public List<Actor> getActors(Coordinates coord) {
         return actors.keySet()
                 .stream()
                 .filter((c) -> (actors.get(c).equals(coord)))
                 .collect(Collectors.toList());
     }
     
-    public void putActor(Actor<BodyImpl> actor, Coordinates newC) {
-        actors.put(actor, newC);
+    public void putActor(Actor actor, Coordinates newC) {
+        actors.put(actor, new Pair(actors.get(actor).getKey(),newC));
     }
 
     public int getTileMobilityCost(Coordinates coord) {
         return 1;
     }
 
-    public Actor<BodyImpl> getDefender(Coordinates coord) {
+    public Actor getDefender(Coordinates coord) {
         return getActors(coord)
                 .stream()
                 .findAny()
@@ -84,11 +87,11 @@ public class DemoGame implements Game<BodyImpl> {
         body.setFitness(d);
     }
 
-    public void kill(Actor<BodyImpl> actor) {
+    public void kill(Actor actor) {
         actors.remove(actor);
     }
 
-    public Actor<BodyImpl> getSubordinate(Actor actor) {
+    public Actor getSubordinate(Actor actor) {
         Coordinates coord = getCoordinates(actor);
         return getActors(coord)
                 .stream()
@@ -98,7 +101,7 @@ public class DemoGame implements Game<BodyImpl> {
     }
 
     @Override
-    public Set<Actor<BodyImpl>> getActors() {
+    public Set<Actor> getActors() {
         return actors.keySet()
                 .stream()
                 .collect(Collectors.toSet());
@@ -112,6 +115,10 @@ public class DemoGame implements Game<BodyImpl> {
     @Override
     public int getWidth() {
         return width;
+    }
+
+    public BodyImpl getBody(Actor actor) {
+        return actors.get(actor).getKey();
     }
     
     
