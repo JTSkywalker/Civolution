@@ -13,7 +13,7 @@ import java.util.Collection;
  * @author jt
  * @param <T>
  */
-public interface Game<T extends Body> {
+public interface Game<T extends Body> /*extends Visitor<Game<T>>*/ {
     
     public Horizon computeHorizon(Actor<T> actor);
     

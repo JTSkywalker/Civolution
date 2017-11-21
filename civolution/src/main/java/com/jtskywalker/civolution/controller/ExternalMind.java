@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.view;
+package com.jtskywalker.civolution.controller;
 
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.game.Horizon;

@@ -5,6 +5,7 @@
  */
 package com.jtskywalker.civolution.view;
 
+import com.jtskywalker.civolution.controller.ExternalMind;
 import com.jtskywalker.civolution.demogame.BodyFactory;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.demogame.BodyImpl;
