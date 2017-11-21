@@ -20,40 +20,40 @@ import javafx.util.Pair;
 public class HorizonImpl implements Horizon {
     
     final int width, height;
-    final Map<Actor, Pair<BodyImpl,Coordinates>> visible = new HashMap<>();
+    final Map<Actor, Pair<Body,Coordinates>> visible = new HashMap<>();
 
     public HorizonImpl(int width, int height) {
         this.width = width;
         this.height = height;
     }
 
-    public void putActor(Actor actor, BodyImpl body, Coordinates coord) {
+    public void putActor(Actor actor, Body body, Coordinates coord) {
         visible.put(actor, new Pair(body, coord));
     }
 
-    private boolean isQueen(BodyImpl c) {
+    private boolean isQueen(Body c) {
         return c.getBaseStrength() == 20
                 && c.getBaseMobility() == 20;
     }
     
-    private boolean isWarrior(BodyImpl c) {
+    private boolean isWarrior(Body c) {
         return c.getBaseStrength() == 20
                 && c.getBaseMobility() == 10;
     }
     
-    private boolean isScout(BodyImpl c) {
+    private boolean isScout(Body c) {
         return c.getBaseStrength() == 10
                 && c.getBaseMobility() == 20;
     }
     
-    private boolean isSettler(BodyImpl c) {
+    private boolean isSettler(Body c) {
         return c.getBaseStrength() == 5
                 && c.getBaseMobility() == 5;
     }
 
     @Override
     public Tile getTile(Coordinates coord) {
-        Set<BodyImpl> localBodies = visible.values().stream()
+        Set<Body> localBodies = visible.values().stream()
                 .filter((b) -> b.getValue().equals(coord))
                 .map((b) -> b.getKey())
                 .collect(Collectors.toSet());

@@ -8,7 +8,7 @@ package com.jtskywalker.civolution.view;
 import com.jtskywalker.civolution.controller.ExternalMind;
 import com.jtskywalker.civolution.demogame.BodyFactory;
 import com.jtskywalker.civolution.demogame.DemoGame;
-import com.jtskywalker.civolution.demogame.BodyImpl;
+import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.game.Coordinates;
 import com.jtskywalker.civolution.controller.Controller;
@@ -60,13 +60,13 @@ public class StartUI extends Application {
         
         int width = 10;
         int height = 15;
-        HashMap<Actor,Pair<BodyImpl,Coordinates>> actors = new HashMap();
+        HashMap<Actor,Pair<Body,Coordinates>> actors = new HashMap();
         BodyFactory bf = new BodyFactory();
         Controller controller = new Controller();
         
-        BodyImpl queen = bf.create("queen", 0);
-        BodyImpl warrior = bf.create("warrior", 0);
-        BodyImpl scout = bf.create("scout", 0);
+        Body queen = bf.create("queen", 0);
+        Body warrior = bf.create("warrior", 0);
+        Body scout = bf.create("scout", 0);
         
         Mind humanMind = new ExternalMind(0);
         GameUI human 

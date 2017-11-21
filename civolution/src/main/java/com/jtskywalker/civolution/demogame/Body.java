@@ -12,14 +12,14 @@ import org.json.simple.JSONObject;
  *
  * @author rincewind
  */
-public class BodyImpl {
+public class Body {
     
     final int emblem, baseStrength, baseMobility, population;
     double fitness;
     final boolean canAttack;
     final Image image;
 
-    public BodyImpl(int nation, int baseStrength, int baseMobility, int population,
+    public Body(int nation, int baseStrength, int baseMobility, int population,
             boolean canAttack, Image image) {
         this.emblem = nation;
         this.baseStrength = baseStrength;
@@ -97,7 +97,7 @@ public class BodyImpl {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final BodyImpl other = (BodyImpl) obj;
+        final Body other = (Body) obj;
         if (this.emblem != other.emblem) {
             return false;
         }

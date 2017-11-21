@@ -24,10 +24,10 @@ public class DemoGame implements Game {
     public static final String BASEPATH = "src/main/resources/demogame/";
     
     final int width, height;
-    final Map<Actor,Pair<BodyImpl,Coordinates>> actors;
+    final Map<Actor,Pair<Body,Coordinates>> actors;
 
     public DemoGame(int width, int height,
-            Map<Actor,Pair<BodyImpl,Coordinates>> actors) {
+            Map<Actor,Pair<Body,Coordinates>> actors) {
         this.width = width;
         this.height= height;
         this.actors= actors;
@@ -83,7 +83,7 @@ public class DemoGame implements Game {
                 .orElseThrow(() -> new IllegalArgumentException());
     }
 
-    public void setFitness(BodyImpl body, double d) {
+    public void setFitness(Body body, double d) {
         body.setFitness(d);
     }
 
@@ -117,7 +117,7 @@ public class DemoGame implements Game {
         return width;
     }
 
-    public BodyImpl getBody(Actor actor) {
+    public Body getBody(Actor actor) {
         return actors.get(actor).getKey();
     }
     

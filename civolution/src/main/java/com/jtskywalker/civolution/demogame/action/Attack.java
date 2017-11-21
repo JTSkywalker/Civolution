@@ -7,7 +7,7 @@ package com.jtskywalker.civolution.demogame.action;
 
 import com.jtskywalker.civolution.game.Direction;
 import com.jtskywalker.civolution.game.Coordinates;
-import com.jtskywalker.civolution.demogame.BodyImpl;
+import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.ActionNotAllowedException;
@@ -30,7 +30,7 @@ public class Attack implements Action<DemoGame> {
     public int execute(DemoGame game, Actor actor)
             throws ActionNotAllowedException {
         
-        BodyImpl body = game.getBody(actor);
+        Body body = game.getBody(actor);
         if (!body.canAttack()) {
             throw new ActionNotAllowedException();
         }
@@ -41,7 +41,7 @@ public class Attack implements Action<DemoGame> {
             throw new ActionNotAllowedException();
         }
         Actor enemyActor = game.getDefender(newC);
-        BodyImpl enemyBody = game.getBody(enemyActor);
+        Body enemyBody = game.getBody(enemyActor);
         int bES = enemyBody.getBaseStrength();
         int bMS = body.getBaseStrength();
         int oldES = enemyBody.getEffectiveStrength();

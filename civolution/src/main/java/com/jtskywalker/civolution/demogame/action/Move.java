@@ -11,7 +11,7 @@ import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.ActionNotAllowedException;
 import com.jtskywalker.civolution.controller.Actor;
-import com.jtskywalker.civolution.demogame.BodyImpl;
+import com.jtskywalker.civolution.demogame.Body;
 import java.util.Objects;
 
 /**
