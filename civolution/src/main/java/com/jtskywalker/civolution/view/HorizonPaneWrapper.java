@@ -3,13 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.game;
+package com.jtskywalker.civolution.view;
+
+import javafx.scene.layout.Pane;
 
 /**
  *
- * @author rincewind
+ * @author jt
  * @param <T>
  */
-public interface Horizon<T> extends Visitable<T> {
+public interface HorizonPaneWrapper<T> {
+    
+    public void update(T t);
+    
+    public Pane getPane();
     
 }

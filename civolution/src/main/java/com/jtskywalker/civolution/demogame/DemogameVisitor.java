@@ -5,17 +5,17 @@
  */
 package com.jtskywalker.civolution.demogame;
 
+import com.jtskywalker.civolution.game.Visitor;
+
 /**
  *
  * @author jt
  */
-public interface DemogameVisitor {
+public interface DemogameVisitor extends Visitor<HorizonImpl> {
     
-    public void visit(DemoGame game);
+    @Override
+    public void visit(HorizonImpl horizon);
     
     public void visit(Body body);
 
-    public void visit(HorizonImpl aThis);
-
-    
 }

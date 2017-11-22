@@ -16,9 +16,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import com.jtskywalker.civolution.view.HorizonPaneWrapper;
+import javafx.scene.layout.Pane;
 
 
-public class MapVisitor implements DemogameVisitor {
+public class DemogameMapVisitor 
+        implements HorizonPaneWrapper<HorizonImpl>, DemogameVisitor {
 
     private final static int CELLSIZE = 50;
     
@@ -26,7 +29,7 @@ public class MapVisitor implements DemogameVisitor {
     private final int width, height;
     private final GridPane map;
     
-    public MapVisitor(GridPane map, int width, int height) {
+    public DemogameMapVisitor(GridPane map, int width, int height) {
         this.map = map;
         this.width = width;
         this.height= height;
@@ -46,12 +49,6 @@ public class MapVisitor implements DemogameVisitor {
         }
     }
     
-    @Override
-    public void visit(DemoGame game) {
-        // this is not needed
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
     @Override
     public void visit(Body body) {
         // do nothing.
@@ -114,5 +111,14 @@ public class MapVisitor implements DemogameVisitor {
         return new Image(base + "more.png");
     }
 
+    @Override
+    public void update(HorizonImpl horizon) {
+        this.visit(horizon);
+    }
+
+    @Override
+    public Pane getPane() {
+        return map;
+    }
     
 }

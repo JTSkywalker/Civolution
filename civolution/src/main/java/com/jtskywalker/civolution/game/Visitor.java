@@ -7,9 +7,11 @@ package com.jtskywalker.civolution.game;
 
 /**
  *
- * @author rincewind
+ * @author jt
  * @param <T>
  */
-public interface Horizon<T> extends Visitable<T> {
+public interface Visitor<T> {
+    
+    public void visit(T t);
     
 }

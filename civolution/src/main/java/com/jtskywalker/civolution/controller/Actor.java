@@ -11,8 +11,9 @@ import com.jtskywalker.civolution.lang.Statement;
 /**
  *
  * @author rincewind
+ * @param <T>
  */
-public class Actor {
+public class Actor<T extends Horizon> {
     
     private Mind mind;
     final Controller controller;
@@ -22,7 +23,7 @@ public class Actor {
         this.controller = controller;
     }
     
-    public void findNextAction(Horizon horizon) {
+    public void findNextAction(T horizon) {
         Action next = mind.nextAction(horizon);
         // this is not very beautiful
         if (next != null) {

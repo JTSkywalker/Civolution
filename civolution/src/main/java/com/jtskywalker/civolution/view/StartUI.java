@@ -15,12 +15,16 @@ import com.jtskywalker.civolution.controller.Controller;
 import com.jtskywalker.civolution.controller.Mind;
 import com.jtskywalker.civolution.controller.Subordinate;
 import com.jtskywalker.civolution.demogame.ActionParser;
+import com.jtskywalker.civolution.view.demogame.DemogameMapVisitor;
 import java.util.HashMap;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
@@ -70,7 +74,23 @@ public class StartUI extends Application {
         
         Mind humanMind = new ExternalMind(0);
         GameUI human 
-                = new GameUI(humanMind, controller, new ActionParser());
+                = new GameUI(humanMind, controller, new ActionParser(),
+                new DemogameMapVisitor(new GridPane(), width, height),
+                new HorizonPaneWrapper() {
+                    
+                    VBox pane = new VBox();
+                    
+                    @Override
+                    public void update(Object t) {
+                        // do nothing
+                    }
+
+                    @Override
+                    public Pane getPane() {
+                        return pane;
+                    }
+
+                });
         Mind subM1 = new Subordinate(0);
         Actor sub1 = new Actor(subM1, controller);
         Mind subM2 = new Subordinate(0);

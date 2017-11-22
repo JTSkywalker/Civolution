@@ -30,22 +30,14 @@ public class HorizonImpl implements Horizon<DemogameVisitor> {
         visible.put(actor, new Pair(body, coord));
     }
 
-    @Override
-    public Horizon computeHorizon(Actor actor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Collection<Actor> getActors() {
         return visible.keySet();
     }
 
-    @Override
     public int getWidth() {
         return width;
     }
 
-    @Override
     public int getHeight() {
         return height;
     }
