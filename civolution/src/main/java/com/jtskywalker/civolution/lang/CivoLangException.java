@@ -11,4 +11,12 @@ package com.jtskywalker.civolution.lang;
  */
 public class CivoLangException extends Exception {
     
+    public CivoLangException() {
+        super();
+    }
+    
+    public CivoLangException(String msg) {
+        super(msg);
+    }    
+    
 }

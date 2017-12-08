@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 /**
  *
  * @author rincewind
+ * @param <K>
+ * @param <V>
  */
 public class HashMapSet<K,V> {
     

@@ -48,10 +48,7 @@ public class ExternalExp<T> implements Expression<T> {
             return false;
         }
         final ExternalExp<?> other = (ExternalExp<?>) obj;
-        if (!Objects.equals(this.external, other.external)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.external, other.external);
     }
 
     @Override

@@ -11,7 +11,6 @@ import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.ActionNotAllowedException;
 import com.jtskywalker.civolution.controller.Actor;
-import com.jtskywalker.civolution.demogame.Body;
 import java.util.Objects;
 
 /**
@@ -61,10 +60,7 @@ public class Move implements Action<DemoGame> {
             return false;
         }
         final Move other = (Move) obj;
-        if (this.direction != other.direction) {
-            return false;
-        }
-        return true;
+        return this.direction == other.direction;
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.util.Objects;
 /**
  *
  * @author rincewind
+ * @param <T>
  */
 public class IdentifierExp<T> implements Expression<T> {
     
@@ -52,10 +53,7 @@ public class IdentifierExp<T> implements Expression<T> {
             return false;
         }
         final IdentifierExp<?> other = (IdentifierExp<?>) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.name, other.name);
     }
 
     @Override

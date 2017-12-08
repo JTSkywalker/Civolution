@@ -52,10 +52,7 @@ public class Command implements Action<DemoGame> {
             return false;
         }
         final Command other = (Command) obj;
-        if (!Objects.equals(this.order, other.order)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.order, other.order);
     }
 
     @Override

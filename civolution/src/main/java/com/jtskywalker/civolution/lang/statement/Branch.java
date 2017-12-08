@@ -14,6 +14,7 @@ import java.util.Objects;
 /**
  *
  * @author rincewind
+ * @param <T>
  */
 public class Branch<T> implements Statement<T>{
 
@@ -71,10 +72,7 @@ public class Branch<T> implements Statement<T>{
         if (!Objects.equals(this.condition, other.condition)) {
             return false;
         }
-        if (!Objects.equals(this.consequence, other.consequence)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.consequence, other.consequence);
     }
 
     @Override

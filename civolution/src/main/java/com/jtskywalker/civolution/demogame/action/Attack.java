@@ -84,10 +84,7 @@ public class Attack implements Action<DemoGame> {
             return false;
         }
         final Attack other = (Attack) obj;
-        if (this.direction != other.direction) {
-            return false;
-        }
-        return true;
+        return this.direction == other.direction;
     }
 
     @Override

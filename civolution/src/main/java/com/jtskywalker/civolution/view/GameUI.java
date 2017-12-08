@@ -11,8 +11,6 @@ import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.controller.Controller;
 import com.jtskywalker.civolution.controller.ExternalMind;
 import com.jtskywalker.civolution.game.Horizon;
-import com.jtskywalker.civolution.lang.ActionEvaluator;
-import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.ExtParser;
 import com.jtskywalker.civolution.lang.Parser;
 import com.jtskywalker.civolution.lang.ParserErrorException;
@@ -50,7 +48,7 @@ public class GameUI<T extends Horizon> implements Actor<T> {
     
     private T horizon;
    
-    private ExternalMind mind;
+    private final ExternalMind mind;
     private Controller controller;
     
     public GameUI(ExternalMind mind,
@@ -90,7 +88,6 @@ public class GameUI<T extends Horizon> implements Actor<T> {
     private void executeOrder(String input) {
         btn.setDisable(true);
         try {
-            Evaluator<Action> eval = new ActionEvaluator(horizon);
             List<Token> tokenlist = lexer.lex(input);
             Statement<Action> program = parser.parse(tokenlist);
             this.setOrders(program);

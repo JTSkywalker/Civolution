@@ -37,8 +37,12 @@ public class ActionParser implements ExtParser<Action> {
             case "move":
                 return new Move(parseDirection(block.get(1)));
             case "command":
-                return new Command(internalParser
+                if (internalParser != null) {
+                    return new Command(internalParser
                         .parse(block.subList(2, block.size() - 1)));
+                } else {
+                    throw new ParserErrorException("internalParser not defined!");
+                }
             default:
                 throw new ParserErrorException();
         }

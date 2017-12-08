@@ -13,6 +13,7 @@ import java.util.Objects;
 /**
  *
  * @author rincewind
+ * @param <T>
  */
 public class ExternalStmt<T> implements Statement<T> {
     
@@ -57,10 +58,7 @@ public class ExternalStmt<T> implements Statement<T> {
             return false;
         }
         final ExternalStmt<?> other = (ExternalStmt<?>) obj;
-        if (!Objects.equals(this.external, other.external)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.external, other.external);
     }
 
     @Override

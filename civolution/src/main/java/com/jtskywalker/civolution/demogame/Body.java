@@ -114,10 +114,7 @@ public class Body implements Visitable<DemogameVisitor> {
         if (Double.doubleToLongBits(this.fitness) != Double.doubleToLongBits(other.fitness)) {
             return false;
         }
-        if (this.canAttack != other.canAttack) {
-            return false;
-        }
-        return true;
+        return this.canAttack == other.canAttack;
     }
 
     @Override

@@ -10,5 +10,13 @@ package com.jtskywalker.civolution.lang;
  * @author rincewind
  */
 public class ParserErrorException extends CivoLangException {
+
+    public ParserErrorException(String msg) {
+        super(msg);
+    }
+
+    public ParserErrorException() {
+        super();
+    }
     
 }

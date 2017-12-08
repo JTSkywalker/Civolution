@@ -11,6 +11,7 @@ import java.util.Objects;
 /**
  *
  * @author rincewind
+ * @param <T>
  */
 public class BinaryExp<T> implements Expression<T> {
     
@@ -57,10 +58,7 @@ public class BinaryExp<T> implements Expression<T> {
         if (!Objects.equals(this.left, other.left)) {
             return false;
         }
-        if (!Objects.equals(this.right, other.right)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.right, other.right);
     }
 
     @Override

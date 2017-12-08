@@ -14,6 +14,7 @@ public class ActionEvaluator implements Evaluator<Action> {
     final Horizon horizon;
 
     public ActionEvaluator(Horizon horizon) {
+        // this will probably be needed at some point
         this.horizon = horizon;
     }
     

@@ -10,6 +10,7 @@ import java.util.List;
 /**
  *
  * @author rincewind
+ * @param <T>
  */
 public interface Parser<T> {
 

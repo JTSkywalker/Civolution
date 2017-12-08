@@ -43,6 +43,7 @@ public class Subordinate implements Actor {
         return result.getExternal();
     }
     
+    @Override
     public boolean receiveOrders(Statement orders, int nation) {
         if (this.nation == nation) {
             this.orders = orders;

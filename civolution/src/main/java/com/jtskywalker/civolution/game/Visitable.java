@@ -8,6 +8,7 @@ package com.jtskywalker.civolution.game;
 /**
  *
  * @author jt
+ * @param <T>
  */
 public interface Visitable<T> {
     

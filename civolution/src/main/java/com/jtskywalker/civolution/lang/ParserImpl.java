@@ -20,6 +20,7 @@ import java.util.List;
 /**
  *
  * @author rincewind
+ * @param <T>
  */
 public class ParserImpl<T> implements Parser<T> {
     

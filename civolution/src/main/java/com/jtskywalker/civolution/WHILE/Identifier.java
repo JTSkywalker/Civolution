@@ -43,10 +43,7 @@ public class Identifier implements Token {
             return false;
         }
         final Identifier other = (Identifier) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.name, other.name);
     }
 
     @Override

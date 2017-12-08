@@ -45,10 +45,7 @@ public class ConstantExp implements Expression {
             return false;
         }
         final ConstantExp other = (ConstantExp) obj;
-        if (this.value != other.value) {
-            return false;
-        }
-        return true;
+        return this.value == other.value;
     }
 
     @Override

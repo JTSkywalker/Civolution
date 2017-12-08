@@ -101,10 +101,7 @@ public class Coordinates {
         if (this.width != other.width) {
             return false;
         }
-        if (this.height != other.height) {
-            return false;
-        }
-        return true;
+        return this.height == other.height;
     }
 
     @Override

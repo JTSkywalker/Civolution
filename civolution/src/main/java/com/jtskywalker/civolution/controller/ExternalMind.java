@@ -5,9 +5,7 @@
  */
 package com.jtskywalker.civolution.controller;
 
-import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.game.Horizon;
-import com.jtskywalker.civolution.controller.Mind;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.Scope;

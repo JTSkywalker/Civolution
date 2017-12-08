@@ -38,10 +38,7 @@ public class Number implements Token {
             return false;
         }
         final Number other = (Number) obj;
-        if (this.value != other.value) {
-            return false;
-        }
-        return true;
+        return this.value == other.value;
     }
 
     public int getValue() {

@@ -44,9 +44,9 @@ public class HorizonImpl implements Horizon<DemogameVisitor> {
 
     @Override
     public void accept(DemogameVisitor t) {
-        for (Pair<Body,Coordinates> pair : visible.values()) {
+        visible.values().forEach((pair) -> {
             pair.getKey().accept(t);
-        }
+        });
         t.visit(this);
     }
 

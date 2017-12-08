@@ -14,6 +14,7 @@ import java.util.Objects;
 /**
  *
  * @author rincewind
+ * @param <T>
  */
 public class Binding<T> implements Statement<T> {
     
@@ -60,10 +61,7 @@ public class Binding<T> implements Statement<T> {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.exp, other.exp)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.exp, other.exp);
     }
 
     @Override
