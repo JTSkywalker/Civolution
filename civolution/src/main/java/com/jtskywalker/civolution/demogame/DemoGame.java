@@ -5,7 +5,7 @@
  */
 package com.jtskywalker.civolution.demogame;
 
-import com.jtskywalker.civolution.game.Coordinates;
+import com.jtskywalker.civolution.game.SquareTileTorusCoordinates;
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.game.Game;
 import com.jtskywalker.civolution.game.Horizon;
@@ -24,10 +24,10 @@ public class DemoGame implements Game {
     public static final String BASEPATH = "src/main/resources/demogame/";
     
     final int width, height;
-    final Map<Actor,Pair<Body,Coordinates>> actors;
+    final Map<Actor,Pair<Body,SquareTileTorusCoordinates>> actors;
 
     public DemoGame(int width, int height,
-            Map<Actor,Pair<Body,Coordinates>> actors) {
+            Map<Actor,Pair<Body,SquareTileTorusCoordinates>> actors) {
         this.width = width;
         this.height= height;
         this.actors= actors;
@@ -51,32 +51,32 @@ public class DemoGame implements Game {
         return horizon;
     }
 
-    public Coordinates getCoordinates(Actor actor) {
+    public SquareTileTorusCoordinates getCoordinates(Actor actor) {
         return actors.get(actor).getValue();
     }
 
-    public boolean hasEnemy(Coordinates coord, int nation) {
+    public boolean hasEnemy(SquareTileTorusCoordinates coord, int nation) {
         return getActors(coord)
                 .stream()
                 .anyMatch((c) -> actors.get(c).getKey().getEmblem() != nation);
     }
 
-    public List<Actor> getActors(Coordinates coord) {
+    public List<Actor> getActors(SquareTileTorusCoordinates coord) {
         return actors.keySet()
                 .stream()
                 .filter((c) -> (actors.get(c).getValue().equals(coord)))
                 .collect(Collectors.toList());
     }
     
-    public void putActor(Actor actor, Coordinates newC) {
+    public void putActor(Actor actor, SquareTileTorusCoordinates newC) {
         actors.put(actor, new Pair(actors.get(actor).getKey(),newC));
     }
 
-    public int getTileMobilityCost(Coordinates coord) {
+    public int getTileMobilityCost(SquareTileTorusCoordinates coord) {
         return 1;
     }
 
-    public Actor getDefender(Coordinates coord) {
+    public Actor getDefender(SquareTileTorusCoordinates coord) {
         return getActors(coord)
                 .stream()
                 .findAny()
@@ -92,7 +92,7 @@ public class DemoGame implements Game {
     }
 
     public Actor getSubordinate(Actor actor) {
-        Coordinates coord = getCoordinates(actor);
+        SquareTileTorusCoordinates coord = getCoordinates(actor);
         return getActors(coord)
                 .stream()
                 .filter((c) -> !c.equals(actor))

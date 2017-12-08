@@ -5,8 +5,8 @@
  */
 package com.jtskywalker.civolution.demogame.action;
 
-import com.jtskywalker.civolution.game.Direction;
-import com.jtskywalker.civolution.game.Coordinates;
+import com.jtskywalker.civolution.game.SquareTileDirection;
+import com.jtskywalker.civolution.game.SquareTileTorusCoordinates;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.ActionNotAllowedException;
@@ -19,17 +19,17 @@ import java.util.Objects;
  */
 public class Move implements Action<DemoGame> {
     
-    final Direction direction;
+    final SquareTileDirection direction;
 
-    public Move(Direction direction) {
+    public Move(SquareTileDirection direction) {
         this.direction = direction;
     }
 
     @Override
     public int execute(DemoGame game, Actor actor) 
             throws ActionNotAllowedException {
-        Coordinates oldC = game.getCoordinates(actor);
-        Coordinates newC = oldC.add(direction);
+        SquareTileTorusCoordinates oldC = game.getCoordinates(actor);
+        SquareTileTorusCoordinates newC = oldC.add(direction);
         if (game.hasEnemy(newC, game.getBody(actor).getEmblem())) {
             if (game.getBody(actor).canAttack()) {
                 return (new Attack(direction)).execute(game, actor);

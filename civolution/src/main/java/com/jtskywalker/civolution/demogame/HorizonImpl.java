@@ -6,7 +6,7 @@
 package com.jtskywalker.civolution.demogame;
 
 import com.jtskywalker.civolution.controller.Actor;
-import com.jtskywalker.civolution.game.Coordinates;
+import com.jtskywalker.civolution.game.SquareTileTorusCoordinates;
 import com.jtskywalker.civolution.game.Horizon;
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,14 +19,14 @@ import javafx.util.Pair;
 public class HorizonImpl implements Horizon<DemogameVisitor> {
     
     final int width, height;
-    final Map<Actor, Pair<Body,Coordinates>> visible = new HashMap<>();
+    final Map<Actor, Pair<Body,SquareTileTorusCoordinates>> visible = new HashMap<>();
 
     public HorizonImpl(int width, int height) {
         this.width = width;
         this.height = height;
     }
 
-    public void putActor(Actor actor, Body body, Coordinates coord) {
+    public void putActor(Actor actor, Body body, SquareTileTorusCoordinates coord) {
         visible.put(actor, new Pair(body, coord));
     }
 
@@ -50,7 +50,7 @@ public class HorizonImpl implements Horizon<DemogameVisitor> {
         t.visit(this);
     }
 
-    public Set<Body> getBodies(Coordinates coord) {
+    public Set<Body> getBodies(SquareTileTorusCoordinates coord) {
         return visible.values().stream()
                 .filter((b) -> b.getValue().equals(coord))
                 .map((b) -> b.getKey())

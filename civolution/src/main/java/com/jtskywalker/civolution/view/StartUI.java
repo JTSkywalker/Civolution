@@ -10,7 +10,7 @@ import com.jtskywalker.civolution.demogame.BodyFactory;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.controller.Actor;
-import com.jtskywalker.civolution.game.Coordinates;
+import com.jtskywalker.civolution.game.SquareTileTorusCoordinates;
 import com.jtskywalker.civolution.controller.Controller;
 import com.jtskywalker.civolution.controller.Subordinate;
 import com.jtskywalker.civolution.demogame.ActionParser;
@@ -63,7 +63,7 @@ public class StartUI extends Application {
         
         int width = 10;
         int height = 15;
-        HashMap<Actor,Pair<Body,Coordinates>> actors = new HashMap();
+        HashMap<Actor,Pair<Body,SquareTileTorusCoordinates>> actors = new HashMap();
         BodyFactory bf = new BodyFactory();
         
         Body queen = bf.create("queen", 0);
@@ -92,9 +92,9 @@ public class StartUI extends Application {
         Actor sub1 = new Subordinate(0);
         Actor sub2 = new Subordinate(0);
         
-        actors.put(human, new Pair(queen, new Coordinates(1,1,width,height)));
-        actors.put(sub1,  new Pair(warrior, new Coordinates(3, 3, width, height)));
-        actors.put(sub2,  new Pair(scout, new Coordinates(0, 5, width, height)));
+        actors.put(human, new Pair(queen, new SquareTileTorusCoordinates(1,1,width,height)));
+        actors.put(sub1,  new Pair(warrior, new SquareTileTorusCoordinates(3, 3, width, height)));
+        actors.put(sub2,  new Pair(scout, new SquareTileTorusCoordinates(0, 5, width, height)));
         
         DemoGame game = new DemoGame(width, height, actors);
 

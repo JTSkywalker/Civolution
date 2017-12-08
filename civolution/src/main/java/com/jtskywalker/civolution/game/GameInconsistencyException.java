@@ -7,10 +7,16 @@ package com.jtskywalker.civolution.game;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
-public enum Direction {
+public class GameInconsistencyException extends RuntimeException {
     
-    N, NE, E, SE, S, SW, W, NW;
+    public GameInconsistencyException() {
+        super();
+    }
+    
+    public GameInconsistencyException(String msg) {
+        super(msg);
+    }
     
 }

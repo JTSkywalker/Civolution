@@ -3,20 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.game;
+package com.jtskywalker.civolution.influencegame;
 
 /**
  *
  * @author jt
  */
-public interface Coordinates {
-    
-    public int getX();
-    
-    public int getY();
-    
-    public int getWidth();
-    
-    public int getHeight();
+class Body {
     
 }

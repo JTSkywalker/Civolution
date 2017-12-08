@@ -9,14 +9,8 @@ package com.jtskywalker.civolution.game;
  *
  * @author jt
  */
-public interface Coordinates {
+public enum SquareTileDirection {
     
-    public int getX();
-    
-    public int getY();
-    
-    public int getWidth();
-    
-    public int getHeight();
+    N, NE, E, SE, S, SW, W, NW;
     
 }
