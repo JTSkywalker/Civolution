@@ -65,7 +65,6 @@ public class StartUI extends Application {
         int height = 15;
         HashMap<Actor,Pair<Body,Coordinates>> actors = new HashMap();
         BodyFactory bf = new BodyFactory();
-        Controller controller = new Controller();
         
         Body queen = bf.create("queen", 0);
         Body warrior = bf.create("warrior", 0);
@@ -73,7 +72,7 @@ public class StartUI extends Application {
         
         ExternalMind humanMind = new ExternalMind(0);
         GameUI human 
-                = new GameUI(humanMind, controller, new ActionParser(),
+                = new GameUI(humanMind, new ActionParser(),
                 new DemogameMapVisitor(new GridPane(), width, height),
                 new HorizonPaneWrapper() {
                     
@@ -99,8 +98,7 @@ public class StartUI extends Application {
         
         DemoGame game = new DemoGame(width, height, actors);
 
-        //still not very happy about this
-        controller.init(game);
+        Controller controller = new Controller(game);
         
         stage.setScene(new Scene(human.getRoot(), 960, 1000));
         stage.show();

@@ -51,8 +51,9 @@ public class GameUI<T extends Horizon> implements Actor<T> {
     private T horizon;
    
     private ExternalMind mind;
+    private Controller controller;
     
-    public GameUI(ExternalMind mind, Controller controller,
+    public GameUI(ExternalMind mind,
             ExtParser<Action> extParser,
             HorizonPaneWrapper<T> overviewWrapper, 
             HorizonPaneWrapper<T> detailWrapper) { 
@@ -60,16 +61,16 @@ public class GameUI<T extends Horizon> implements Actor<T> {
         this.overviewWrapper= overviewWrapper;
         this.detailWrapper  = detailWrapper;
         this.parser  = new ParserImpl(extParser);
-        init(controller);
+        init();
     }
     
-    private void init(Controller controller) {
+    private void init() {
         
         //setup cmpPane
         BorderPane cmdPane = new BorderPane();
         btn.setText("do it !");
         btn.setOnAction((ActionEvent event) -> {
-            executeOrder(txt.getText(), controller);
+            executeOrder(txt.getText());
         });
         cmdPane.setCenter(txt);
         cmdPane.setRight(btn);
@@ -79,13 +80,14 @@ public class GameUI<T extends Horizon> implements Actor<T> {
         root.setCenter(overviewWrapper.getPane());
         root.setBottom(cmdPane);
         root.setRight(detailWrapper.getPane());
+        btn.setDisable(true);
     }
     
     public Pane getRoot() {
         return root;
     }
     
-    private void executeOrder(String input, Controller controller) {
+    private void executeOrder(String input) {
         btn.setDisable(true);
         try {
             Evaluator<Action> eval = new ActionEvaluator(horizon);
@@ -102,6 +104,7 @@ public class GameUI<T extends Horizon> implements Actor<T> {
     
     @Override
     public void findNextAction(T horizon, Controller controller) {
+        this.controller = controller;
         this.horizon = horizon;
         updateView();
         Action next = this.nextAction(horizon);

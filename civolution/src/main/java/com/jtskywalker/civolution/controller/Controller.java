@@ -14,15 +14,12 @@ import com.jtskywalker.civolution.game.Game;
  */
 public class Controller {
     
-    private Game game;
+    private final Game game;
     
     //Integer denotes turns the actor has to pause
     final DelayedQueue<Actor> actors = new DelayedQueue();
     
-    public Controller() {
-    }
-    
-    public void init(Game game) {
+    public Controller(Game game) {
         this.game = game;
         this.actors.addAll(game.getActors());
     }
