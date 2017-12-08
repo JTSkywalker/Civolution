@@ -20,9 +20,8 @@ public class Controller {
     final DelayedQueue<Actor> actors = new DelayedQueue();
     
     public Controller() {
-        
     }
-
+    
     public void init(Game game) {
         this.game = game;
         this.actors.addAll(game.getActors());
@@ -31,7 +30,7 @@ public class Controller {
     public void notifyNextActor() {
         checkInitialised();
         Actor next = actors.stepToNext();
-        next.findNextAction(game.computeHorizon(next));
+        next.findNextAction(game.computeHorizon(next), this);
     }
     
     public void executeAction(Actor actor, Action action) {
@@ -41,7 +40,7 @@ public class Controller {
                 int pause = action.execute(game, actor);
                 actors.put(actor, pause);
             } catch (ActionNotAllowedException ex) {
-                actor.findNextAction(game.computeHorizon(actor));
+                actor.findNextAction(game.computeHorizon(actor), this);
             }
         }
         notifyNextActor();

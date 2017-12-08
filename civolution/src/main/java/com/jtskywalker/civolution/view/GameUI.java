@@ -9,8 +9,8 @@ import com.jtskywalker.civolution.WHILE.WHILELexer;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.controller.Controller;
+import com.jtskywalker.civolution.controller.ExternalMind;
 import com.jtskywalker.civolution.game.Horizon;
-import com.jtskywalker.civolution.controller.Mind;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.ExtParser;
@@ -33,7 +33,7 @@ import javafx.scene.layout.Pane;
  * @author jt
  * @param <T>
  */
-public class GameUI<T extends Horizon> extends Actor<T> {
+public class GameUI<T extends Horizon> implements Actor<T> {
     
     private final BorderPane root = new BorderPane();
     
@@ -50,34 +50,30 @@ public class GameUI<T extends Horizon> extends Actor<T> {
     
     private T horizon;
    
+    private ExternalMind mind;
     
-    public GameUI(Mind mind, Controller controller, ExtParser<Action> extParser,
+    public GameUI(ExternalMind mind, Controller controller,
+            ExtParser<Action> extParser,
             HorizonPaneWrapper<T> overviewWrapper, 
-            HorizonPaneWrapper<T> detailWrapper) {
-        super(mind, controller);
-        //TODO: This is suspicious!!! I am handing around an uninitialised controller
+            HorizonPaneWrapper<T> detailWrapper) { 
+        this.mind = mind;
         this.overviewWrapper= overviewWrapper;
         this.detailWrapper  = detailWrapper;
         this.parser  = new ParserImpl(extParser);
+        init(controller);
     }
     
-    public void init() {
+    private void init(Controller controller) {
         
         //setup cmpPane
         BorderPane cmdPane = new BorderPane();
         btn.setText("do it !");
         btn.setOnAction((ActionEvent event) -> {
-            executeOrder(txt.getText());
+            executeOrder(txt.getText(), controller);
         });
         cmdPane.setCenter(txt);
         cmdPane.setRight(btn);
         
-        //setup map
-        
-        //setup infoPane: this should be solved with a visitor
-        //Label infoText = new Label();
-        //infoPane.getChildren().add(infoText);
-        //infoText.setText(body.getJSON().toJSONString() + "\n" + "test");
         
         //setup root
         root.setCenter(overviewWrapper.getPane());
@@ -89,14 +85,14 @@ public class GameUI<T extends Horizon> extends Actor<T> {
         return root;
     }
     
-    private void executeOrder(String input) {
+    private void executeOrder(String input, Controller controller) {
         btn.setDisable(true);
         try {
             Evaluator<Action> eval = new ActionEvaluator(horizon);
             List<Token> tokenlist = lexer.lex(input);
             Statement<Action> program = parser.parse(tokenlist);
-            super.setOrders(program);
-            super.findNextAction(horizon);
+            this.setOrders(program);
+            this.findNextAction(horizon, controller);
         } catch (ParserErrorException ex) {
             ex.printStackTrace();
             btn.setDisable(false);
@@ -105,17 +101,34 @@ public class GameUI<T extends Horizon> extends Actor<T> {
     }
     
     @Override
-    public void findNextAction(T horizon) {
+    public void findNextAction(T horizon, Controller controller) {
         this.horizon = horizon;
         updateView();
-        super.findNextAction(horizon);
+        Action next = this.nextAction(horizon);
+        if (next != null) {
+            controller.executeAction(this, next);
+        }
         btn.setDisable(false);
     }
     
-    //FIXME: I have broken my separation! here 
     private void updateView() {
         overviewWrapper.update(horizon);
         detailWrapper.update(horizon);
+    }
+
+    @Override
+    public Action nextAction(Horizon horizon) {
+        return mind.nextAction(horizon);
+    }
+
+    @Override
+    public boolean receiveOrders(Statement orders, int nation) {
+        return mind.receiveOrders(orders, nation);
+    }
+
+    @Override
+    public void setOrders(Statement orders) {
+        mind.setOrders(orders);
     }
     
 }

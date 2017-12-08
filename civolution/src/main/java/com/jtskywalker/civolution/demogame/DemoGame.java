@@ -64,7 +64,7 @@ public class DemoGame implements Game {
     public List<Actor> getActors(Coordinates coord) {
         return actors.keySet()
                 .stream()
-                .filter((c) -> (actors.get(c).equals(coord)))
+                .filter((c) -> (actors.get(c).getValue().equals(coord)))
                 .collect(Collectors.toList());
     }
     

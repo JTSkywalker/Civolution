@@ -45,12 +45,12 @@ public class ExternalMind implements Mind {
     }
 
     @Override
-    public boolean receiveOrders(Statement<Action> orders, int nation) {
+    public boolean receiveOrders(Statement orders, int nation) {
         return false;
     }
 
     @Override
-    public void setOrders(Statement<Action> orders) {
+    public void setOrders(Statement orders) {
         this.orders = orders;
     }
     

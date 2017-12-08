@@ -13,42 +13,20 @@ import com.jtskywalker.civolution.lang.Statement;
  * @author rincewind
  * @param <T>
  */
-public class Actor<T extends Horizon> {
+public interface Actor<T extends Horizon> {
     
-    private Mind mind;
-    final Controller controller;
-    
-    public Actor(Mind mind, Controller controller) {
-        this.mind = mind;
-        this.controller = controller;
-    }
-    
-    public void findNextAction(T horizon) {
-        Action next = mind.nextAction(horizon);
+    default public void findNextAction(T horizon, Controller controller) {
+        Action next = this.nextAction(horizon);
         // this is not very beautiful
         if (next != null) {
             controller.executeAction(this, next);
         }
     }
     
-    public boolean receiveOrders(Statement<Action> orders, int nation) {
-        return mind.receiveOrders(orders, nation);
-    }
+    public Action nextAction(T horizon);
     
-    public void setOrders(Statement<Action> orders) {
-        mind.setOrders(orders);
-    }
-
-    public Mind getMind() {
-        return mind;
-    }
-
-    public void setMind(Mind mind) {
-        this.mind = mind;
-    }
+    public boolean receiveOrders(Statement<Action> orders, int nation);
     
-    public Controller getController() {
-        return controller;
-    }    
+    public void setOrders(Statement<Action> orders);
     
 }

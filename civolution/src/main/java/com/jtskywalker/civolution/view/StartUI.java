@@ -12,7 +12,6 @@ import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.game.Coordinates;
 import com.jtskywalker.civolution.controller.Controller;
-import com.jtskywalker.civolution.controller.Mind;
 import com.jtskywalker.civolution.controller.Subordinate;
 import com.jtskywalker.civolution.demogame.ActionParser;
 import com.jtskywalker.civolution.view.demogame.DemogameMapVisitor;
@@ -72,7 +71,7 @@ public class StartUI extends Application {
         Body warrior = bf.create("warrior", 0);
         Body scout = bf.create("scout", 0);
         
-        Mind humanMind = new ExternalMind(0);
+        ExternalMind humanMind = new ExternalMind(0);
         GameUI human 
                 = new GameUI(humanMind, controller, new ActionParser(),
                 new DemogameMapVisitor(new GridPane(), width, height),
@@ -91,20 +90,17 @@ public class StartUI extends Application {
                     }
 
                 });
-        Mind subM1 = new Subordinate(0);
-        Actor sub1 = new Actor(subM1, controller);
-        Mind subM2 = new Subordinate(0);
-        Actor sub2 = new Actor(subM2, controller);
+        Actor sub1 = new Subordinate(0);
+        Actor sub2 = new Subordinate(0);
         
         actors.put(human, new Pair(queen, new Coordinates(1,1,width,height)));
         actors.put(sub1,  new Pair(warrior, new Coordinates(3, 3, width, height)));
         actors.put(sub2,  new Pair(scout, new Coordinates(0, 5, width, height)));
         
         DemoGame game = new DemoGame(width, height, actors);
-        
-        //FIXME: this is kind of ugly
+
+        //still not very happy about this
         controller.init(game);
-        human.init();
         
         stage.setScene(new Scene(human.getRoot(), 960, 1000));
         stage.show();

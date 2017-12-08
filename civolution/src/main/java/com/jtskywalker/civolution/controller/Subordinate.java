@@ -17,7 +17,7 @@ import com.jtskywalker.civolution.lang.statement.ExternalStmt;
  *
  * @author rincewind
  */
-public class Subordinate implements Mind {
+public class Subordinate implements Actor {
     
     final int nation;
     Statement orders;
@@ -43,8 +43,7 @@ public class Subordinate implements Mind {
         return result.getExternal();
     }
     
-    @Override
-    public boolean receiveOrders(Statement<Action> orders, int nation) {
+    public boolean receiveOrders(Statement orders, int nation) {
         if (this.nation == nation) {
             this.orders = orders;
             return true;
@@ -54,7 +53,7 @@ public class Subordinate implements Mind {
     }
 
     @Override
-    public void setOrders(Statement<Action> orders) {
+    public void setOrders(Statement orders) {
         this.orders = orders;
     }
     
