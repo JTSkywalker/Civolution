@@ -9,21 +9,33 @@ import com.jtskywalker.civolution.lang.Token;
 import java.util.Objects;
 
 /**
- *
- * @author rincewind
+ * Represents an identifier in the language WHILE
+ * @author jt
  */
 public class Identifier implements Token {
     
-    final String name;
+    private final String name;
 
+    /**
+     * Constructor.
+     * @param s - string representation of the identifier
+     */
     public Identifier(String s) {
         this.name = s;
     }
     
+    /**
+     * Getter for the string representation.
+     * @return - the stringn representation of this identifier
+     */
     public String getName() {
         return name;
     }   
         
+    /**
+     * Standard hashCode function.
+     * @return - hashCode of this identifier
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -31,6 +43,11 @@ public class Identifier implements Token {
         return hash;
     }
 
+    /**
+     * Standard equals function.
+     * @param obj - the object to be compared
+     * @return - whether the two objects are equal
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -46,6 +63,10 @@ public class Identifier implements Token {
         return Objects.equals(this.name, other.name);
     }
 
+    /**
+     * Return the string representation in a JSON-like string
+     * @return - string representation of this object
+     */
     @Override
     public String toString() {
         return "Identifier{" + "name=" + name + '}';

@@ -12,12 +12,16 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author rincewind
+ * This is the lexer for the language WHILE.
+ * @author jt
  */
 public class WHILELexer {
     
-    
+    /**
+     * The given String is expanded into a list of tokens.
+     * @param input - to be lexed
+     * @return - resulting list of tokens
+     */
     public List<Token> lex(String input) {
         String prelexed = prelex(input);
         Scanner sc = new Scanner(new StringReader(prelexed));
@@ -31,7 +35,7 @@ public class WHILELexer {
     // support omitting whitespace
     // it's a pretty ugly solution though 
     String prelex(String input) {
-        String res = "";
+        StringBuilder buf = new StringBuilder();
         for (int i=0; i < input.length(); i++) {
             char c = input.charAt(i);
             String spaced = " " + c + " ";
@@ -44,23 +48,23 @@ public class WHILELexer {
                 case '-':
                 case '?':
                 case ';':
-                    res += spaced;
+                    buf.append(spaced);
                     break;
                 case '!':
                 case '<':
                 case '>':
                 case '=':
                     if (i + 1 < input.length() && input.charAt(i+1) == '=') {
-                        res += " " + c + "=";
+                        buf.append(" ").append(c).append("=");
                         i++;//don't visit this symbol again
                     } else
-                        res += spaced;
+                        buf.append(spaced);
                     break;
                 default:
-                    res += c;
+                    buf.append(c);
             }
         }
-        return res;
+        return buf.toString();
     }
     
     Token lexToken(String s) {

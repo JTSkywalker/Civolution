@@ -8,8 +8,8 @@ package com.jtskywalker.civolution.WHILE;
 import com.jtskywalker.civolution.lang.Token;
 
 /**
- *
- * @author rincewind
+ * Keyword tokens of WHILE.
+ * @author jt
  */
 public enum Keyword implements Token {
     
