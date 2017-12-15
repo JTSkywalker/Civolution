@@ -8,7 +8,7 @@ package com.jtskywalker.civolution.demogame;
 import com.jtskywalker.civolution.demogame.action.Move;
 import com.jtskywalker.civolution.demogame.action.Attack;
 import com.jtskywalker.civolution.demogame.action.Command;
-import com.jtskywalker.civolution.game.SquareTileDirection;
+import com.jtskywalker.civolution.game.SqDirection;
 import com.jtskywalker.civolution.WHILE.Identifier;
 import com.jtskywalker.civolution.lang.ExtParser;
 import com.jtskywalker.civolution.lang.Parser;
@@ -48,20 +48,20 @@ public class ActionParser implements ExtParser<Action> {
         }
     }
 
-    private SquareTileDirection parseDirection(Token token) throws ParserErrorException {
+    private SqDirection parseDirection(Token token) throws ParserErrorException {
         if (!(token instanceof Identifier)) {
             throw new ParserErrorException();
         }
         String s = ((Identifier) token).getName();
         switch (s) {
-            case "N": return SquareTileDirection.N;
-            case "NE": return SquareTileDirection.NE;
-            case "E": return SquareTileDirection.E;
-            case "SE": return SquareTileDirection.SE;
-            case "S": return SquareTileDirection.S;
-            case "SW": return SquareTileDirection.SW;
-            case "W": return SquareTileDirection.W;
-            case "NW": return SquareTileDirection.NW;
+            case "N": return SqDirection.N;
+            case "NE": return SqDirection.NE;
+            case "E": return SqDirection.E;
+            case "SE": return SqDirection.SE;
+            case "S": return SqDirection.S;
+            case "SW": return SqDirection.SW;
+            case "W": return SqDirection.W;
+            case "NW": return SqDirection.NW;
             default : throw new ParserErrorException();
         }
     }

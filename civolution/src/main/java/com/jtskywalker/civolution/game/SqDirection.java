@@ -9,7 +9,7 @@ package com.jtskywalker.civolution.game;
  *
  * @author jt
  */
-public enum SquareTileDirection {
+public enum SqDirection {
     
     N, NE, E, SE, S, SW, W, NW;
     

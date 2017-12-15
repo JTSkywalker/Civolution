@@ -5,8 +5,8 @@
  */
 package com.jtskywalker.civolution.demogame.action;
 
-import com.jtskywalker.civolution.game.SquareTileDirection;
-import com.jtskywalker.civolution.game.SquareTileTorusCoordinates;
+import com.jtskywalker.civolution.game.SqDirection;
+import com.jtskywalker.civolution.game.SqCoordinates;
 import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.controller.Action;
@@ -20,9 +20,9 @@ import java.util.Objects;
  */
 public class Attack implements Action<DemoGame> {
     
-    final SquareTileDirection direction;
+    final SqDirection direction;
 
-    public Attack(SquareTileDirection direction) {
+    public Attack(SqDirection direction) {
         this.direction = direction;
     }
 
@@ -35,8 +35,8 @@ public class Attack implements Action<DemoGame> {
             throw new ActionNotAllowedException();
         }
         
-        SquareTileTorusCoordinates oldC = game.getCoordinates(actor);
-        SquareTileTorusCoordinates newC = oldC.add(direction);
+        SqCoordinates oldC = game.getCoordinates(actor);
+        SqCoordinates newC = game.plusStep(oldC, direction);
         if (!game.hasEnemy(newC, body.getEmblem())) {
             throw new ActionNotAllowedException();
         }

@@ -15,8 +15,4 @@ public interface Coordinates {
     
     public int getY();
     
-    public int getWidth();
-    
-    public int getHeight();
-    
 }

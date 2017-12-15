@@ -9,7 +9,7 @@ import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.demogame.DemogameVisitor;
 import com.jtskywalker.civolution.demogame.HorizonImpl;
-import com.jtskywalker.civolution.game.SquareTileTorusCoordinates;
+import com.jtskywalker.civolution.game.SqCoordinates;
 import java.util.Set;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -58,7 +58,7 @@ public class DemogameMapVisitor
     public void visit(HorizonImpl horizon) {
         for (int x=0; x < width; x++) {
             for (int y=0; y < height; y++) {
-                SquareTileTorusCoordinates coord = new SquareTileTorusCoordinates(x,y,width,height);
+                SqCoordinates coord = new SqCoordinates(x,y);
                 tile[x][y].setImage(determineImage(horizon, coord));
             }
         }
@@ -84,7 +84,7 @@ public class DemogameMapVisitor
                 && c.getBaseMobility() == 5;
     }
 
-    public Image determineImage(HorizonImpl horizon, SquareTileTorusCoordinates coord) {
+    public Image determineImage(HorizonImpl horizon, SqCoordinates coord) {
         Set<Body> localBodies = horizon.getBodies(coord);
         int queens = (int) localBodies.stream().filter((a) 
                 -> isQueen(a)).count();

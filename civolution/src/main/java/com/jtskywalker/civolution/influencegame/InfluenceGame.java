@@ -7,7 +7,9 @@ package com.jtskywalker.civolution.influencegame;
 
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.game.Game;
+import com.jtskywalker.civolution.game.GameMap;
 import com.jtskywalker.civolution.game.Horizon;
+import com.jtskywalker.civolution.game.SqTorusCoordinator;
 import java.util.Collection;
 
 /**
@@ -15,6 +17,12 @@ import java.util.Collection;
  * @author jt
  */
 public class InfluenceGame implements Game {
+    
+    private final GameMap map;
+    
+    public InfluenceGame(int width, int height) {
+        map = new GameMap(new SqTorusCoordinator(width,height));
+    }
 
     @Override
     public Horizon computeHorizon(Actor actor) {

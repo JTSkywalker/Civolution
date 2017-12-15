@@ -5,94 +5,149 @@
  */
 package com.jtskywalker.civolution.demogame;
 
-import com.jtskywalker.civolution.game.SquareTileTorusCoordinates;
+import com.jtskywalker.civolution.game.SqCoordinates;
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.game.Game;
+import com.jtskywalker.civolution.game.GameMap;
 import com.jtskywalker.civolution.game.Horizon;
+import com.jtskywalker.civolution.game.SqDirection;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javafx.util.Pair;
 
 /**
- * This class contains all information on the game 
- * @author rincewind
+ * This class contains all information on the game.
+ * @author jt
  */
 public class DemoGame implements Game {
     
+    /**
+     * Base path of the resources for this game.
+     */
     public static final String BASEPATH = "src/main/resources/demogame/";
     
-    final int width, height;
-    final Map<Actor,Pair<Body,SquareTileTorusCoordinates>> actors;
+    final GameMap<SqCoordinates,SqDirection,Body> map;
 
-    public DemoGame(int width, int height,
-            Map<Actor,Pair<Body,SquareTileTorusCoordinates>> actors) {
-        this.width = width;
-        this.height= height;
-        this.actors= actors;
+    /**
+     * Constructor.
+     * @param map - the map with the positions and properties of the actors
+     */
+    public DemoGame(GameMap map) {
+        this.map = map;
     }
         
+    /**
+     * Returns all the actors of the map in the same team of {@code actor}.
+     * @param actor - the {@code Actor} whose friends are looked for
+     * @return {@code List} of {@code Actor} who are in the same team as 
+     * {@code actor}
+     */
     public List<Actor> getFriends(Actor actor) {
-        return actors.keySet()
+        return map.getActors()
                 .stream()
                 .filter((c) 
                          -> getBody(c).getEmblem() == getBody(actor).getEmblem())
                 .collect(Collectors.toList());
     }
     
-    
+    /**
+     * {@inheritDoc }
+     */
     @Override
     public Horizon computeHorizon(Actor actor) {
-        HorizonImpl horizon = new HorizonImpl(width, height);
+        HorizonImpl horizon = new HorizonImpl(map.getWidth(), map.getHeight());
         getFriends(actor).forEach((c) -> {
             horizon.putActor(c, getBody(c), getCoordinates(c));
         });
         return horizon;
     }
 
-    public SquareTileTorusCoordinates getCoordinates(Actor actor) {
-        return actors.get(actor).getValue();
+    /**
+     * Return the position of {@code actor}
+     * @param actor - the actor whose position is looked for
+     * @return the position of {@code actor}
+     */
+    public SqCoordinates getCoordinates(Actor actor) {
+        return map.getPosition(actor);
     }
 
-    public boolean hasEnemy(SquareTileTorusCoordinates coord, int nation) {
-        return getActors(coord)
+    /**
+     * Returns {@code true} iff there is a {@code Body} on {@code position}
+     * of nation that differs from {@code nation}.
+     * @param position - the position to consider
+     * @param nation - the nation of the asker
+     * @return {@code true} iff {@code there is a {@code Body} on {@code position}
+     * of nation that differs from {@code nation}.
+     */
+    public boolean hasEnemy(SqCoordinates position, int nation) {
+        return getActors(position)
                 .stream()
-                .anyMatch((c) -> actors.get(c).getKey().getEmblem() != nation);
+                .anyMatch((c) -> map.getBody(c).getEmblem() != nation);
     }
 
-    public List<Actor> getActors(SquareTileTorusCoordinates coord) {
-        return actors.keySet()
+    /**
+     * Return {@code Set} of {@code Actor} that are present on {@code position}
+     * @param position - the position to look for
+     * @return {@code Set} of {@code Actor} that are present on {@code position}
+     */
+    public Set<Actor> getActors(SqCoordinates position) {
+        return map.getActors()
                 .stream()
-                .filter((c) -> (actors.get(c).getValue().equals(coord)))
-                .collect(Collectors.toList());
+                .filter((c) -> (map.getPosition(c).equals(position)))
+                .collect(Collectors.toSet());
     }
     
-    public void putActor(Actor actor, SquareTileTorusCoordinates newC) {
-        actors.put(actor, new Pair(actors.get(actor).getKey(),newC));
+    /**
+     * Puts {@code actor} at {@code newC}.
+     * This can either introduce a new actor 
+     * or move one that is already present.
+     * @param actor - actor to move.
+     * @param newC - new position
+     */
+    public void putActor(Actor actor, SqCoordinates newC) {
+        map.put(actor, newC);
     }
 
-    public int getTileMobilityCost(SquareTileTorusCoordinates coord) {
+    /**
+     * Return tile mobility cost of {@code position}
+     * @param position
+     * @return tile mobility cost of {@code position} 
+     */
+    public int getTileMobilityCost(SqCoordinates position) {
         return 1;
     }
 
-    public Actor getDefender(SquareTileTorusCoordinates coord) {
-        return getActors(coord)
+    /**
+     * Return the defending {@code Actor} on {@code position}.
+     * @param position - the position that is attacked.
+     * @return the defending {@code Actor} on {@code position}.
+     */
+    public Actor getDefender(SqCoordinates position) {
+        return getActors(position)
                 .stream()
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException());
     }
 
-    public void setFitness(Body body, double d) {
-        body.setFitness(d);
+    /**
+     * Set the fitness of {@code body} to {@code fitness}.
+     * @param body - body to modify
+     * @param fitness - new fitness value
+     */
+    public void setFitness(Body body, double fitness) {
+        body.setFitness(fitness);
     }
 
+    /**
+     * Remove {@code actor} from the game.
+     * @param actor - {@code Actor} to kill
+     */
     public void kill(Actor actor) {
-        actors.remove(actor);
+        map.remove(actor);
     }
 
     public Actor getSubordinate(Actor actor) {
-        SquareTileTorusCoordinates coord = getCoordinates(actor);
+        SqCoordinates coord = getCoordinates(actor);
         return getActors(coord)
                 .stream()
                 .filter((c) -> !c.equals(actor))
@@ -102,23 +157,34 @@ public class DemoGame implements Game {
 
     @Override
     public Set<Actor> getActors() {
-        return actors.keySet()
+        return map.getActors()
                 .stream()
                 .collect(Collectors.toSet());
     }
 
     @Override
     public int getHeight() {
-        return height;
+        return map.getHeight();
     }
 
     @Override
     public int getWidth() {
-        return width;
+        return map.getWidth();
     }
 
     public Body getBody(Actor actor) {
-        return actors.get(actor).getKey();
+        return map.getBody(actor);
+    }
+     
+    /**
+     * Add step in given direction to {@code position}.
+     * @param position - position to start
+     * @param direction - direction to go 
+     * @return new Coordinates object where the step is done.
+     */
+    public SqCoordinates plusStep(
+            SqCoordinates position,SqDirection direction) {
+        return map.plusStep(position, direction);
     }
     
 }

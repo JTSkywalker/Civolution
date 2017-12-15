@@ -16,26 +16,32 @@ import javafx.util.Pair;
 /**
  * Map to use for every map-based game.
  * @author jt
- * @param <S> - parameter for the Coordinate type
- * @param <T> - parameter for the Body type
+ * @param <C> - type of the Coordinates
+ * @param <D> - type of directions
+ * @param <B> - type of the Body
  */
-public class GameMap<S extends Coordinates,T> {
+public class GameMap<C extends Coordinates,D,B> {
     
-    final Map<Actor,T> bodies = new HashMap<>();
-    final Map<Actor,S> positions = new HashMap<>();
+    final Map<Actor,B> bodies = new HashMap<>();
+    final Map<Actor,C> positions = new HashMap<>();
+    final Coordinator<C,D> coordinator;
+    
     
     /**
-     * Empty constructor.
+     * Constructor.
+     * @param coordinator - coordinator for the kind of coordinates used
      */
-    public GameMap() {
-        
+    public GameMap(Coordinator<C,D> coordinator) {
+        this.coordinator = coordinator;
     }
     
     /**
      * Constructor that adds all given actors with their positions and bodies
+     * @param coordinator - coordinator for the kind of coordinates used
      * @param actors - to be added to the GameMap
      */
-    public GameMap(Map<Actor,Pair<T,S>> actors) {
+    public GameMap(Coordinator<C,D> coordinator, Map<Actor,Pair<B,C>> actors) {
+        this(coordinator);
         putAll(actors);
     }
     
@@ -44,7 +50,7 @@ public class GameMap<S extends Coordinates,T> {
      * @param actor - actor whose body is looked up
      * @return - body of the actor
      */
-    public T getBody(Actor actor) {
+    public B getBody(Actor actor) {
         return bodies.get(actor);
     }
     
@@ -53,7 +59,7 @@ public class GameMap<S extends Coordinates,T> {
      * @param actor - actor whose position is looked up
      * @return - position of the actor
      */
-    public S getPosition(Actor actor) {
+    public C getPosition(Actor actor) {
         return positions.get(actor);
     }
     
@@ -62,7 +68,7 @@ public class GameMap<S extends Coordinates,T> {
      * @param position - position to look for actors
      * @return - set of actors who are at the given position
      */
-    public Set<Actor> getActors(S position) {
+    public Set<Actor> getActors(C position) {
         return positions.entrySet().stream().filter((entry) -> {
            return entry.getValue().equals(position); 
         }).map((entry) -> entry.getKey()).collect(Collectors.toSet());
@@ -72,9 +78,11 @@ public class GameMap<S extends Coordinates,T> {
      * Getter of the actor corresponding to a body.
      * @param body - the body whose actor is looked up
      * @return - the actor of the body
-     * @throws GameInconsistencyException - if there is actor corresponding to the body or more than one
+     * @throws GameInconsistencyException - if there is more than one actor 
+     * corresponding to the body
+     * @throws IllegalArgumentException - if there is no actor for this body
      */
-    public Actor getActor(T body) {
+    public Actor getActor(B body) {
         List<Actor> actors = bodies.entrySet().stream()
                 .filter((entry) -> entry.getValue().equals(body))
                 .map((entry) -> entry.getKey())
@@ -82,7 +90,7 @@ public class GameMap<S extends Coordinates,T> {
         if (actors.size() == 1) {
             return actors.get(0);
         } else if (actors.isEmpty())
-            throw new GameInconsistencyException(
+            throw new IllegalArgumentException(
                 "There is no Actor for this Body: " + body.toString()
             );
         else 
@@ -91,7 +99,7 @@ public class GameMap<S extends Coordinates,T> {
             );
     }
     
-    private void checkConsistentPut(Actor actor, T body) {
+    private void checkConsistentPut(Actor actor, B body) {
         if (bodies.entrySet().stream()
                 .anyMatch((entry) 
                         -> !entry.getKey().equals(actor) 
@@ -107,7 +115,7 @@ public class GameMap<S extends Coordinates,T> {
      * @param actor - the actor to put
      * @param body - the body to put
      */
-    public void put(Actor actor, T body) {
+    public void put(Actor actor, B body) {
         checkConsistentPut(actor, body);
         bodies.put(actor, body);
     }
@@ -117,7 +125,7 @@ public class GameMap<S extends Coordinates,T> {
      * @param actor - actor to move
      * @param position - new position of the actor.
      */
-    public void put(Actor actor, S position) {
+    public void put(Actor actor, C position) {
         positions.put(actor, position);
     }
     
@@ -128,7 +136,7 @@ public class GameMap<S extends Coordinates,T> {
      * @param body - body to assign
      * @param position - new position
      */
-    public void put(Actor actor, T body, S position) {
+    public void put(Actor actor, B body, C position) {
         checkConsistentPut(actor, body);
         bodies.put(actor, body);
         positions.put(actor, position);
@@ -139,15 +147,47 @@ public class GameMap<S extends Coordinates,T> {
      * body. This overrides previous assignments.
      * @param actors - mapping to be included to this GameMap
      */
-    public final void putAll(Map<Actor,Pair<T,S>> actors) {
+    public final void putAll(Map<Actor,Pair<B,C>> actors) {
         actors.entrySet().stream().forEach((entry) -> {
             Actor actor = entry.getKey();
-            T body = entry.getValue().getKey();
-            S position = entry.getValue().getValue();
+            B body = entry.getValue().getKey();
+            C position = entry.getValue().getValue();
             checkConsistentPut(actor, body);
             bodies.put(actor,body);
             positions.put(actor,position);
         });
+    }
+    
+    public void remove(Actor actor) {
+        bodies.remove(actor);
+        positions.remove(actor);
+    }
+    
+    /**
+     * Add step in given direction to {@code position}.
+     * @param position - position to start
+     * @param direction - direction to go 
+     * @return new Coordinates object where teh step is done.
+     */
+    public C plusStep(C position, D direction) {
+        return coordinator.plusStep(position, direction);
+    }
+
+    /**
+     * Return the set of actors.
+     * @return set of {@code Actor} on this {@code GameMap}
+     */
+    public Set<Actor> getActors() {
+        assert(bodies.keySet().equals(positions.keySet()));
+        return bodies.keySet();
+    }
+    
+    public int getWidth() {
+        return coordinator.getWidth();
+    }
+    
+    public int getHeight() {
+        return coordinator.getHeight();
     }
     
 }
