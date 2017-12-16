@@ -12,9 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * This is a collection where every member is mapped to an integer.
+ * Members are directly accessible if they are mapped to something less or equal
+ * to zero.
+ * One can also move forward the whole queue to get to the next members.
  * @author jt
- * @param <T>
+ * @param <T> type of values
  */
 public class DelayedQueue<T> {
     

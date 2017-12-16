@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
- * @author rincewind
- * @param <K>
- * @param <V>
+ * A class to keep track of the current scope.
+ * @author jt
+ * @param <K> key type
+ * @param <V> value type
  */
 public class Scope<K,V> {
     

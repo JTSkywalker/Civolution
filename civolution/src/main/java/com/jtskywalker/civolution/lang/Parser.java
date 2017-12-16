@@ -8,9 +8,9 @@ package com.jtskywalker.civolution.lang;
 import java.util.List;
 
 /**
- *
- * @author rincewind
- * @param <T>
+ * The parser to parse WHILE.
+ * @author jt
+ * @param <T> type of the game-specific language
  */
 public interface Parser<T> {
 

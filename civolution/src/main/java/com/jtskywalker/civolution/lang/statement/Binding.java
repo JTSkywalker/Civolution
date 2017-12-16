@@ -12,9 +12,9 @@ import com.jtskywalker.civolution.lang.Statement;
 import java.util.Objects;
 
 /**
- *
- * @author rincewind
- * @param <T>
+ * This class describes the binding of a variable to an integer.
+ * @author jt
+ * @param <T> type of the game-specific language
  */
 public class Binding<T> implements Statement<T> {
     

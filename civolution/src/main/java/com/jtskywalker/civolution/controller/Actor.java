@@ -9,9 +9,10 @@ import com.jtskywalker.civolution.game.Horizon;
 import com.jtskywalker.civolution.lang.Statement;
 
 /**
- *
- * @author rincewind
- * @param <T>
+ * This is the general interface that is used for the every element of a game
+ * that is possible to modify the state of the game by itself.
+ * @author jt
+ * @param <T> type of horizon
  */
 public interface Actor<T extends Horizon> {
     

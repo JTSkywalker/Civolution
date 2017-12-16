@@ -17,7 +17,7 @@ public class Number implements Token {
 
     /**
      * Constructor
-     * @param value - the value of the integer
+     * @param value the value of the integer
      */
     public Number(int value) {
         this.value = value;
@@ -53,7 +53,7 @@ public class Number implements Token {
 
     /**
      * Getter for the value.
-     * @return - value of this integer
+     * @return value of this integer
      */
     public int getValue() {
         return value;

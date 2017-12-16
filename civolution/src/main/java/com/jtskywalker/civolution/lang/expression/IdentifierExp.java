@@ -12,8 +12,8 @@ import java.util.Objects;
 
 /**
  *
- * @author rincewind
- * @param <T>
+ * @author jt
+ * @param <T> type of the game-specific language
  */
 public class IdentifierExp<T> implements Expression<T> {
     

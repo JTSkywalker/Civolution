@@ -33,7 +33,7 @@ import javafx.scene.layout.Pane;
  * general implementation should be used or they have to be customly implemented
  * for any specific game.
  * @author jt
- * @param <T> - specifies the specific kind of Horizon used in this GameUI
+ * @param <T> specifies the specific kind of Horizon used in this GameUI
  */
 public class GameUI<T extends Horizon> implements Actor<T> {
     
@@ -57,10 +57,10 @@ public class GameUI<T extends Horizon> implements Actor<T> {
     
     /**
      * The only constructor. 
-     * @param mind - the ExternalMind used for this GameUI
-     * @param extParser - the parser to parse external statements, i.e. Actions
-     * @param overviewWrapper - recommended to use to give an overview on the horizon
-     * @param detailWrapper - recommended to use to show some specific details 
+     * @param mind the ExternalMind used for this GameUI
+     * @param extParser the parser to parse external statements, i.e. Actions
+     * @param overviewWrapper recommended to use to give an overview on the horizon
+     * @param detailWrapper recommended to use to show some specific details 
      */
     public GameUI(ExternalMind mind,
             ExtParser<Action> extParser,
@@ -94,7 +94,7 @@ public class GameUI<T extends Horizon> implements Actor<T> {
     
     /**
      * Getter for the root pane.
-     * @return - returns the root pane
+     * @return returns the root pane
      */
     public Pane getRoot() {
         return root;
@@ -116,8 +116,8 @@ public class GameUI<T extends Horizon> implements Actor<T> {
     
     /**
      * Called by the controller to notify the UI, that an action is admissible.
-     * @param horizon - the current Horizon of the player
-     * @param controller - the Controller to deliver the next Action to
+     * @param horizon the current Horizon of the player
+     * @param controller the Controller to deliver the next Action to
      */
     @Override
     public void findNextAction(T horizon, Controller controller) {
@@ -138,8 +138,8 @@ public class GameUI<T extends Horizon> implements Actor<T> {
 
     /**
      * Calls the mind to compute the next Action.
-     * @param horizon - the current horizon
-     * @return - returns the next Action
+     * @param horizon the current horizon
+     * @return returns the next Action
      */
     @Override
     public Action nextAction(Horizon horizon) {
@@ -148,9 +148,9 @@ public class GameUI<T extends Horizon> implements Actor<T> {
 
     /**
      * Calls the mind to decide what to do with the receivedOrders
-     * @param orders - received orders
-     * @param nation - the nation of the instructor
-     * @return - returns true iff the orders are accepted
+     * @param orders received orders
+     * @param nation the nation of the instructor
+     * @return returns true iff the orders are accepted
      */
     @Override
     public boolean receiveOrders(Statement orders, int nation) {
@@ -159,7 +159,7 @@ public class GameUI<T extends Horizon> implements Actor<T> {
 
     /**
      * Set the orders in the mind.
-     * @param orders - new orders to set
+     * @param orders new orders to set
      */
     @Override
     public void setOrders(Statement orders) {

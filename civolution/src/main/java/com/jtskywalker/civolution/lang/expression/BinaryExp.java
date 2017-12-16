@@ -10,8 +10,8 @@ import java.util.Objects;
 
 /**
  *
- * @author rincewind
- * @param <T>
+ * @author jt
+ * @param <T> type of the game-specific language
  */
 public class BinaryExp<T> implements Expression<T> {
     

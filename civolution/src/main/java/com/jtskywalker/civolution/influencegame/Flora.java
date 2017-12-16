@@ -30,7 +30,7 @@ enum Flora {
     
     /**
      * Creates a {@code Flora} with the given {@code fertility}
-     * @param fertility - fertility of the {@code Flora}
+     * @param fertility fertility of the {@code Flora}
      */    
     Flora(int fertility) {
         this.fertility = fertility;

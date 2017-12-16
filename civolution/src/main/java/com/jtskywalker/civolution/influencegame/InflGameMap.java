@@ -28,7 +28,7 @@ public class InflGameMap extends GameMap<SqCoordinates,SqDirection,Body> {
     /**
      * Creates a new map for the influence game.
      * Every tile is set to be plain grassland.
-     * @param coordinator - to compute coordinate changes
+     * @param coordinator to compute coordinate changes
      */
     public InflGameMap(Coordinator<SqCoordinates, SqDirection> coordinator) {
         super(coordinator);

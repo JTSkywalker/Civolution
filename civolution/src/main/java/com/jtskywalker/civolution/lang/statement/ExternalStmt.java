@@ -11,9 +11,10 @@ import com.jtskywalker.civolution.lang.Statement;
 import java.util.Objects;
 
 /**
- *
- * @author rincewind
- * @param <T>
+ * This class describes the external statement, i.e. a statement where some 
+ * intervention to the game happens through the game-specific language.
+ * @author jt
+ * @param <T> type of the game-specific language
  */
 public class ExternalStmt<T> implements Statement<T> {
     

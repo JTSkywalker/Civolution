@@ -16,8 +16,8 @@ public class SqTorusCoordinator
     
     /**
      * Constructor.
-     * @param width - width of the torus
-     * @param height - height of the torus
+     * @param width width of the torus
+     * @param height height of the torus
      */
     public SqTorusCoordinator(int width, int height) {
         this.width = width;
@@ -27,10 +27,10 @@ public class SqTorusCoordinator
     /**
      * Function to move the given number of steps in the given direction from
      * the starting position.
-     * @param start - starting position
-     * @param direction - direction to go
-     * @param steps - steps to go
-     * @return 
+     * @param start starting position
+     * @param direction direction to go
+     * @param steps steps to go
+     * @return the new position
      */
     @Override
     public SqCoordinates plusSteps(SqCoordinates start, 

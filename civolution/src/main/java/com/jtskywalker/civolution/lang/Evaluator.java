@@ -5,10 +5,11 @@
  */
 package com.jtskywalker.civolution.lang;
 
+//TODO: extend this explanation
 /**
- *
- * @author rincewind
- * @param <T>
+ * Used to evaluate requests to the game environment.
+ * @author jt
+ * @param <T> type of the game-specific language
  */
 @FunctionalInterface
 public interface Evaluator<T> {

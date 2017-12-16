@@ -8,9 +8,10 @@ package com.jtskywalker.civolution.controller;
 import com.jtskywalker.civolution.game.Game;
 
 /**
- *
- * @author rincewind
- * @param <T>
+ * The game-specific language should implement this interface with all its 
+ * actions that modify the game.
+ * @author jt
+ * @param <T> type of game
  */
 public interface Action<T extends Game> {
     

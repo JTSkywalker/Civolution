@@ -8,9 +8,9 @@ package com.jtskywalker.civolution.lang;
 import java.util.List;
 
 /**
- *
- * @author rincewind
- * @param <T>
+ * The external parser used to parse the game-specific language.
+ * @author jt
+ * @param <T> type of external statements
  */
 public interface ExtParser<T> {
 

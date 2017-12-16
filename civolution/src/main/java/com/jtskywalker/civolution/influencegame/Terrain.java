@@ -43,8 +43,8 @@ enum Terrain {
     
     /**
      * Creates a terrain with the given parameters.
-     * @param exertion - how much effort it is to travel through these lands
-     * @param danger - how dangerous it is to travel through these lands
+     * @param exertion how much effort it is to travel through these lands
+     * @param danger how dangerous it is to travel through these lands
      */
     Terrain (int exertion, int danger) {
         this.exertion = exertion;

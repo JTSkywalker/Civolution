@@ -6,12 +6,16 @@
 package com.jtskywalker.civolution.game;
 
 /**
- *
+ * Visitor interface of the visitor pattern.
  * @author jt
- * @param <T>
+ * @param <T> type of the corresponding visitable
  */
 public interface Visitor<T> {
     
-    public void visit(T t);
+    /**
+     * Visit (access) the given {@code visitable}
+     * @param visitable the object visited by this visitor 
+     */
+    public void visit(T visitable);
     
 }

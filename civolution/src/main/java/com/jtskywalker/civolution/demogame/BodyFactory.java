@@ -17,7 +17,7 @@ import org.json.simple.parser.ParseException;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class BodyFactory {
     

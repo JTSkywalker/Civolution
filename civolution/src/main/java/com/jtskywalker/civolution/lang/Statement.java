@@ -10,9 +10,11 @@ import com.jtskywalker.civolution.lang.statement.ExternalStmt;
 
 
 /**
- *
- * @author rincewind
- * @param <T>
+ * This interface describes the statement.
+ * Every WHILE-program is represented by a statement, which is a linked list of 
+ * statements.
+ * @author jt
+ * @param <T> type of the game-specific language
  */
 public interface Statement<T> {
     

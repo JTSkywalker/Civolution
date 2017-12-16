@@ -11,7 +11,7 @@ import com.jtskywalker.civolution.lang.Scope;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class ConstantExp implements Expression {
     

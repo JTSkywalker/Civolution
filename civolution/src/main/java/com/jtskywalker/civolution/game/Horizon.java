@@ -7,8 +7,8 @@ package com.jtskywalker.civolution.game;
 
 /**
  *
- * @author rincewind
- * @param <T>
+ * @author jt
+ * @param <T> visitor corresponding to this game
  */
 public interface Horizon<T> extends Visitable<T> {
     

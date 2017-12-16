@@ -6,7 +6,7 @@
 package com.jtskywalker.civolution.controller;
 
 import com.jtskywalker.civolution.game.Horizon;
-import com.jtskywalker.civolution.game.Skip;
+import com.jtskywalker.civolution.game.action.Skip;
 import com.jtskywalker.civolution.lang.ActionEvaluator;
 import com.jtskywalker.civolution.lang.Evaluator;
 import com.jtskywalker.civolution.lang.Scope;
@@ -15,7 +15,7 @@ import com.jtskywalker.civolution.lang.statement.ExternalStmt;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class Subordinate implements Actor {
     

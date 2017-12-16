@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class ActionParser implements ExtParser<Action> {
     

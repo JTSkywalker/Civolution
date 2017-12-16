@@ -18,9 +18,9 @@ import com.jtskywalker.civolution.lang.statement.ExternalStmt;
 import java.util.List;
 
 /**
- *
- * @author rincewind
- * @param <T>
+ * Implementation of the Parser for the DemoGame
+ * @author jt
+ * @param <T> type of the external language
  */
 public class ParserImpl<T> implements Parser<T> {
     
@@ -33,10 +33,10 @@ public class ParserImpl<T> implements Parser<T> {
     
     /**
      * Parse the list of tokens and throw a ParsereErrorException if it fails
-     * @param tokens
+     * @param tokens list of tokens to parse
      * @return the first statement of the given input
      *         (which has a link to its successor)
-     * @throws ParserErrorException 
+     * @throws ParserErrorException thrown if there is a syntax error
      */
     @Override
     public Statement<T> parse(List<Token> tokens) throws ParserErrorException {
@@ -46,10 +46,10 @@ public class ParserImpl<T> implements Parser<T> {
     /**
      * Parse the given tokenlist to a statement and link every terminal
      * statements to the given successor.
-     * @param tokens
-     * @param successor
-     * @return
-     * @throws ParserErrorException - thrown if there is a syntax error
+     * @param tokens list of tokens to parse 
+     * @param successor statement that should be executed after the list of tokens
+     * @return the parsed {@link Statement}
+     * @throws ParserErrorException thrown if there is a syntax error
      */
     public Statement<T> parse(List<Token> tokens, Statement<T> successor) 
                 throws ParserErrorException {
@@ -74,10 +74,10 @@ public class ParserImpl<T> implements Parser<T> {
     /**
      * Parse an external statement: The external parser gets all tokens between
      * the "!" and the next ";". 
-     * @param tokens
-     * @param successor
-     * @return
-     * @throws ParserErrorException 
+     * @param tokens list of tokens to parse 
+     * @param successor statement that should be executed after the list of tokens
+     * @return the parsed external {@link Statement}
+     * @throws ParserErrorException thrown if there is a syntax error
      */
     private Statement<T> parseExternal(List<Token> tokens, Statement<T> successor)
             throws ParserErrorException {
@@ -93,10 +93,10 @@ public class ParserImpl<T> implements Parser<T> {
     /**
      * Parse a while-loop: The expression is everything between "while" and the
      * first "{" and the body is between the braces.
-     * @param tokens
-     * @param successor
-     * @return
-     * @throws ParserErrorException 
+     * @param tokens list of tokens to parse 
+     * @param successor statement that should be executed after the list of tokens
+     * @return the parsed while-{@link Statement}
+     * @throws ParserErrorException thrown if there is a syntax error
      */
     private Statement<T> parseWhile(List<Token> tokens, Statement<T> successor)
             throws ParserErrorException {

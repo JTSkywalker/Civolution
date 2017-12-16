@@ -7,7 +7,7 @@ package com.jtskywalker.civolution.lang;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public interface Token {
     

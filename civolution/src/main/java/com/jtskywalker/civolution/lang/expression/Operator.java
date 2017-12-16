@@ -7,7 +7,7 @@ package com.jtskywalker.civolution.lang.expression;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public enum Operator {
     

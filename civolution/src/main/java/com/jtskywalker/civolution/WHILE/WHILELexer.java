@@ -19,8 +19,8 @@ public class WHILELexer {
     
     /**
      * The given String is expanded into a list of tokens.
-     * @param input - to be lexed
-     * @return - resulting list of tokens
+     * @param input to be lexed
+     * @return resulting list of tokens
      */
     public List<Token> lex(String input) {
         String prelexed = prelex(input);

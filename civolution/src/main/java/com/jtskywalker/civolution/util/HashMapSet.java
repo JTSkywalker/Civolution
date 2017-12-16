@@ -12,10 +12,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- *
- * @author rincewind
- * @param <K>
- * @param <V>
+ * A Map that maps every key to a set of values.
+ * Whether a key is mapped to nothing at all or to an empty set 
+ * is indistinguishable.
+ * @author jt
+ * @param <K> key type
+ * @param <V> value type
  */
 public class HashMapSet<K,V> {
     

@@ -10,7 +10,7 @@ import com.jtskywalker.civolution.game.Game;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class Controller {
     

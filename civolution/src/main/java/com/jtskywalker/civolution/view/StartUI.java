@@ -6,18 +6,10 @@
 package com.jtskywalker.civolution.view;
 
 import com.jtskywalker.civolution.controller.ExternalMind;
-import com.jtskywalker.civolution.demogame.BodyFactory;
 import com.jtskywalker.civolution.demogame.DemoGame;
-import com.jtskywalker.civolution.demogame.Body;
-import com.jtskywalker.civolution.controller.Actor;
-import com.jtskywalker.civolution.game.SqCoordinates;
 import com.jtskywalker.civolution.controller.Controller;
-import com.jtskywalker.civolution.controller.Subordinate;
 import com.jtskywalker.civolution.demogame.ActionParser;
-import com.jtskywalker.civolution.game.GameMap;
-import com.jtskywalker.civolution.game.SqTorusCoordinator;
 import com.jtskywalker.civolution.view.demogame.DemogameMapVisitor;
-import java.util.HashMap;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -27,7 +19,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 
 /**
  *

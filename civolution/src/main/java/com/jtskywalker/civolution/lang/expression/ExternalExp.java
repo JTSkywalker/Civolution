@@ -12,8 +12,9 @@ import java.util.Objects;
 
 /**
  *
- * @author rincewind
- * @param <T>
+ * @author jt
+ * type of the game-specific language
+ * @param <T> type of the game-specific language
  */
 public class ExternalExp<T> implements Expression<T> {
     

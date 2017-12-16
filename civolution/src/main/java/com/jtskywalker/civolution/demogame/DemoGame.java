@@ -7,7 +7,6 @@ package com.jtskywalker.civolution.demogame;
 
 import com.jtskywalker.civolution.game.SqCoordinates;
 import com.jtskywalker.civolution.controller.Actor;
-import com.jtskywalker.civolution.controller.ExternalMind;
 import com.jtskywalker.civolution.controller.Subordinate;
 import com.jtskywalker.civolution.game.Game;
 import com.jtskywalker.civolution.game.GameMap;
@@ -15,15 +14,10 @@ import com.jtskywalker.civolution.game.Horizon;
 import com.jtskywalker.civolution.game.SqDirection;
 import com.jtskywalker.civolution.game.SqTorusCoordinator;
 import com.jtskywalker.civolution.view.GameUI;
-import com.jtskywalker.civolution.view.HorizonPaneWrapper;
-import com.jtskywalker.civolution.view.demogame.DemogameMapVisitor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
 /**
@@ -41,7 +35,7 @@ public class DemoGame implements Game {
 
     /**
      * Constructor.
-     * @param map - the map with the positions and properties of the actors
+     * @param map the map with the positions and properties of the actors
      */
     public DemoGame(GameMap map) {
         this.map = map;
@@ -49,7 +43,7 @@ public class DemoGame implements Game {
         
     /**
      * Returns all the actors of the map in the same team of {@code actor}.
-     * @param actor - the {@code Actor} whose friends are looked for
+     * @param actor the {@code Actor} whose friends are looked for
      * @return {@code List} of {@code Actor} who are in the same team as 
      * {@code actor}
      */
@@ -75,7 +69,7 @@ public class DemoGame implements Game {
 
     /**
      * Return the position of {@code actor}
-     * @param actor - the actor whose position is looked for
+     * @param actor the actor whose position is looked for
      * @return the position of {@code actor}
      */
     public SqCoordinates getCoordinates(Actor actor) {
@@ -85,9 +79,9 @@ public class DemoGame implements Game {
     /**
      * Returns {@code true} iff there is a {@code Body} on {@code position}
      * of nation that differs from {@code nation}.
-     * @param position - the position to consider
-     * @param nation - the nation of the asker
-     * @return {@code true} iff {@code there is a {@code Body} on {@code position}
+     * @param position the position to consider
+     * @param nation the nation of the asker
+     * @return {@code true} iff there is a {@code Body} on {@code position}
      * of nation that differs from {@code nation}.
      */
     public boolean hasEnemy(SqCoordinates position, int nation) {
@@ -98,7 +92,7 @@ public class DemoGame implements Game {
 
     /**
      * Return {@code Set} of {@code Actor} that are present on {@code position}
-     * @param position - the position to look for
+     * @param position the position to look for
      * @return {@code Set} of {@code Actor} that are present on {@code position}
      */
     public Set<Actor> getActors(SqCoordinates position) {
@@ -112,8 +106,8 @@ public class DemoGame implements Game {
      * Puts {@code actor} at {@code newC}.
      * This can either introduce a new actor 
      * or move one that is already present.
-     * @param actor - actor to move.
-     * @param newC - new position
+     * @param actor actor to move.
+     * @param newC new position
      */
     public void putActor(Actor actor, SqCoordinates newC) {
         map.put(actor, newC);
@@ -121,7 +115,7 @@ public class DemoGame implements Game {
 
     /**
      * Return tile mobility cost of {@code position}
-     * @param position
+     * @param position the position to go
      * @return tile mobility cost of {@code position} 
      */
     public int getTileMobilityCost(SqCoordinates position) {
@@ -130,7 +124,7 @@ public class DemoGame implements Game {
 
     /**
      * Return the defending {@code Actor} on {@code position}.
-     * @param position - the position that is attacked.
+     * @param position the position that is attacked.
      * @return the defending {@code Actor} on {@code position}.
      */
     public Actor getDefender(SqCoordinates position) {
@@ -142,8 +136,8 @@ public class DemoGame implements Game {
 
     /**
      * Set the fitness of {@code body} to {@code fitness}.
-     * @param body - body to modify
-     * @param fitness - new fitness value
+     * @param body body to modify
+     * @param fitness new fitness value
      */
     public void setFitness(Body body, double fitness) {
         body.setFitness(fitness);
@@ -151,7 +145,7 @@ public class DemoGame implements Game {
 
     /**
      * Remove {@code actor} from the game.
-     * @param actor - {@code Actor} to kill
+     * @param actor {@code Actor} to kill
      */
     public void kill(Actor actor) {
         map.remove(actor);
@@ -189,8 +183,8 @@ public class DemoGame implements Game {
      
     /**
      * Add step in given direction to {@code position}.
-     * @param position - position to start
-     * @param direction - direction to go 
+     * @param position position to start
+     * @param direction direction to go 
      * @return new Coordinates object where the step is done.
      */
     public SqCoordinates plusStep(

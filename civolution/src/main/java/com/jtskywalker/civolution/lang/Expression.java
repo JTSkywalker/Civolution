@@ -7,9 +7,9 @@ package com.jtskywalker.civolution.lang;
 
 
 /**
- *
- * @author rincewind
- * @param <T>
+ * Expression in WHILE.
+ * @author jt
+ * @param <T> type of the game-specific language
  */
 public interface Expression<T> {
     

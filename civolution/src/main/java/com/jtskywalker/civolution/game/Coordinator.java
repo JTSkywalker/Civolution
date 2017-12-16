@@ -15,8 +15,8 @@ public interface Coordinator<C extends Coordinates,D> {
     
     /**
      * Function to move one step in the given direction from the given position.
-     * @param start - starting position
-     * @param direction - direction to go
+     * @param start starting position
+     * @param direction direction to go
      * @return a new position object
      */
     public default C plusStep(C start, D direction) {
@@ -26,9 +26,9 @@ public interface Coordinator<C extends Coordinates,D> {
     /**
      * Function to move the given number of steps in the given direction from
      * the starting position.
-     * @param start - starting position
-     * @param direction - direction to go
-     * @param steps - steps to go
+     * @param start starting position
+     * @param direction direction to go
+     * @param steps steps to go
      * @return a new position object
      */
     public C plusSteps(C start, D direction, int steps);

@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class WHILELexerTest {
     

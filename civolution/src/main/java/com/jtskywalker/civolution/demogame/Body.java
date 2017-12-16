@@ -11,7 +11,7 @@ import com.jtskywalker.civolution.game.Visitable;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class Body implements Visitable<DemogameVisitor> {
     

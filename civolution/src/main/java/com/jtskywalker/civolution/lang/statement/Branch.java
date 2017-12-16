@@ -12,9 +12,11 @@ import com.jtskywalker.civolution.lang.Statement;
 import java.util.Objects;
 
 /**
- *
- * @author rincewind
- * @param <T>
+ * This class defines a conditional branching statement.
+ * It can be used either to represent an {@code if}-statement or 
+ * a {@code while}-statement.
+ * @author jt
+ * @param <T> type of the game-specific language
  */
 public class Branch<T> implements Statement<T>{
 

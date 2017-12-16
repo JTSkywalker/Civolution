@@ -7,7 +7,7 @@ package com.jtskywalker.civolution.controller;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class ActionNotAllowedException extends Exception {
     

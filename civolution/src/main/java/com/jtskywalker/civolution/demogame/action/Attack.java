@@ -16,7 +16,7 @@ import java.util.Objects;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class Attack implements Action<DemoGame> {
     

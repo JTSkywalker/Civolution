@@ -14,7 +14,7 @@ import java.util.Objects;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class Command implements Action<DemoGame> {
     

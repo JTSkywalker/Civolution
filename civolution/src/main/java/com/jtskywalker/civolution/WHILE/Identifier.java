@@ -18,7 +18,7 @@ public class Identifier implements Token {
 
     /**
      * Constructor.
-     * @param s - string representation of the identifier
+     * @param s string representation of the identifier
      */
     public Identifier(String s) {
         this.name = s;
@@ -26,7 +26,7 @@ public class Identifier implements Token {
     
     /**
      * Getter for the string representation.
-     * @return - the stringn representation of this identifier
+     * @return the stringn representation of this identifier
      */
     public String getName() {
         return name;
@@ -34,7 +34,7 @@ public class Identifier implements Token {
         
     /**
      * Standard hashCode function.
-     * @return - hashCode of this identifier
+     * @return hashCode of this identifier
      */
     @Override
     public int hashCode() {
@@ -45,8 +45,8 @@ public class Identifier implements Token {
 
     /**
      * Standard equals function.
-     * @param obj - the object to be compared
-     * @return - whether the two objects are equal
+     * @param obj the object to be compared
+     * @return whether the two objects are equal
      */
     @Override
     public boolean equals(Object obj) {
@@ -65,7 +65,7 @@ public class Identifier implements Token {
 
     /**
      * Return the string representation in a JSON-like string
-     * @return - string representation of this object
+     * @return string representation of this object
      */
     @Override
     public String toString() {

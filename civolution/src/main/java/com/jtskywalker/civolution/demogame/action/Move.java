@@ -15,7 +15,7 @@ import java.util.Objects;
 
 /**
  *
- * @author rincewind
+ * @author jt
  */
 public class Move implements Action<DemoGame> {
     

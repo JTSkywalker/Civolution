@@ -8,9 +8,10 @@ package com.jtskywalker.civolution.view;
 import javafx.scene.layout.Pane;
 
 /**
- *
+ * This interface is used to connect the {@link GameUI} to the horizon 
+ * accessible to the player.
  * @author jt
- * @param <T>
+ * @param <T> the horizon used in this wrapper 
  */
 public interface HorizonPaneWrapper<T> {
     
