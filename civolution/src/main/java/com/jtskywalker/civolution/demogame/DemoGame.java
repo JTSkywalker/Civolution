@@ -7,13 +7,24 @@ package com.jtskywalker.civolution.demogame;
 
 import com.jtskywalker.civolution.game.SqCoordinates;
 import com.jtskywalker.civolution.controller.Actor;
+import com.jtskywalker.civolution.controller.ExternalMind;
+import com.jtskywalker.civolution.controller.Subordinate;
 import com.jtskywalker.civolution.game.Game;
 import com.jtskywalker.civolution.game.GameMap;
 import com.jtskywalker.civolution.game.Horizon;
 import com.jtskywalker.civolution.game.SqDirection;
+import com.jtskywalker.civolution.game.SqTorusCoordinator;
+import com.jtskywalker.civolution.view.GameUI;
+import com.jtskywalker.civolution.view.HorizonPaneWrapper;
+import com.jtskywalker.civolution.view.demogame.DemogameMapVisitor;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.util.Pair;
 
 /**
  * This class contains all information on the game.
@@ -185,6 +196,25 @@ public class DemoGame implements Game {
     public SqCoordinates plusStep(
             SqCoordinates position,SqDirection direction) {
         return map.plusStep(position, direction);
+    }
+    
+    public static DemoGame createDemo(int width, int height, GameUI gameUI) {
+        HashMap<Actor,Pair<Body,SqCoordinates>> actors = new HashMap();
+        BodyFactory bf = new BodyFactory();
+        
+        Body queen = bf.create("queen", 0);
+        Body warrior = bf.create("warrior", 0);
+        Body scout = bf.create("scout", 0);
+
+        Actor sub1 = new Subordinate(0);
+        Actor sub2 = new Subordinate(0);
+        
+        actors.put(gameUI, new Pair(queen, new SqCoordinates(1,1)));
+        actors.put(sub1,  new Pair(warrior, new SqCoordinates(3, 3)));
+        actors.put(sub2,  new Pair(scout, new SqCoordinates(0, 5)));
+        
+        return new DemoGame(new GameMap(
+                new SqTorusCoordinator(width,height), actors));
     }
     
 }

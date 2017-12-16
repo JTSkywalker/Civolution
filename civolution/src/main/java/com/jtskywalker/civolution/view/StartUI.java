@@ -63,47 +63,30 @@ public class StartUI extends Application {
     
     void demoSetup(Stage stage) {
         
-        int width = 10;
-        int height = 15;
-        HashMap<Actor,Pair<Body,SqCoordinates>> actors = new HashMap();
-        BodyFactory bf = new BodyFactory();
-        
-        Body queen = bf.create("queen", 0);
-        Body warrior = bf.create("warrior", 0);
-        Body scout = bf.create("scout", 0);
-        
-        ExternalMind humanMind = new ExternalMind(0);
-        GameUI human 
-                = new GameUI(humanMind, new ActionParser(),
-                new DemogameMapVisitor(new GridPane(), width, height),
-                new HorizonPaneWrapper() {
-                    
-                    VBox pane = new VBox();
-                    
-                    @Override
-                    public void update(Object t) {
-                        // do nothing
-                    }
+        int width = 10 , height = 15;
+        GameUI gameUI 
+                = new GameUI(new ExternalMind(0), new ActionParser(),
+            new DemogameMapVisitor(new GridPane(), width, height),
+            new HorizonPaneWrapper() {
 
-                    @Override
-                    public Pane getPane() {
-                        return pane;
-                    }
+                VBox pane = new VBox();
 
-                });
-        Actor sub1 = new Subordinate(0);
-        Actor sub2 = new Subordinate(0);
-        
-        actors.put(human, new Pair(queen, new SqCoordinates(1,1)));
-        actors.put(sub1,  new Pair(warrior, new SqCoordinates(3, 3)));
-        actors.put(sub2,  new Pair(scout, new SqCoordinates(0, 5)));
-        
-        DemoGame game = new DemoGame(new GameMap(
-                new SqTorusCoordinator(width,height), actors));
+                @Override
+                public void update(Object t) {
+                    // do nothing
+                }
+
+                @Override
+                public Pane getPane() {
+                    return pane;
+                }
+
+        });
+        DemoGame game = DemoGame.createDemo(width,height,gameUI);
 
         Controller controller = new Controller(game);
         
-        stage.setScene(new Scene(human.getRoot(), 960, 1000));
+        stage.setScene(new Scene(gameUI.getRoot(), 960, 1000));
         stage.show();
         
         controller.notifyNextActor();
