@@ -13,7 +13,15 @@ import com.jtskywalker.civolution.game.SqTorusCoordinator;
 import java.util.Collection;
 
 /**
- * The InfluenceGame. TODO: explain game here
+ * The InfluenceGame.
+ * The players goal is to conquer the capital of the enemy.
+ * At the start the enemy is way stronger and the player has to recruit 
+ * mercenaries to achieve his goal.
+ * The player will be constantly under attack, but both he and the enemy have
+ * walls that help protecting them until someone invents explosives and uses
+ * cannons to destroy these walls.
+ * Player get money from the cities and can use it either to support research or
+ * to pay their troops.
  * @author jt
  */
 public class InfluenceGame implements Game {
@@ -24,24 +32,36 @@ public class InfluenceGame implements Game {
         map = new GameMap(new SqTorusCoordinator(width,height));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Horizon computeHorizon(Actor actor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Collection<Actor> getActors() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getWidth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return map.getWidth();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getHeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return map.getHeight();
     }
     
 }

@@ -182,10 +182,18 @@ public class GameMap<C extends Coordinates,D,B> {
         return bodies.keySet();
     }
     
+    /**
+     * Return width of this map.
+     * @return width of this map 
+     */
     public int getWidth() {
         return coordinator.getWidth();
     }
     
+    /**
+     * Return height of this map.
+     * @return height of this map 
+     */
     public int getHeight() {
         return coordinator.getHeight();
     }
