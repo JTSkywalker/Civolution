@@ -32,13 +32,15 @@ public class Attack implements Action<DemoGame> {
         
         Body body = game.getBody(actor);
         if (!body.canAttack()) {
-            throw new ActionNotAllowedException();
+            throw new ActionNotAllowedException(
+                    "Actor " + actor.toString() + " can't attack!");
         }
         
         SqCoordinates oldC = game.getCoordinates(actor);
         SqCoordinates newC = game.plusStep(oldC, direction);
         if (!game.hasEnemy(newC, body.getEmblem())) {
-            throw new ActionNotAllowedException();
+            throw new ActionNotAllowedException(
+            "There is noone to attack!");
         }
         Actor enemyActor = game.getDefender(newC);
         Body enemyBody = game.getBody(enemyActor);

@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jtskywalker.civolution.demogame.action;
+package com.jtskywalker.civolution.influencegame;
 
 import com.jtskywalker.civolution.game.SqDirection;
 import com.jtskywalker.civolution.game.SqCoordinates;
-import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.controller.Action;
 import com.jtskywalker.civolution.controller.ActionNotAllowedException;
 import com.jtskywalker.civolution.controller.Actor;
@@ -17,31 +16,51 @@ import java.util.Objects;
  *
  * @author jt
  */
-public class Move implements Action<DemoGame> {
+public class Move implements Action<InflGame> {
     
     final SqDirection direction;
 
     public Move(SqDirection direction) {
         this.direction = direction;
     }
-
+    
+    /**
+     * The {@code Body} of {@code actor} moves one step in {@code direction} of
+     * this object if there is no enemy on the new position and it is accessible
+     * for the body.
+     * If their is an enemy it will be attacked.
+     * @param game
+     * @param actor
+     * @return
+     * @throws ActionNotAllowedException 
+     */
     @Override
-    public int execute(DemoGame game, Actor actor) 
+    public int execute(InflGame game, Actor actor) 
             throws ActionNotAllowedException {
-        SqCoordinates oldC = game.getCoordinates(actor);
+        Body body = game.getBody(actor);
+        SqCoordinates oldC = game.getPosition(body);
         SqCoordinates newC = game.plusStep(oldC, direction);
-        if (game.hasEnemy(newC, game.getBody(actor).getEmblem())) {
-            if (game.getBody(actor).canAttack()) {
-                return (new Attack(direction)).execute(game, actor);
+        
+        if (body.canMove(game.getTerrain(newC))) {
+            if (game.hasEnemy(newC, body.getTeam())) {
+                return attack(game, actor, oldC, newC);
             } else {
-                throw new ActionNotAllowedException(
-                        "Actor can't attack, but their is an enemy in its way");
+                game.put(body, newC);
             }
         }
-        game.putActor(actor,newC);
-        return game.getTileMobilityCost(newC);
+         
+        game.put(body,newC);
+        return game.getTerrain(newC).exertion;
+    }
+    
+    private int attack(InflGame game, Actor actor, 
+            SqCoordinates oldC,SqCoordinates newC) {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -49,6 +68,9 @@ public class Move implements Action<DemoGame> {
         return hash;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -64,6 +86,9 @@ public class Move implements Action<DemoGame> {
         return this.direction == other.direction;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Move{" + "direction=" + direction + '}';

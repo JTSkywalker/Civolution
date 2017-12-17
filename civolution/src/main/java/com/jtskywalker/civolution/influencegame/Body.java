@@ -11,4 +11,16 @@ package com.jtskywalker.civolution.influencegame;
  */
 class Body {
     
+    private int team;
+
+    public int getTeam() {
+        return team;
+    }
+
+    boolean canMove(Terrain terrain) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+       
 }
+
+

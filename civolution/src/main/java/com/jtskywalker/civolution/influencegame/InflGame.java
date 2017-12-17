@@ -7,10 +7,12 @@ package com.jtskywalker.civolution.influencegame;
 
 import com.jtskywalker.civolution.controller.Actor;
 import com.jtskywalker.civolution.game.Game;
-import com.jtskywalker.civolution.game.GameMap;
 import com.jtskywalker.civolution.game.Horizon;
+import com.jtskywalker.civolution.game.SqCoordinates;
+import com.jtskywalker.civolution.game.SqDirection;
 import com.jtskywalker.civolution.game.SqTorusCoordinator;
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * The InfluenceGame.
@@ -24,12 +26,52 @@ import java.util.Collection;
  * to pay their troops.
  * @author jt
  */
-public class InfluenceGame implements Game {
+public class InflGame implements Game {
     
-    private final GameMap map;
+    private final InflGameMap map;
     
-    public InfluenceGame(int width, int height) {
-        map = new GameMap(new SqTorusCoordinator(width,height));
+    /*
+    This class shouldn't leak actors.
+    */
+    
+    public InflGame(int width, int height) {
+        map = new InflGameMap(new SqTorusCoordinator(width,height));
+    }
+
+    Terrain getTerrain(SqCoordinates position) {
+        return map.getTerrain(position);
+    }
+
+    boolean isSea(SqCoordinates position) {
+        return map.isSea(position);
+    }
+
+    Flora getFlora(SqCoordinates position) {
+        return map.getFlora(position);
+    }
+    
+    Body getBody(Actor actor) {
+        return map.getBody(actor);
+    }
+
+    SqCoordinates getPosition(Body body) {
+        return map.getPosition(body);
+    }
+
+    Set<Body> getBodies(SqCoordinates position) {
+        return map.getBodies(position);
+    }
+
+    void put(Body body, SqCoordinates position) {
+        map.put(body, position);
+    }
+
+    void remove(Body body) {
+        map.remove(body);
+    }
+
+    public SqCoordinates plusStep(SqCoordinates position, SqDirection direction) {
+        return map.plusStep(position, direction);
     }
 
     /**
@@ -63,5 +105,7 @@ public class InfluenceGame implements Game {
     public int getHeight() {
         return map.getHeight();
     }
+    
+    
     
 }

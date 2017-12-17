@@ -23,14 +23,18 @@ public class Command implements Action<DemoGame> {
     public Command(Statement<Action> order) {
         this.order = order;
     }
-
+    
 
     @Override
     public int execute(DemoGame game, Actor actor) 
             throws ActionNotAllowedException {
-        Actor sub = game.getSubordinate(actor);
-        sub.receiveOrders(order, game.getBody(actor).getEmblem());
-        return 0;
+        try {
+            Actor sub = game.getSubordinate(actor);
+            sub.receiveOrders(order, game.getBody(actor).getEmblem());
+            return 0;
+        } catch (IllegalArgumentException ex) {
+            throw new ActionNotAllowedException("No Subordinate found.",ex);
+        }
     }
 
     @Override

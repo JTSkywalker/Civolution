@@ -9,6 +9,7 @@ import com.jtskywalker.civolution.controller.Actor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.util.Pair;
@@ -22,6 +23,7 @@ import javafx.util.Pair;
  */
 public class GameMap<C extends Coordinates,D,B> {
     
+    //TODO: maybe these maps should be body-focused and not actor-focused.
     final Map<Actor,B> bodies = new HashMap<>();
     final Map<Actor,C> positions = new HashMap<>();
     final Coordinator<C,D> coordinator;
@@ -64,6 +66,15 @@ public class GameMap<C extends Coordinates,D,B> {
     }
     
     /**
+     * Getter for the position of the given body.
+     * @param body body whose position is looked up
+     * @return position of the body
+     */
+    public C getPosition(B body) {
+        return positions.get(getActor(body));
+    }
+    
+    /**
      * Getter of the set of actors at the given position.
      * @param position position to look for actors
      * @return set of actors who are at the given position
@@ -72,6 +83,18 @@ public class GameMap<C extends Coordinates,D,B> {
         return positions.entrySet().stream().filter((entry) -> {
            return entry.getValue().equals(position); 
         }).map((entry) -> entry.getKey()).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Getter of the set of bodies at the given position.
+     * @param position position to look for bodies
+     * @return set of bodies who are at the given position
+     */
+    public Set<B> getBodies(C position) {
+        return positions.entrySet().stream().filter((entry) -> {
+           return entry.getValue().equals(position); 
+        }).map((entry) -> entry.getKey())
+                .map((actor) -> getBody(actor)).collect(Collectors.toSet());
     }
     
     /**
@@ -90,7 +113,7 @@ public class GameMap<C extends Coordinates,D,B> {
         if (actors.size() == 1) {
             return actors.get(0);
         } else if (actors.isEmpty())
-            throw new IllegalArgumentException(
+            throw new NoSuchElementException(
                 "There is no Actor for this Body: " + body.toString()
             );
         else 
@@ -130,6 +153,16 @@ public class GameMap<C extends Coordinates,D,B> {
     }
     
     /**
+     * Put the actor of {@code body} at {@code position}.
+     * This removes the old position of the actor.
+     * @param body to move
+     * @param position new position of the actor.
+     */
+    public void put(B body, C position) {
+        positions.put(getActor(body), position);
+    }
+    
+    /**
      * Put the actor at the position and the assign the body. This overrides
      * previous assignments.
      * @param actor actor to put
@@ -158,7 +191,21 @@ public class GameMap<C extends Coordinates,D,B> {
         });
     }
     
+    /**
+     * Remove {@code actor} from this game.
+     * @param actor to remove
+     */
     public void remove(Actor actor) {
+        bodies.remove(actor);
+        positions.remove(actor);
+    }
+    
+    /**
+     * Remove {@code body} from this game.
+     * @param body to remove
+     */
+    public void remove(B body) {
+        Actor actor = getActor(body);
         bodies.remove(actor);
         positions.remove(actor);
     }

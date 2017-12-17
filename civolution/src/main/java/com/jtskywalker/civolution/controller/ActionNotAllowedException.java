@@ -11,4 +11,12 @@ package com.jtskywalker.civolution.controller;
  */
 public class ActionNotAllowedException extends Exception {
     
+    public ActionNotAllowedException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+
+    public ActionNotAllowedException(String msg) {
+        super(msg);
+    }
+    
 }
