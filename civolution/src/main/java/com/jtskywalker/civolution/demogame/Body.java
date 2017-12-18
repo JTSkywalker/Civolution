@@ -5,9 +5,9 @@
  */
 package com.jtskywalker.civolution.demogame;
 
+import com.jtskywalker.civolution.game.Visitable;
 import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
-import com.jtskywalker.civolution.game.Visitable;
 
 /**
  *

@@ -31,7 +31,7 @@ public class DemoGame implements Game {
      */
     public static final String BASEPATH = "src/main/resources/demogame/";
     
-    final GameMap<SqCoordinates,SqDirection,Body> map;
+    final GameMap<SqCoordinates,SqDirection,Body,DemogameVisitor> map;
 
     /**
      * Constructor.
@@ -60,11 +60,7 @@ public class DemoGame implements Game {
      */
     @Override
     public Horizon computeHorizon(Actor actor) {
-        HorizonImpl horizon = new HorizonImpl(map.getWidth(), map.getHeight());
-        getFriends(actor).forEach((c) -> {
-            horizon.putActor(c, getBody(c), getCoordinates(c));
-        });
-        return horizon;
+        return new HorizonImpl(map);
     }
 
     /**

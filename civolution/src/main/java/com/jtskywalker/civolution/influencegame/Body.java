@@ -5,11 +5,13 @@
  */
 package com.jtskywalker.civolution.influencegame;
 
+import com.jtskywalker.civolution.game.Visitable;
+
 /**
  *
  * @author jt
  */
-class Body {
+class Body implements Visitable<InflGameVisitor> {
     
     private int team;
 
@@ -20,7 +22,10 @@ class Body {
     boolean canMove(Terrain terrain) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void accept(InflGameVisitor visitor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
        
 }
-
-

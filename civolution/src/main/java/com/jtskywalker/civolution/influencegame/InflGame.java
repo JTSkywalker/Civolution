@@ -105,7 +105,13 @@ public class InflGame implements Game {
     public int getHeight() {
         return map.getHeight();
     }
+
+    boolean hasEnemy(SqCoordinates newC, int team) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
-    
+    boolean atWar(int team1, int team2) {
+        return team1 != team2 && team1 != 0 && team2 != 0;
+    }
     
 }

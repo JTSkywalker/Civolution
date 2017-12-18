@@ -9,6 +9,7 @@ import com.jtskywalker.civolution.demogame.Body;
 import com.jtskywalker.civolution.demogame.DemoGame;
 import com.jtskywalker.civolution.demogame.DemogameVisitor;
 import com.jtskywalker.civolution.demogame.HorizonImpl;
+import com.jtskywalker.civolution.game.GameMap;
 import com.jtskywalker.civolution.game.SqCoordinates;
 import java.util.Set;
 import javafx.scene.image.Image;
@@ -119,6 +120,11 @@ public class DemogameMapVisitor
     @Override
     public Pane getPane() {
         return map;
+    }
+
+    @Override
+    public void visit(GameMap gamemap) {
+        
     }
     
 }

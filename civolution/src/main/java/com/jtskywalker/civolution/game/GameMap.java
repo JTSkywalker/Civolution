@@ -7,6 +7,7 @@ package com.jtskywalker.civolution.game;
 
 import com.jtskywalker.civolution.controller.Actor;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -20,8 +21,11 @@ import javafx.util.Pair;
  * @param <C> type of the Coordinates
  * @param <D> type of directions
  * @param <B> type of the Body
+ * @param <T> type of the visitor for this GameMap
  */
-public class GameMap<C extends Coordinates,D,B> {
+public class GameMap<C extends Coordinates,D,B extends Visitable<T>,
+        T extends Visitor<GameMap<C,D,B,T>>>
+        implements Visitable<T> {
     
     //TODO: maybe these maps should be body-focused and not actor-focused.
     final Map<Actor,B> bodies = new HashMap<>();
@@ -95,6 +99,14 @@ public class GameMap<C extends Coordinates,D,B> {
            return entry.getValue().equals(position); 
         }).map((entry) -> entry.getKey())
                 .map((actor) -> getBody(actor)).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Return all bodies that are on the map.
+     * @return all bodies on the map
+     */
+    public Set<B> getBodies() {
+        return new HashSet<>(bodies.values());
     }
     
     /**
@@ -243,6 +255,16 @@ public class GameMap<C extends Coordinates,D,B> {
      */
     public int getHeight() {
         return coordinator.getHeight();
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    @Override
+    public void accept(T visitor) {
+        bodies.values().stream()
+                .forEach((body) -> body.accept(visitor));
+        visitor.visit(this);
     }
     
 }

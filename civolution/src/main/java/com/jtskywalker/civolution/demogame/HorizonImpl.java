@@ -6,54 +6,41 @@
 package com.jtskywalker.civolution.demogame;
 
 import com.jtskywalker.civolution.controller.Actor;
+import com.jtskywalker.civolution.game.GameMap;
 import com.jtskywalker.civolution.game.SqCoordinates;
 import com.jtskywalker.civolution.game.Horizon;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import com.jtskywalker.civolution.game.SqDirection;
 import java.util.Set;
-import java.util.stream.Collectors;
-import javafx.util.Pair;
 
 
-public class HorizonImpl implements Horizon<DemogameVisitor> {
+public class HorizonImpl<T extends DemogameVisitor> implements Horizon<T> {
     
-    final int width, height;
-    final Map<Actor, Pair<Body,SqCoordinates>> visible = new HashMap<>();
+    final GameMap<SqCoordinates,SqDirection,Body,DemogameVisitor> visible;
 
-    public HorizonImpl(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public HorizonImpl(GameMap<SqCoordinates,SqDirection,Body,DemogameVisitor> map) {
+        this.visible = map;
     }
 
-    public void putActor(Actor actor, Body body, SqCoordinates coord) {
-        visible.put(actor, new Pair(body, coord));
-    }
-
-    public Collection<Actor> getActors() {
-        return visible.keySet();
+    public Set<Actor> getActors() {
+        return visible.getActors();
     }
 
     public int getWidth() {
-        return width;
+        return visible.getWidth();
     }
 
     public int getHeight() {
-        return height;
+        return visible.getHeight();
     }
 
     @Override
-    public void accept(DemogameVisitor t) {
-        visible.values().forEach((pair) -> {
-            pair.getKey().accept(t);
-        });
-        t.visit(this);
+    public void accept(T visitor) {
+        visible.accept(visitor);
+        visitor.visit(this);
     }
 
     public Set<Body> getBodies(SqCoordinates coord) {
-        return visible.values().stream()
-                .filter((b) -> b.getValue().equals(coord))
-                .map((b) -> b.getKey())
-                .collect(Collectors.toSet());
+        return visible.getBodies(coord);
     }
+    
 }

@@ -14,7 +14,8 @@ import com.jtskywalker.civolution.game.SqDirection;
  *
  * @author jt
  */
-public class InflGameMap extends GameMap<SqCoordinates,SqDirection,Body> {
+public class InflGameMap 
+        extends GameMap<SqCoordinates,SqDirection,Body,InflGameVisitor> {
     
     private final Terrain[][] terrain;
     private final Flora[][] flora;
